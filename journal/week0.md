@@ -9,8 +9,10 @@ As the prerequisites for the bootcamp, I had created a new account that would be
 - To enable mutliple permissions for the account, I applied the Administrator permissions on the IAM user.
  
 ### Step 2:Spending and Budgets
-- Created 2 Budgets, one that would monitor my spend for my AWS free credits and another that would track Dollar spend in the free tier.
-- I also created a Billing Alarm  that will be triggered once 75% spend threshold has been neared and or exceeded.
+- Created 2 Budgets, one that would monitor my spend for my AWS free credits and another that would track Dollar spend in the free tier. I created both budgets by CLI and the console.
+![Budgets image]()
+- I also created a Billing Alarm both through the Console and CLI that will be triggered once 50%, 75%, 80%, 100% spend threshold has been neared and or exceeded.
+![Billing Alarm budget]()
 ##### IMPORTANT: Be sure to maintain only 2 budgets so as to remain within the free tier.
 
 ### Step 3:Enabling Credentials for my IAM User
