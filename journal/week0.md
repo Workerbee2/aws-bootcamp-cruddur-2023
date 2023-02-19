@@ -29,10 +29,11 @@ As the prerequisites for the bootcamp, I had created a new account that would be
 ##### IMPORTANT: Be sure to maintain only 2 access keys at any given time.
  
 ### Step 5: The Logical diagram and Napkin design Architectures.
-- Followed the tutorial to upload my napkin design 
-- ![This is the Napkin design for the Cruddr Micro-blogging application.](assets/IMG20230216220109.jpg)
+- Followed the Github Markdown tutorials to upload a photo of my napkin design.
+![This is the Napkin design for the Cruddr Micro-blogging application.](assets/IMG20230216220109.jpg)
 
-- [This is the link from Lucid Chart app for the Logical digram](https://lucid.app/lucidchart/be53d504-319e-46ba-8e0e-aa52b36eaa6c/edit?viewport_loc=-220%2C625%2C1614%2C907%2C0_0&invitationId=inv_8e890b65-1684-4a45-9551-5239c148d0fb)
+
+[This is the link from Lucid Chart app for the Logical digram](https://lucid.app/lucidchart/be53d504-319e-46ba-8e0e-aa52b36eaa6c/edit?viewport_loc=-220%2C625%2C1614%2C907%2C0_0&invitationId=inv_8e890b65-1684-4a45-9551-5239c148d0fb)
 
 
 #### Resources used 
@@ -41,3 +42,5 @@ As the prerequisites for the bootcamp, I had created a new account that would be
 3. [Free AWS Cloud Bootcamp - Week 0 Part 2](https://dev.to/msaghu/free-aws-bootcamp-week-0-part-2-5fi6)
 4. [Well Architected Labs - Cost Optimization](https://wellarchitectedlabs.com/cost/100_labs/100_1_aws_account_setup/)
 5. [ExampPro Billing Video](https://www.youtube.com/watch?v=OdUnNuKylHg&list=PLBfufR7vyJJ7k25byhRXJldB5AiwgNnWv&index=14)
+6. [AWS CLI documentation](https://docs.aws.amazon.com/cli/latest/reference/)
+7. [How to create Github Markdown files - Exampro](https://www.youtube.com/watch?v=mWaSBRJhUFM&list=PLBfufR7vyJJ7k25byhRXJldB5AiwgNnWv&index=19)
