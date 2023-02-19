@@ -32,8 +32,10 @@ As the prerequisites for the bootcamp, I had created a new account that would be
 - Followed the Github Markdown tutorials to upload a photo of my napkin design.
 ![This is the Napkin design for the Cruddr Micro-blogging application.](assets/IMG20230216220109.jpg)
 
-
-[This is the link from Lucid Chart app for the Logical digram](https://lucid.app/lucidchart/be53d504-319e-46ba-8e0e-aa52b36eaa6c/edit?viewport_loc=-220%2C625%2C1614%2C907%2C0_0&invitationId=inv_8e890b65-1684-4a45-9551-5239c148d0fb)
+- 
+- ![Image of the Cruddr image from Lucid Charts](assets/cruddur.png)
+[This is the link from Lucid Chart app for the Logical digram]
+(https://lucid.app/lucidchart/be53d504-319e-46ba-8e0e-aa52b36eaa6c/edit?viewport_loc=-1156%2C180%2C3330%2C1461%2C0_0&invitationId=inv_8e890b65-1684-4a45-9551-5239c148d0fb)
 
 
 #### Resources used 
