@@ -10,23 +10,24 @@ As the prerequisites for the bootcamp, I had created a new account that would be
  
 ### Step 2:Spending and Budgets
 - Created 2 Budgets, one that would monitor my spend for my AWS free credits and another that would track Dollar spend in the free tier. I created both budgets by CLI and the console.
-![Budgets image]()
+![Budgets image](assets/budgets2.png)
+
 - I also created a Billing Alarm both through the Console and CLI that will be triggered once 50%, 75%, 80%, 100% spend threshold has been neared and or exceeded.
-![Billing Alarm budget]()
+![Billing Alarm budget](assets/cloudwatch2.png)
 ##### IMPORTANT: Be sure to maintain only 2 budgets so as to remain within the free tier.
 
-### Step 3:Enabling Credentials for my IAM User
-- Logged into my account as the IAM User created in Step 1. When we log in for the first time as the IAM , AWS will prompt us to reset our password (this is an option that we select/tick when creating the IAM user).
-- To create credentials for the IAM user, I had to log out then log back in as root user In the IAM console, I was able to create the IAM credentials for my IAM user that I will use to configure the AWS CLI which i then downloaded as a CSV file.
-- I also secured the account using MFA from the Google Authenticator App installed on my phone.
-##### IMPORTANT: Be sure to maintain only 2 access keys at any given time.
- 
-### Step 4:Installing and configuring the AWS CLI
+### Step 3:Installing and configuring the AWS CLI
 - Used CloudShell  and Installed the AWS CLI for my IAM accounton Gitpod.
 - Then set up the credentials for my github account and committed the changed to Github.
 - Used the CLI to create an AWS budget.
 ##### IMPORTANT: Be sure to remove the ACCESS KEYS and SECRET ACCESS KEYS from the code before pushing to Github.
 
+### Step 4:Enabling Credentials for my IAM User
+- Logged into my account as the IAM User created in Step 1. When we log in for the first time as the IAM , AWS will prompt us to reset our password (this is an option that we select/tick when creating the IAM user).
+- To create credentials for the IAM user, I had to log out then log back in as root user In the IAM console, I was able to create the IAM credentials for my IAM user that I will use to configure the AWS CLI which i then downloaded as a CSV file.
+- I also secured the account using MFA from the Google Authenticator App installed on my phone.
+##### IMPORTANT: Be sure to maintain only 2 access keys at any given time.
+ 
 ### Step 5: The Logical diagram and Napkin design Architectures.
 - Followed the tutorial to upload my napkin design 
 - ![This is the Napkin design for the Cruddr Micro-blogging application.](assets/IMG20230216220109.jpg)
