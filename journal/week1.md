@@ -23,6 +23,15 @@
 - Can be asily scaled to meet demands due to their small sizes.
 - Docker Images can be run anywhere that Docker can be installed.
 
+**What is a Docker Image?**
+- A read-only template that has a set of instructions for creating a containerthat can run on the Docker platform.
+
+**What is a Dockerfile?**
+- A text document with the necessary commands for creating a Docker image.
+
+**What is a Container?**
+- A single running/stopped instance of a Docker image.
+
 ## Tasks
 **1. Create a new GitHub repo**
 - From the Msaghu/aws-bootcamp-cruddur-2023/journal/week-1/main page, then launch Gitpod from there.
