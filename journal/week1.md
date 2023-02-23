@@ -93,6 +93,28 @@ networks:
 
 12. Mount directories so we can make changes while we codeation
 
+**Step 9 - Created a new api endpoint**
+- Opened our API file then opened the OpenAPI extension, and under paths, added a new path for our notifications feature.
+- We then  edited the file and adde3d the following code block,
+
+```
+  /api/activities/notifications:
+    get: 
+      description: 'Return a feed of activity for all my following list'
+      tags:
+       - activities
+      parameters: []
+      responses:
+        '200':
+          description: Returns an array of activities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Activity'
+```
+
 **How do we run Containers in AWS?**
 - AWS ECS
 - AWS EKS
