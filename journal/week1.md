@@ -60,7 +60,7 @@
 - AWS AppRunner
 - AWS Fargate
 
-##Additional Homework Challenges
+## Additional Homework Challenges
 1. Run the Dockerfile command as an external script.
 2. Push and tag a image to DockerHub (they have a free tier).
 3. Use multi-stage building for a Dockerfile build.
