@@ -45,17 +45,18 @@
 6. Ensure we can get the apps running locally
 7. Write a Dockerfile for each app
 8. Ensure we get the apps running via individual container
-9. Create a docker-compose file
-10. Ensure we can orchestrate multiple containers to run side by side
-11. Mount directories so we can make changes while we codeation
+**9. Create a docker-compose file**
+- For any application that is interactive, the backend services have to be able to communicate to the front end.
+- Docker-compose enables us to achieve this by ensuring that we can run both the backend and the frontend simultaneously thus showing us a display page 
+
+11. Ensure we can orchestrate multiple containers to run side by side
+12. Mount directories so we can make changes while we codeation
 
 **How do we run Containers in AWS?**
 - AWS ECS
 - AWS EKS
 - AWS AppRunner
 - AWS Fargate
-
-
 
 ##Additional Homework Challenges
 1. Run the Dockerfile command as an external script.
