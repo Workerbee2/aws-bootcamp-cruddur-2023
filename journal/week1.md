@@ -49,6 +49,14 @@
 10. Ensure we can orchestrate multiple containers to run side by side
 11. Mount directories so we can make changes while we codeation
 
+**How do we run Containers in AWS?**
+- AWS ECS
+- AWS EKS
+- AWS AppRunner
+- AWS Fargate
+
+
+
 ##Additional Homework Challenges
 1. Run the Dockerfile command as an external script.
 2. Push and tag a image to DockerHub (they have a free tier).
