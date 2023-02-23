@@ -54,7 +54,37 @@ $ cd front-end-react-js
 $ npm install
 ```
 
-- Therefore, we created a docker-compose.yml file in the directory(for me the application only runs if the file is ouside the back-end and front-end directories).
+- Thereafter, we created a docker-compose.yml file in the directory(for me the application only runs if the file is ouside the back-end and front-end directories) and pasted the code into the file, saved then right-clicked on the **red** docker whale and chose **Docker up**.
+
+```
+version: "3.8"
+services:
+  backend-flask:
+    environment:
+      FRONTEND_URL: "https://3000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+      BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+    build: ./backend-flask
+    ports:
+      - "4567:4567"
+    volumes:
+      - ./backend-flask:/backend-flask
+  frontend-react-js:
+    environment:
+      REACT_APP_BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+    build: ./frontend-react-js
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend-react-js:/frontend-react-js
+
+# the name flag is a hack to change the default prepend folder
+# name when outputting the image names
+networks: 
+  internal-network:
+    driver: bridge
+    name: cruddur
+```
+
 - We exposed port 3000 for the frontend and port 4567 for the backend, meaning that to see the landing page for our application, we had to open the ports tab in the terminal section of Gitpod, unlock it and click on the link, and vice versa for the backend.
 - Incase of issues while launching the application , be sure to click on the docker extension to view logs on what could be preventing it from running. 
 
