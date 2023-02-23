@@ -33,20 +33,17 @@
 - A single running/stopped instance of a Docker image.
 
 ## Tasks
-**1. Create a new GitHub repo**
+**Step 1 - Created a new GitHub repo and Launched the repo within a Gitpod workspace**
 - From the Msaghu/aws-bootcamp-cruddur-2023/journal/week-1/main page, then launch Gitpod from there.
 
-**2. Launch the repo within a Gitpod workspace**
-
-
-3. Configure Gitpod.yml configuration, eg. I’m VSCode Extensions
+**Step 2 - Configure Gitpod.yml configuration, eg. I’m VSCode Extensions**
 4. Clone the frontend and backend repo
 5. Explore the codebases
 6. Ensure we can get the apps running locally
 7. Write a Dockerfile for each app
 8. Ensure we get the apps running via individual container
 
-**Create a docker-compose file and Ensure we can orchestrate multiple containers to run side by side**
+**Step 7 - Create a docker-compose file and Ensure we can orchestrate multiple containers to run side by side**
 - For any application that is interactive, the backend services have to be able to communicate to the front end.
 - Docker-compose enables us to achieve this by ensuring that we can run both the backend and the frontend simultaneously thus showing us a display page.
 - Therefore, we created a docker-compose.yml file in the directory(for me the application only runs if the file is ouside the back-end and front-end directories).
