@@ -45,9 +45,13 @@
 6. Ensure we can get the apps running locally
 7. Write a Dockerfile for each app
 8. Ensure we get the apps running via individual container
+
 **9. Create a docker-compose file**
 - For any application that is interactive, the backend services have to be able to communicate to the front end.
-- Docker-compose enables us to achieve this by ensuring that we can run both the backend and the frontend simultaneously thus showing us a display page 
+- Docker-compose enables us to achieve this by ensuring that we can run both the backend and the frontend simultaneously thus showing us a display page.
+- Therefore, we created a docker-compose.yml file in the directory(for me the application only runs if the file is ouside the back-end and front-end directories).
+- We exposed port 3000 for the frontend and port 4567 for the backend, meaning that to see the landing page for our application, we had to open the ports tab in the terminal section of Gitpod, unlock it and click on the link, and vice versa for the backend.
+*The only downside that i experienced for docker-compose, was that to run and access a different application, I had to stop the other container.
 
 11. Ensure we can orchestrate multiple containers to run side by side
 12. Mount directories so we can make changes while we codeation
