@@ -16,7 +16,7 @@
 **What is Docker?**
 - Docker in written in Go and Version 1.0 was first released in 2014. It runs on Linux, Windows, Mac.
 - The Docker mascot is a whale .
--
+
 **Why Docker?**
 - Provides a consistent development and deployment experience.
 - Can be used on any machine .
@@ -48,6 +48,7 @@
 - Docker-compose enables us to achieve this by ensuring that we can run both the backend and the frontend simultaneously thus showing us a display page.
 - Therefore, we created a docker-compose.yml file in the directory(for me the application only runs if the file is ouside the back-end and front-end directories).
 - We exposed port 3000 for the frontend and port 4567 for the backend, meaning that to see the landing page for our application, we had to open the ports tab in the terminal section of Gitpod, unlock it and click on the link, and vice versa for the backend.
+- Incase of issues while launching the application , be sure to click on the docker extension to view logs on what could be preventing it from running. 
 
 *The only downside that i experienced for docker-compose, was that to run and access a different application, I had to stop the other container.
 
@@ -61,6 +62,7 @@
 - AWS Fargate
 
 ## Additional Homework Challenges
+
 1. Run the Dockerfile command as an external script.
 2. Push and tag a image to DockerHub (they have a free tier).
 3. Use multi-stage building for a Dockerfile build.
@@ -68,3 +70,4 @@
 5. Research best practices of Dockerfiles and attempt to implement it in your Dockerfile.
 6. Learn how to install Docker on your local machine and get the same containers running outside of Gitpod / Codespaces.
 7. Launch an EC2 instance that has docker installed, and pull a container to demonstrate you can run your own docker processes.
+8. I was also able to publish a blog post about Docker on my Dev.to blogpost.
