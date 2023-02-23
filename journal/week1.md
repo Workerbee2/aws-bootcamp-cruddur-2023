@@ -46,7 +46,14 @@
 **Step 7 - Create a docker-compose file and Ensure we can orchestrate multiple containers to run side by side**
 - For any application that is interactive, the backend services have to be able to communicate to the front end.
 - Docker-compose enables us to achieve this by ensuring that we can run both the backend and the frontend simultaneously thus showing us a display page.
-- To be able to succeffully launch the application, we will run npm-install, reason being that we have a react front-end application.
+- To be able to succeffully launch the application, we will cd into the front-end appliocation and run npm-install, reason being that we have a react front-end application.
+
+```
+$ ls
+$ cd front-end-react-js
+$ npm install
+```
+
 - Therefore, we created a docker-compose.yml file in the directory(for me the application only runs if the file is ouside the back-end and front-end directories).
 - We exposed port 3000 for the frontend and port 4567 for the backend, meaning that to see the landing page for our application, we had to open the ports tab in the terminal section of Gitpod, unlock it and click on the link, and vice versa for the backend.
 - Incase of issues while launching the application , be sure to click on the docker extension to view logs on what could be preventing it from running. 
