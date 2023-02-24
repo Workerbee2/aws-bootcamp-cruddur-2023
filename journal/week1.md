@@ -121,6 +121,19 @@ networks:
 - AWS AppRunner
 - AWS Fargate
 
+**Step 10: Adding DynamoDB and Postgresql**
+- From the AWS CLI , I searched and copied the commands on how to create a DynamoDB table
+
+```
+aws dynamodb create-table \
+    --endpoint-url http://localhost:8000 \
+    --table-name Music \
+    --attribute-definitions AttributeName=Artist,AttributeType=S AttributeName=SongTitle,AttributeType=S \
+    --key-schema AttributeName=Artist,KeyType=HASH AttributeName=SongTitle,KeyType=RANGE \
+    --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
+    --table-class STANDARD
+```
+
 ## Additional Homework Challenges
 
 1. Run the Dockerfile command as an external script.
