@@ -149,6 +149,7 @@ aws dynamodb put-item \
 - To view our available DynamoDB tables, we use the following command in the terminal.
 
 ```
+aws dynamodb list-tables --endpoint-url http://localhost:8000 \
 ```
 
 ## Additional Homework Challenges
