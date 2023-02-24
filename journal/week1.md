@@ -152,6 +152,11 @@ aws dynamodb put-item \
 aws dynamodb list-tables --endpoint-url http://localhost:8000 \
 ```
 
+- We then scan the entire Music table, and then narrows the results to songs by the artist “No One You Know”. For each item, only the album title and song title are returned.
+
+```
+```
+
 ## Additional Homework Challenges
 
 1. Run the Dockerfile command as an external script.
