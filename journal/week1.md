@@ -95,7 +95,7 @@ networks:
 
 **Step 9 - Created a new api endpoint**
 - Opened our API file then opened the OpenAPI extension, and under paths, added a new path for our notifications feature.
-- We then  edited the file and adde3d the following code block,
+- We then  edited the file and added the following code block,( I copied the code from AWS DynamoDB documentation and edited it as per the tutorial)
 
 ```
   /api/activities/notifications:
@@ -134,6 +134,18 @@ aws dynamodb create-table \
     --table-class STANDARD
 ```
 
+- - To add items to the table created above, paste into the code below into the terminal.
+
+```
+aws dynamodb put-item \
+    --table-name MusicCollection \
+    --item file://item.json \
+    --return-consumed-capacity TOTAL \
+    --return-item-collection-metrics SIZE
+```
+- Since we do not want to create a new JSON file in  **--item file://item.json \**  we will paste in the JSON code from the documentation 
+
+
 ## Additional Homework Challenges
 
 1. Run the Dockerfile command as an external script.
@@ -146,5 +158,5 @@ aws dynamodb create-table \
 8. I was also able to publish a blog post about Docker on my Dev.to blogpost.
 
 RESOURCES
-1. [AWS CLI Documentation - Create a table](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/create-table.html)
-2. [AWS CLI Documentation - Put Item](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/put-item.html#examples)
+1. [AWS CLI DynamoDB Documentation - Create a table](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/create-table.html)
+2. [AWS CLI DynamoDB Documentation - Put Item](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/put-item.html#examples)
