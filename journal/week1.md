@@ -144,3 +144,7 @@ aws dynamodb create-table \
 6. Learn how to install Docker on your local machine and get the same containers running outside of Gitpod / Codespaces.
 7. Launch an EC2 instance that has docker installed, and pull a container to demonstrate you can run your own docker processes.
 8. I was also able to publish a blog post about Docker on my Dev.to blogpost.
+
+RESOURCES
+1. [AWS CLI Documentation - Create a table](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/create-table.html)
+2. 
