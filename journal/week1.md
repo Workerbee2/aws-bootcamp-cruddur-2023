@@ -146,6 +146,10 @@ aws dynamodb put-item \
 ```
 - Since we do not want to create a new JSON file in  **--item file://item.json \**  we will paste in the JSON code from the documentation 
 
+- To view our available DynamoDB tables, we use the following command in the terminal.
+
+```
+```
 
 ## Additional Homework Challenges
 
@@ -161,3 +165,4 @@ aws dynamodb put-item \
 RESOURCES
 1. [AWS CLI DynamoDB Documentation - Create a table](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/create-table.html)
 2. [AWS CLI DynamoDB Documentation - Put Item](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/put-item.html#examples)
+3. [AWS CLI DynamoDB Documentation - List Tables](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/list-tables.html)
