@@ -140,11 +140,7 @@ aws dynamodb create-table \
 aws dynamodb put-item \
     --endpoint-url http://localhost:8000 \
     --table-name Music \
-    --item {
-    "Artist": {"S": "No One You Know"},
-    "SongTitle": {"S": "Call Me Today"},
-    "AlbumTitle": {"S": "Greatest Hits"}
-}\
+    --item {"Artist": {"S": "No One You Know"}, "SongTitle": {"S": "Call Me Today"}, "AlbumTitle": {"S": "Greatest Hits"}} \
     --return-consumed-capacity TOTAL \
 
 ```
