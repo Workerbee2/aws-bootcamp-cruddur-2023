@@ -147,4 +147,4 @@ aws dynamodb create-table \
 
 RESOURCES
 1. [AWS CLI Documentation - Create a table](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/create-table.html)
-2. 
+2. [AWS CLI Documentation - Put Item](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/put-item.html#examples)
