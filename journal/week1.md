@@ -155,6 +155,7 @@ aws dynamodb list-tables --endpoint-url http://localhost:8000 \
 - We then scan the entire Music table, and then narrows the results to songs by the artist “No One You Know”. For each item, only the album title and song title are returned.
 
 ```
+aws dynamodb scan --table-name cruddur_crud --query "Items" --endpoint-url http://localhost:8000 \
 ```
 
 ## Additional Homework Challenges
