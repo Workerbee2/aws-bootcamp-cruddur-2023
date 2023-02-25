@@ -70,12 +70,13 @@
 *If we do not set the variables, we will find that it gives **error 404 - Not Found** , this shows that the server is running but not receiving requests.*
 - Then paste 
  ``` python3 -m flask run --host=0.0.0.0 --port=4567 ``` and run it
- - Go into the ports tab and unlock the port for 4567(this is the default port that Fask runs on). Copy the link provided and paste into a new tab and run it. 
 
+- Go into the ports tab and unlock the port for 4567(this is the default port that Fask runs on). Copy the link provided and paste into a new tab then add ```/api/activities/home``` to the end of the link then run it. 
+- 
 
 
 **Step 5 - Write a Dockerfile for each app**
-- Change into nbackend-flask *(cd backend-flask)*
+- Change into backend-flask *(cd backend-flask)*
 - Copy code from the Omenking/aws-cruddur-bootcamp/week-1 code, and paste in the backend/Dockerfile
 
 ```
