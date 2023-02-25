@@ -53,11 +53,16 @@
 - From the Msaghu/aws-bootcamp-cruddur-2023/journal/week-1/main page, then launch Gitpod from there.
 
 **Step 2 - Configure Gitpod.yml configuration, eg. I’m VSCode Extensions**
-4. Clone the frontend and backend repo
-5. Explore the codebases
-6. Ensure we can get the apps running locally
-7. Write a Dockerfile for each app
-8. Ensure we get the apps running via individual container
+- To make it easier to work with Docker in VSCode(do it also for your local VSCode environment), go to the Extensions tab on the left-hand side and search for Docker and click Install.
+
+**Step 3 - Clone the frontend and backend repo and Explore the codebases**
+**Step 4 - Ensure we can get the apps running locally**
+
+**Step 5 - Write a Dockerfile for each app**
+- Copy code from the Omenking/aws-cruddur-bootcamp/week-1 code,
+
+
+**Step 6 - Ensure we get the apps running via individual container**
 
 **Step 7 - Create a docker-compose file and Ensure we can orchestrate multiple containers to run side by side**
 - For any application that is interactive, the backend services have to be able to communicate to the front end.
@@ -109,7 +114,7 @@ networks:
 
 12. Mount directories so we can make changes while we codeation
 
-**Step 9 - Created a new api endpoint**
+**Step 8 - Created a new api endpoint**
 - Opened our API file then opened the OpenAPI extension, and under paths, added a new path for our notifications feature.
 - We then  edited the file and added the following code block,( I copied the code from AWS DynamoDB documentation and edited it as per the tutorial)
 
@@ -133,7 +138,7 @@ networks:
 
 
 
-**Step 10: Adding DynamoDB and Postgresql**
+**Step 9 - Adding DynamoDB and Postgresql**
 - From the AWS CLI , I searched and copied the commands on how to create a DynamoDB table
 
 ```
