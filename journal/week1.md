@@ -127,9 +127,7 @@ CMD ["npm", "start"]
  unset BACKEND_URL
  ```
  
-
-
-**Step 9 - Ensure we get the apps running via individual container**
+**Step 8 - Ensure we get the apps running via individual container**
 - Change into project directory *(cd ..)*
 - Create an image from the dockerfile by running the above dockerfile 
 ```docker build -t  backend-flask ./backend-flask```
@@ -140,9 +138,7 @@ CMD ["npm", "start"]
 We will find that it gives **error 404 - Not Found** , this shows that the server is running but not receiving requests.*
 
 
-
-
-**Step 10 - Create a docker-compose file and Ensure we can orchestrate multiple containers to run side by side**
+**Step 9 - Create a docker-compose file and Ensure we can orchestrate multiple containers to run side by side**
 - For any application that is interactive, the backend services have to be able to communicate to the front end.
 - Docker-compose enables us to achieve this by ensuring that we can run both the backend and the frontend simultaneously thus showing us a display page.
 - To be able to succeffully launch the application, we will cd into the front-end appliocation and run npm-install, reason being that we have a react front-end application.
@@ -192,7 +188,7 @@ networks:
 
 12. Mount directories so we can make changes while we codeation
 
-**Step 11 - Created a new api endpoint**
+**Step 10 - Created a new api endpoint**
 - Opened our API file then opened the OpenAPI extension, and under paths, added a new path for our notifications feature.
 - We then  edited the file and added the following code block,( I copied the code from AWS DynamoDB documentation and edited it as per the tutorial)
 
@@ -216,7 +212,7 @@ networks:
 
 
 
-**Step 12 - Adding DynamoDB and Postgresql**
+**Step 11 - Adding DynamoDB and Postgresql**
 - From the AWS CLI , I searched and copied the commands on how to create a DynamoDB table
 
 ```
