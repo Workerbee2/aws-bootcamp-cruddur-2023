@@ -59,6 +59,19 @@
 
 
 **Step 4 - Ensure we can get the apps running locally**
+- Change into backend-flask *(cd backend-flask)*
+- In the terminal, paste the code and run it
+``` pip3 install -r requirements.txt ```
+ - To make sure that we get results, we need to set the environment variables,
+ ```
+ export FRONTEND_URL="*"
+ export BACKEND_URL="*"
+ ```
+*If we do not set the variables, we will find that it gives **error 404 - Not Found** , this shows that the server is running but not receiving requests.*
+- Then paste 
+ ``` python3 -m flask run --host=0.0.0.0 --port=4567 ``` and run it
+ - Go into the ports tab and unlock the port for 4567(this is the default port that Fask runs on). Copy the link provided and paste into a new tab and run it. 
+
 
 
 **Step 5 - Write a Dockerfile for each app**
@@ -89,13 +102,11 @@ EXPOSE ${PORT}
 CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
 ```
 
-- In the terminal, paste the code and run it
-``` pip3 install -r requirements.txt ```
-
-- 
+**Step 6 - Write a Dockerfile for each app**
+ 
 
 
-**Step 6 - Ensure we get the apps running via individual container**
+
 
 
 **Step 7 - Create a docker-compose file and Ensure we can orchestrate multiple containers to run side by side**
@@ -143,7 +154,7 @@ networks:
 - We exposed port 3000 for the frontend and port 4567 for the backend, meaning that to see the landing page for our application, we had to open the ports tab in the terminal section of Gitpod, unlock it and click on the link, and vice versa for the backend.
 - Incase of issues while launching the application , be sure to click on the docker extension to view logs on what could be preventing it from running. 
 
-*The only downside that i experienced for docker-compose, was that to run and access a different application, I had to stop the other container.
+*The only downside that i experienced for docker-compose, was that to run and access a different application, I had to stop the other container.*
 
 
 12. Mount directories so we can make changes while we codeation
