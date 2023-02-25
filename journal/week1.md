@@ -38,6 +38,12 @@
 **What is a Container?**
 - A single running/stopped instance of a Docker image.
 
+**How do we run Containers in AWS?**
+- AWS ECS
+- AWS EKS
+- AWS AppRunner
+- AWS Fargate
+
 ## Use Case
 - We need to launch our Cruddur application. We have the front-end and backend code written out, and we now need to Dockerise our application and ship it. 
 - For the purposes of this application, we need create an image and run a container from it for both the front-end and backend. To create an image, we need to create Dockerfile within the front-end folder. We need to do the same for the back-end folder too.
@@ -125,11 +131,7 @@ networks:
                   $ref: '#/components/schemas/Activity'
 ```
 
-**How do we run Containers in AWS?**
-- AWS ECS
-- AWS EKS
-- AWS AppRunner
-- AWS Fargate
+
 
 **Step 10: Adding DynamoDB and Postgresql**
 - From the AWS CLI , I searched and copied the commands on how to create a DynamoDB table
@@ -167,6 +169,9 @@ aws dynamodb list-tables --endpoint-url http://localhost:8000 \
 ```
 aws dynamodb scan --table-name cruddur_crud --query "Items" --endpoint-url http://localhost:8000 \
 ```
+
+**Challenges**
+- To launch/access the postgresql environment, 
 
 ## Next Steps - Additional Homework Challenges
 
