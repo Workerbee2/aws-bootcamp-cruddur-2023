@@ -1,4 +1,4 @@
-# Week 1 — App Containerization ![Header Image](
+# Week 1 — App Containerization 
  Hey guys , welcome back to Week 1!
  For a beginner like me, I would like to present a few definitions beforewe get into the homework challenges and the stretch challenges too!
  
