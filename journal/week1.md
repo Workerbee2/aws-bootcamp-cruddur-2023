@@ -56,13 +56,16 @@
 - To make it easier to work with Docker in VSCode(do it also for your local VSCode environment), go to the Extensions tab on the left-hand side and search for Docker and click Install.
 
 **Step 3 - Clone the frontend and backend repo and Explore the codebases**
+
+
 **Step 4 - Ensure we can get the apps running locally**
+
 
 **Step 5 - Write a Dockerfile for each app**
 - Copy code from the Omenking/aws-cruddur-bootcamp/week-1 code,
+
 ```
 FROM python:3.10-slim-buster
-
 
 #Step:2  Make a new folder inside the container
 WORKDIR /backend-flask
@@ -86,6 +89,7 @@ CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
 ```
 
 **Step 6 - Ensure we get the apps running via individual container**
+
 
 **Step 7 - Create a docker-compose file and Ensure we can orchestrate multiple containers to run side by side**
 - For any application that is interactive, the backend services have to be able to communicate to the front end.
