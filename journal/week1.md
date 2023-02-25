@@ -2,6 +2,12 @@
  Hey guys , welcome back to Week 1!
  For a beginner like me, I would like to present a few definitions beforewe get into the homework challenges and the stretch challenges too!
  
+### Introduction
+- This is Week 1 of the project bootcamp and we will be using Docker to ship our Cruddur application.
+
+### Prerequisites
+- For the purposes of this bootcamp, we need to know about what Docker is and the reason why its so common to ship most applications in todays modern world. Below we have a few basic definitions 
+
 **What is a Container?**
 - Allow developers to package up and to isolate applications from the host system, with all its libraries and dependencies, and ship it out.
 
@@ -31,6 +37,9 @@
 
 **What is a Container?**
 - A single running/stopped instance of a Docker image.
+
+## Use Case
+- For the purposes of this application, we need create an image and run a container from it for both the front-end and backend. To create an image, we need to create Dockerfile within the front-end folder that 
 
 ## Tasks
 **Step 1 - Created a new GitHub repo and Launched the repo within a Gitpod workspace**
@@ -158,7 +167,7 @@ aws dynamodb list-tables --endpoint-url http://localhost:8000 \
 aws dynamodb scan --table-name cruddur_crud --query "Items" --endpoint-url http://localhost:8000 \
 ```
 
-## Additional Homework Challenges
+## Next Steps - Additional Homework Challenges
 
 1. Run the Dockerfile command as an external script.
 2. Push and tag a image to DockerHub (they have a free tier).
