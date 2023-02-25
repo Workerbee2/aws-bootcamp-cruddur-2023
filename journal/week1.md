@@ -1,4 +1,4 @@
-# Week 1 — App Containerization
+# Week 1 — App Containerization ![Header Image](
  Hey guys , welcome back to Week 1!
  For a beginner like me, I would like to present a few definitions beforewe get into the homework challenges and the stretch challenges too!
  
@@ -16,8 +16,6 @@
 
 **What are Libraries?**
 - Tools and functions that are pulled in to help support our application.
-
-**What are the differences between Containers and Virtual Machines?**
 
 **What is Docker?**
 - Docker in written in Go and Version 1.0 was first released in 2014. It runs on Linux, Windows, Mac.
@@ -37,6 +35,8 @@
 
 **What is a Container?**
 - A single running/stopped instance of a Docker image.
+
+![Container Volumes](assets/images.png)
 
 **How do we run Containers in AWS?**
 - AWS ECS
@@ -210,6 +210,7 @@ networks:
                   $ref: '#/components/schemas/Activity'
 ```
 
+![Notifications feature enabled](assets/notification%20feature.png)
 
 
 **Step 11 - Adding DynamoDB and Postgresql**
