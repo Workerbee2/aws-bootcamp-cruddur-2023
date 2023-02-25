@@ -56,10 +56,10 @@
 - To make it easier to work with Docker in VSCode(do it also for your local VSCode environment), go to the Extensions tab on the left-hand side and search for Docker and click Install.
 
 **Step 3 - Clone the frontend and backend repo and Explore the codebases**
-
+- Take a look at the frontend and backend code and see how it runs.
 
 **Step 4 - Ensure we can get the apps running locally**
-- Change into backend-flask *(cd backend-flask)*
+- Change into backend-flask *(cd backend-flask)* 
 - In the terminal, paste the code and run it
 ``` pip3 install -r requirements.txt ```
  - To make sure that we get results, we need to set the environment variables,
@@ -72,12 +72,11 @@
  ``` python3 -m flask run --host=0.0.0.0 --port=4567 ``` and run it
 
 - Go into the ports tab and unlock the port for 4567(this is the default port that Fask runs on). Copy the link provided and paste into a new tab then add ```/api/activities/home``` to the end of the link then run it. 
-- 
-
+- We now get a JSON response.
+- We can then stop the container by entering Ctrl+C 
 
 **Step 5 - Write a Dockerfile for each app**
-- Change into backend-flask *(cd backend-flask)*
-- Copy code from the Omenking/aws-cruddur-bootcamp/week-1 code, and paste in the backend/Dockerfile
+- While still in backend-flask/ folder, copy code from the Omenking/aws-cruddur-bootcamp/week-1 code, and paste in the backend/Dockerfile and save.
 
 ```
 FROM python:3.10-slim-buster
@@ -103,8 +102,17 @@ EXPOSE ${PORT}
 CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
 ```
 
-**Step 6 - Write a Dockerfile for each app**
- 
+ - Then we will unset the environment variables we set in **Step 4**. 
+ ```
+ unset FRONTEND_URL
+ unset BACKEND_URL
+ ```
+
+**Step 6 - Ensure we get the apps running via individual container**
+- Change into project directory *(cd ..)*
+- Create an image from the dockerfile by running the above dockerfile 
+```docker build -t  backend-flask ./backend-flask```
+- 
 
 
 
