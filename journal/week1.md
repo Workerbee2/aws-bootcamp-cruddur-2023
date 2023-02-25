@@ -58,7 +58,7 @@
 **Step 3 - Clone the frontend and backend repo and Explore the codebases**
 - Take a look at the frontend and backend code and see how it runs.
 
-**Step 4 - Ensure we can get the apps running locally**
+**Step 4 - Ensure we can get the apps running locally(for the Backend)**
 - Change into backend-flask *(cd backend-flask)* 
 - In the terminal, paste the code and run it
 ``` pip3 install -r requirements.txt ```
@@ -112,8 +112,11 @@ CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
 - Change into project directory *(cd ..)*
 - Create an image from the dockerfile by running the above dockerfile 
 ```docker build -t  backend-flask ./backend-flask```
-- 
-
+- To run the container while also setting the environment variables,
+```docker run --rm -p 4567:4567 -it  -e FRONTEND_URL="*" -e BACKEND_URL="*" backend-flask```
+*If run a container from the image that we created, without setting the variabl;es
+```docker run --rm -p 4567:4567 -it backend-flask```
+We will find that it gives **error 404 - Not Found** , this shows that the server is running but not receiving requests.*
 
 
 
@@ -244,6 +247,7 @@ aws dynamodb scan --table-name cruddur_crud --query "Items" --endpoint-url http:
 8. I was also able to publish a blog post about Docker on my Dev.to blogpost.
 
 **RESOURCES**
-1. [AWS CLI DynamoDB Documentation - Create a table](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/create-table.html)
-2. [AWS CLI DynamoDB Documentation - Put Item](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/put-item.html#examples)
-3. [AWS CLI DynamoDB Documentation - List Tables](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/list-tables.html)
+1. [Docker and Kubernetes - Full Course for Beginners](https://www.youtube.com/watch?v=Wf2eSG3owoA)
+2. [AWS CLI DynamoDB Documentation - Create a table](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/create-table.html)
+3. [AWS CLI DynamoDB Documentation - Put Item](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/put-item.html#examples)
+4. [AWS CLI DynamoDB Documentation - List Tables](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/list-tables.html)
