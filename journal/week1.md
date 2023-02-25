@@ -62,7 +62,8 @@
 
 
 **Step 5 - Write a Dockerfile for each app**
-- Copy code from the Omenking/aws-cruddur-bootcamp/week-1 code,
+- Change into nbackend-flask *(cd backend-flask)*
+- Copy code from the Omenking/aws-cruddur-bootcamp/week-1 code, and paste in the backend/Dockerfile
 
 ```
 FROM python:3.10-slim-buster
@@ -87,6 +88,12 @@ EXPOSE ${PORT}
 #python3 -m flask run --host=0.0.0.0 --port=4567
 CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
 ```
+
+- In the terminal, paste the code and run it
+``` pip3 install -r requirements.txt ```
+
+- 
+
 
 **Step 6 - Ensure we get the apps running via individual container**
 
@@ -216,7 +223,7 @@ aws dynamodb scan --table-name cruddur_crud --query "Items" --endpoint-url http:
 7. Launch an EC2 instance that has docker installed, and pull a container to demonstrate you can run your own docker processes.
 8. I was also able to publish a blog post about Docker on my Dev.to blogpost.
 
-RESOURCES
+**RESOURCES**
 1. [AWS CLI DynamoDB Documentation - Create a table](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/create-table.html)
 2. [AWS CLI DynamoDB Documentation - Put Item](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/put-item.html#examples)
 3. [AWS CLI DynamoDB Documentation - List Tables](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/dynamodb/list-tables.html)
