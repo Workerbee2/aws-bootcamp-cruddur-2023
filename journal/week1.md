@@ -2,10 +2,10 @@
  Hey guys , welcome back to Week 1!
  For a beginner like me, I would like to present a few definitions beforewe get into the homework challenges and the stretch challenges too!
  
-### Introduction
+## Introduction
 - This is Week 1 of the project bootcamp and we will be using Docker to ship our Cruddur application.
 
-### Prerequisites
+## Prerequisites
 - For the purposes of this bootcamp, we need to know about what Docker is and the reason why its so common to ship most applications in todays modern world. Below we have a few basic definitions 
 
 **What is a Container?**
@@ -39,7 +39,8 @@
 - A single running/stopped instance of a Docker image.
 
 ## Use Case
-- For the purposes of this application, we need create an image and run a container from it for both the front-end and backend. To create an image, we need to create Dockerfile within the front-end folder that 
+- We need to launch our Cruddur application. We have the front-end and backend code written out, and we now need to Dockerise our application and ship it. 
+- For the purposes of this application, we need create an image and run a container from it for both the front-end and backend. To create an image, we need to create Dockerfile within the front-end folder. We need to do the same for the back-end folder too.
 
 ## Tasks
 **Step 1 - Created a new GitHub repo and Launched the repo within a Gitpod workspace**
