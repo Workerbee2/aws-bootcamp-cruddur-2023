@@ -1,9 +1,9 @@
 # Week 2 — Distributed Tracing
-- Heyuys , welcome back to Week 2!
--or a beginner like me, I would like to present a few definitions beforewe get into the homework challenges and the stretch challenges too!
+- Hey guys , welcome back to Week 2!
+-For a beginner like me, I would like to present a few definitions before we get into the homework challenges and the stretch challenges too!
  
 ## Introduction
-
+-
 
 ## Prerequisites
 
@@ -41,4 +41,4 @@
 
 
 **RESOURCES**
-
+1. [MasterMnd DevOps/SRE Roles - Observability](https://www.youtube.com/watch?v=N2sOzYMwxJs&list=PLleOCN2eBn8KYJlW2kZ90ZNiUaYOy2fI4&index=8)
