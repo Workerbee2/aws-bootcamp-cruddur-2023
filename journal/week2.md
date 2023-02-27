@@ -6,10 +6,16 @@
 -
 
 ## Prerequisites
+We will cover a few definitions here that are necessary for us to Understand Distributed Tracing and Logging.
 
+For the purposes of this Class/week we need to have set up a few resources that will assist us and we will also learn about how to use them.
 
+**What is Observability?**
 
-
+**What is Monitoring?***
+- An action that we perform against our applications and systems to determine their state.
+- Shows if they are ruunning or not, to also perfoming perfomance health checks.
+- 
 
 ## Use Case
 
