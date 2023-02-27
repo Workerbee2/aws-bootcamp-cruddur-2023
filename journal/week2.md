@@ -1,8 +1,6 @@
 # Week 2 — Distributed Tracing
-# Week 2 — Distributed Tracing
-
- Hey guys , welcome back to Week 1!
- For a beginner like me, I would like to present a few definitions beforewe get into the homework challenges and the stretch challenges too!
+- Heyuys , welcome back to Week 2!
+-or a beginner like me, I would like to present a few definitions beforewe get into the homework challenges and the stretch challenges too!
  
 ## Introduction
 
