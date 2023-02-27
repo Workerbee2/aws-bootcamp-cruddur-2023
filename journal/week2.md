@@ -10,14 +10,30 @@ We will cover a few definitions here that are necessary for us to Understand Dis
 
 For the purposes of this Class/week we need to have set up a few resources that will assist us and we will also learn about how to use them.
 
-**What is Observability?**
+**What are Metrics?**
+- Are measurements of specific data points aggregated over a period of time i.e CPU usage, 
+- We can only collect metrics on what we know.
 
 **What is Monitoring?***
 - An action that we perform against our applications and systems to determine their state.
+- It collects metrics and compares them against a defined state/value.
 - Shows if they are ruunning or not, to also perfoming perfomance health checks.
 - 
 
-## Use Case
+**What is Observability?**
+- Being able to loodk at data from outside the system about what is going on within the system.
+- ***Pattern Recognition*** - 
+
+**What is Logging?**
+- jjhh
+- ***Log Levels*** - allow us to see classifcations of logs within a log.
+Debug, Info, Warnings, Critical, Error
+
+What are the issues with logging
+1. When we have Debug on that provides all information, we get log fatigue which can make it very easy easy to miss critical warnings.
+2. Logs take up alot of disk space.
+
+## Use Cases
 
 
 ## Tasks
