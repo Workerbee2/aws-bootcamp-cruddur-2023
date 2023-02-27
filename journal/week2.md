@@ -44,7 +44,7 @@ What are the issues with logging
 - Networks -
 - Events monitoring - 
 - Databases
-- Logs and log analysis
+- Logs and log analysis - *(Log aggregation and searching for multiple applications such as **PaperTrail**, **ELK Stack** - Allows us to perform log aggregation and analytics)
 
 ## Use Cases
 
