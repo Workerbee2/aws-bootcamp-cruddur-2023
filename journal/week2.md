@@ -21,7 +21,7 @@ For the purposes of this Class/week we need to have set up a few resources that 
 - 
 
 **What is Observability?**
-- Being able to loodk at data from outside the system about what is going on within the system.
+- Being able to look at data from outside the system about what is going on within the system.
 - ***Pattern Recognition*** - 
 
 **What is Logging?**
@@ -39,10 +39,10 @@ What are the issues with logging
 - Helps us understand latency between applications.
 
 **What can we observe?**
-- Application Perfomance(types of application perfomance monitoring tools include **Datadog**, **Honeycomb**, **New Relic**)
-- Infrastructure
-- Networks
-- Events
+- Application Perfomance Monitoring - *(types of application perfomance monitoring tools include **Datadog**, **Honeycomb**, **New Relic**, **Dyna Trace**)*
+- Infrastructure monitoring - *(**Monit**, **Nagios**, **Prometheus**)*
+- Networks -
+- Events monitoring - 
 - Databases
 - Logs and log analysis
 
