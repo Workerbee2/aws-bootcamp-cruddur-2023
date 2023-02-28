@@ -59,14 +59,14 @@ What are the issues with logging
 1. When we have Debug on that provides all information, we get log fatigue which can make it very easy easy to miss critical warnings.
 2. Logs take up alot of disk space.
 
-**What is Tracing?**
+**What is Tracing/Distributed Tracing?**
 - Information about individual transactions/requests i.e the time a request took, errors that occurred during the process.
-- Will inform when things are not running correctly in a pattern match environment, but will not tell you what went wrong but will say something maybe wrong. Logs will clearly say what is wrong.
+- Will inform when things are not running correctly in a pattern match environment, ***but will not tell you what went wrong but will say something maybe wrong. Logs will clearly say what is wrong.***
 - Better for microservices than monolithic applications.
 - Helps us understand latency between applications.
 
-**Tracing terminologies**
-- ***Span*** - the smallest unit in a trace i.e a single HTTP request, a database query.
+**Tracing/Distributed Tracing terminologies**
+- ***Span*** - the smallest unit in a trace, i.e a single HTTP request, a database query. Has a start time and duration. The smallest unit of work.
 - ***span_id*** - unique identifier in a trace, it is only unique within a trace id, and can be reused.
 - ***trace_id*** - determine its trace and is unique.
 - ***parent_id*** - describe a hierarchy of where the calls came from.
