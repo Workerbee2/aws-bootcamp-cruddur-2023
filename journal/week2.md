@@ -57,6 +57,10 @@ What are the issues with logging
 - Databases
 - Logs and log analysis - *(Log aggregation and searching for multiple applications such as **PaperTrail**, **ELK Stack** - Allows us to perform log aggregation and analytics)
 
+**What is Open Telemetry?**
+- A standardized way of describing what distributed systems are doing. 
+- **OpenTelemetry Project** a collection of tools, APIs and SDKs used to instrument, generate, collect and export telemetry data.
+
 ## Use Cases
 
 
