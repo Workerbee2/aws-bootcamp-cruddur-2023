@@ -79,6 +79,14 @@ What are the issues with logging
 ## Tasks
 
 **Step 1 - Instrument our backend flask application to use Open Telemetry (OTEL) with Honeycomb.io as the provider**
+- First we will configure the environment to use our Honeycomb.io account API key.
+- Create a new onment in Honeycomb and copy its API key then
+```
+export HONEYCOMB_API_KEY="2vWapikeyapikey"
+gp env HONEYCOMB_API_KEY="2vWapikeyapikey"
+```
+-To see that its been set
+``` env grep  | HNEY_COMB ```
 
 
 **Step 2 - Run queries to explore traces within Honeycomb.io**
