@@ -36,7 +36,18 @@ What are the issues with logging
 
 **What is Tracing?**
 - Information about individual transactions/requests i.e the time a request took, errors that occurred during the process.
+- Will inform when things are not running correctly in a pattern match environment, but will not tell you what went wrong but will say something maybe wrong. Logs will clearly say what is wrong.
+- Better for microservices than monolithic applications.
 - Helps us understand latency between applications.
+
+**Tracing terminologies**
+- ***Span*** - the smallest unit in a trace i.e a single HTTP request, a database query.
+- ***span_id*** - unique identifier in a trace, it is only unique within a trace id, and can be reused.
+- ***trace_id*** - determine its trace and is unique.
+- ***parent_id*** - describe a hierarchy of where the calls came from.
+- ***labels*** - set of key/value pairs.
+- ***Span context*** - set of value that will be propagated.
+- ***Logs*** - provide unique 'WTF' information.
 
 **What can we observe?**
 - Application Perfomance Monitoring - *(types of application perfomance monitoring tools include **Datadog**, **Honeycomb**, **New Relic**, **Dyna Trace**)*
@@ -76,7 +87,8 @@ What are the issues with logging
 
 
 ## Next Steps - Additional Homework Challenges
-
+1. Prometheus
+2. Istio Service Mesh
 
 **RESOURCES**
 1. [MasterMnd DevOps/SRE Roles - Observability](https://www.youtube.com/watch?v=N2sOzYMwxJs&list=PLleOCN2eBn8KYJlW2kZ90ZNiUaYOy2fI4&index=8)
