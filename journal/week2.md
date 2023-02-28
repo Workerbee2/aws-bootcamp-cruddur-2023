@@ -93,14 +93,24 @@ gp env HONEYCOMB_API_KEY="2vWapikeyapikey"
 OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io"
 OTEL_EXPORTER_OTLP_HEADERS: "x-honeycomb-team=${HONEYCOMB_API_KEY}"
 ```
+- Change into the backend-flask folder and run the following commands:
+```
+cd backend-flask
+pip install opentelemetry-api
+```
+
 - Since our backend is written in Python, we will use the Python tab to instrument our flask app with opentelemtry. Copy the code from the honeycomb.io page and paste into our requirements.txt file in the backend-flask-app folder.
 ```
-opentelemetry-api \
-opentelemetry-sdk \
-opentelemetry-exporter-otlp-proto-http \
-opentelemetry-instrumentation-flask \
+opentelemetry-api 
+opentelemetry-sdk 
+opentelemetry-exporter-otlp-proto-http 
+opentelemetry-instrumentation-flask 
 opentelemetry-instrumentation-requests
 ```
+- Then run 
+``` pip install -r requirements.txt ```
+
+-
 
 **Step 2 - Run queries to explore traces within Honeycomb.io**
 
