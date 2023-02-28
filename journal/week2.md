@@ -50,36 +50,29 @@ What are the issues with logging
 
 
 ## Tasks
-nstrument our backend flask application to use Open Telemetry (OTEL) with
-Honeycomb.io as the provider
-Run queries to explore traces within Honeycomb.io
-Instrument AWS X-Ray into backend flask application
-Configure and provision X-Ray daemon within docker-compose and send data back to X-Ray API
-Observe X-Ray traces within the AWS Console
-Integrate Rollbar for Error Logging
-Trigger an error an observe an error with Rollbar
-Install WatchTower and write a custom logger to send application log data to - CloudWatch Log group
 
-**Step 1 - **
+**Step 1 - Instrument our backend flask application to use Open Telemetry (OTEL) with Honeycomb.io as the provider**
 
 
-**Step 2 - **
+**Step 2 - Run queries to explore traces within Honeycomb.io**
 
 
-**Step 3 - **
+**Step 3 - Instrument AWS X-Ray into backend flask application**
 
 
-**Step 4 - **
+**Step 4 - Configure and provision X-Ray daemon within docker-compose and send data back to X-Ray API**
 
 
-**Step 5 - **
+**Step 5 - Observe X-Ray traces within the AWS Console**
 
 
-**Step 6 - **
+**Step 6 - Integrate Rollbar for Error Logging**
 
-**Step 7 - **
 
-**Step 8 - **
+**Step 7 - Trigger an error an observe an error with Rollbar**
+
+
+**Step 8 - Install WatchTower and write a custom logger to send application log data to - CloudWatch Log group**
 
 
 ## Next Steps - Additional Homework Challenges
