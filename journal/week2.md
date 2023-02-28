@@ -110,6 +110,28 @@ opentelemetry-instrumentation-requests
 - Then run 
 ``` pip install -r requirements.txt ```
 
+- In our app.py, paste the foolowing code:
+```
+from opentelemetry import trace
+from opentelemetry.instrumentation.flask import FlaskInstrumentor
+from opentelemetry.instrumentation.requests import RequestsInstrumentor
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+```
+- Top enable tracing
+```
+provider = TracerProvider()
+processor = BatchSpanProcessor(OTLPSpanExporter())
+provider.add_span_processor(processor)
+trace.set_tracer_provider(provider)
+tracer = trace.get_tracer(__name__)
+```
+- To initialize automatic instrumentation with Flask
+```
+FlaskInstrumentor().instrument_app(app)
+RequestsInstrumentor().instrument()
+```
 -
 
 **Step 2 - Run queries to explore traces within Honeycomb.io**
