@@ -7,8 +7,10 @@
 
 ## Prerequisites
 We will cover a few definitions here that are necessary for us to Understand Distributed Tracing and Logging.
-
 For the purposes of this Class/week we need to have set up a few resources that will assist us and we will also learn about how to use them.
+We also need to set up the following :
+1. A Honeycomb.io account - Honeycomb makes it easy to understand and troubleshoot complex relationships within our distributed services.
+2. A Rollbar account - Proactively discover, predict, and resolve errors in real-time with Rollbar’s error monitoring platform.
 
 **What are Microservices ?**
 - Applications are simpler to build and maintain as smaller services.
