@@ -10,22 +10,45 @@ We will cover a few definitions here that are necessary for us to Understand Dis
 
 For the purposes of this Class/week we need to have set up a few resources that will assist us and we will also learn about how to use them.
 
-**What are Metrics?**
-- Are measurements of specific data points aggregated over a period of time i.e CPU usage, memory and bandwidth.
-- We can only collect metrics on what we know.
+**What are Microservices ?**
+- Applications are simpler to build and maintain as smaller services.
+- We can isolate software functionality into multiple independent modules that are individually responsible for perfoming precisely defined stand-alone tasks.
+- The modules communicate to each other using APIs.
+
+**What is Open Telemetry?**
+- A standardized way of describing what distributed systems are doing. 
+- **OpenTelemetry Project** a collection of tools, APIs and SDKs used to instrument, generate, collect and export telemetry data.
 
 **What is Monitoring?***
 - An action that we perform against our applications and systems to determine their state.
 - It collects metrics and compares them against a defined state/value .
 - Shows if they are ruunning or not, to also perfoming perfomance health checks.
-- 
 
 **What is Observability?**
 - Being able to look at data from outside the system about what is going on within the system.
+- What can we unerstand from a system based on its output?
 - ***Pattern Recognition*** - 
 
+**What can we observe?**
+The data types that show us the perfomance and health of our systems(MELT):
+- Application Perfomance Monitoring - *(types of application perfomance monitoring tools include **Datadog**, **Honeycomb**, **New Relic**, **Dyna Trace**)*
+- Infrastructure monitoring - *(**Monit**, **Nagios**, **Prometheus**)*
+- Networks -
+- Events monitoring - 
+- Logs and log analysis - *(Log aggregation and searching for multiple applications such as **PaperTrail**, **ELK Stack** - Allows us to perform log aggregation and analytics)
+- Tracing
+- Databases
+
+**What are Metrics?**
+- Are measurements of specific data points aggregated over a period of time i.e CPU usage, memory and bandwidth.
+- We can only collect metrics on what we know.
+
+**What are Events?**
+- A dicrete action that takes place at any moment in time.
+- Add metadata for better serach capabilities.
+
 **What is Logging?**
-- jjhh
+- Come directly from our application and transfer detailed data and detailed context for an event.
 - To be able to view logs correctly of multiple applications at the same time, we need to make sure that we properly aggreagate the logs.
 - ***Log Levels*** - allow us to see classifcations of logs within a log.
 Debug, Info, Warnings, Critical, Error
@@ -49,20 +72,7 @@ What are the issues with logging
 - ***Span context*** - set of value that will be propagated.
 - ***Logs*** - provide unique 'WTF' information.
 
-**What can we observe?**
-- Application Perfomance Monitoring - *(types of application perfomance monitoring tools include **Datadog**, **Honeycomb**, **New Relic**, **Dyna Trace**)*
-- Infrastructure monitoring - *(**Monit**, **Nagios**, **Prometheus**)*
-- Networks -
-- Events monitoring - 
-- Databases
-- Logs and log analysis - *(Log aggregation and searching for multiple applications such as **PaperTrail**, **ELK Stack** - Allows us to perform log aggregation and analytics)
-
-**What is Open Telemetry?**
-- A standardized way of describing what distributed systems are doing. 
-- **OpenTelemetry Project** a collection of tools, APIs and SDKs used to instrument, generate, collect and export telemetry data.
-
 ## Use Cases
-
 
 ## Tasks
 
@@ -87,7 +97,7 @@ What are the issues with logging
 **Step 7 - Trigger an error an observe an error with Rollbar**
 
 
-**Step 8 - Install WatchTower and write a custom logger to send application log data to - CloudWatch Log group**
+**Step 8 - Install WatchTower and write a custom logger to send application log data to a CloudWatch Log group**
 
 
 ## Next Steps - Additional Homework Challenges
