@@ -21,7 +21,7 @@ We also need to set up the following :
 - A standardized way of describing what distributed systems are doing. 
 - **OpenTelemetry Project** a collection of tools, APIs and SDKs used to instrument, generate, collect and export telemetry data.
 
-**What is Monitoring?***
+**What is Monitoring?**
 - An action that we perform against our applications and systems to determine their state.
 - It collects metrics and compares them against a defined state/value .
 - Shows if they are ruunning or not, to also perfoming perfomance health checks.
@@ -86,12 +86,20 @@ export HONEYCOMB_API_KEY="2vWapikeyapikey"
 gp env HONEYCOMB_API_KEY="2vWapikeyapikey"
 ```
 - To see that its been set
-``` env grep  | HNEY_COMB ```
+``` env grep  | HONEY_COMB ```
 
 - To configure Open Telemtry to send to Honeycomb, we will set the following in the Docker-compose.yml file, just below the BACKEND_URL line.
 ```
 OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io"
 OTEL_EXPORTER_OTLP_HEADERS: "x-honeycomb-team=${HONEYCOMB_API_KEY}"
+```
+- Since our backend is written in Python, we will use the Python tab to instrument our flask app with opentelemtry. Copy the code from the honeycomb.io page and paste into our requirements.txt file in the backend-flask-app folder.
+```
+opentelemetry-api \
+opentelemetry-sdk \
+opentelemetry-exporter-otlp-proto-http \
+opentelemetry-instrumentation-flask \
+opentelemetry-instrumentation-requests
 ```
 
 **Step 2 - Run queries to explore traces within Honeycomb.io**
