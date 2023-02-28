@@ -132,7 +132,11 @@ tracer = trace.get_tracer(__name__)
 FlaskInstrumentor().instrument_app(app)
 RequestsInstrumentor().instrument()
 ```
--
+- Move into the front-end folder 
+```
+cd ../frontend-react-js/
+npm install
+```
 
 **Step 2 - Run queries to explore traces within Honeycomb.io**
 
