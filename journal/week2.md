@@ -167,11 +167,20 @@ ports:
 -
 
 **Step 2 - Run queries to explore traces within Honeycomb.io**
-- To set up or acquire a tracer, paste the follopwing code in:
+- To set up or acquire a tracer to only use the OpenTelemetry API, paste the follopwing code in:
 ```
 from opentelemetry import trace
 
 tracer = trace.get_tracer("tracer.name.here")
+```
+
+- In the ```home_activities.py``` paste in the following:
+
+```
+from opentelemetry import trace
+
+tracer = trace.get_tracer(__name__)
+with tracer.start_as_current_span("http-handler"):
 ```
 
 **Step 3 - Instrument AWS X-Ray into backend flask application**
