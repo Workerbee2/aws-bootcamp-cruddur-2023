@@ -167,7 +167,12 @@ ports:
 -
 
 **Step 2 - Run queries to explore traces within Honeycomb.io**
+- To set up or acquire a tracer, paste the follopwing code in:
+```
+from opentelemetry import trace
 
+tracer = trace.get_tracer("tracer.name.here")
+```
 
 **Step 3 - Instrument AWS X-Ray into backend flask application**
 
