@@ -137,6 +137,21 @@ RequestsInstrumentor().instrument()
 cd ../frontend-react-js/
 npm install
 ```
+- To ensure that the ports are always open when we run Docker-compose up, copy the following code and paste into the ```.gotpod.yml``` file: 
+```
+ports:
+  - name: frontend
+    port: 3000
+    onOpen: open-browser
+    visibility: public
+  - name: backend
+    port: 4567
+    visibility: public
+  - name: xray-daemon
+    port: 2000
+    visibility: public
+ ```
+- 
 
 **Step 2 - Run queries to explore traces within Honeycomb.io**
 
