@@ -85,6 +85,7 @@ What are the issues with logging
 export HONEYCOMB_API_KEY="2vWapikeyapikey"
 gp env HONEYCOMB_API_KEY="2vWapikeyapikey"
 ```
+
 - To see that its been set
 ``` env grep  | HONEY_COMB ```
 
@@ -93,6 +94,7 @@ gp env HONEYCOMB_API_KEY="2vWapikeyapikey"
 OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io"
 OTEL_EXPORTER_OTLP_HEADERS: "x-honeycomb-team=${HONEYCOMB_API_KEY}"
 ```
+
 - Change into the backend-flask folder and run the following commands:
 ```
 cd backend-flask
@@ -107,6 +109,7 @@ opentelemetry-exporter-otlp-proto-http
 opentelemetry-instrumentation-flask 
 opentelemetry-instrumentation-requests
 ```
+
 - Then run 
 ``` pip install -r requirements.txt ```
 
@@ -119,6 +122,7 @@ from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExport
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 ```
+
 - Top enable tracing
 ```
 provider = TracerProvider()
@@ -127,16 +131,19 @@ provider.add_span_processor(processor)
 trace.set_tracer_provider(provider)
 tracer = trace.get_tracer(__name__)
 ```
-- To initialize automatic instrumentation with Flask
+
+- To initialize automatic instrumentation with Flask:
 ```
 FlaskInstrumentor().instrument_app(app)
 RequestsInstrumentor().instrument()
 ```
-- Move into the front-end folder 
+
+- Move into the front-end folder then run npm install
 ```
 cd ../frontend-react-js/
 npm install
 ```
+
 - To ensure that the ports are always open when we run Docker-compose up, copy the following code and paste into the ```.gotpod.yml``` file: 
 ```
 ports:
@@ -151,7 +158,13 @@ ports:
     port: 2000
     visibility: public
  ```
-- 
+ 
+- Run Docker-compose up to make sure that the changes have been effected.
+- To make sure that our application is returning the API endpoint, run the provided link in a new tab and confirm that you can see the page working.
+- For the backend , paste the link in a new tab and add /api/activities/home at the end of the link
+*If we do not add the /api/activities/home at the end we will meet a 404 error*
+
+-
 
 **Step 2 - Run queries to explore traces within Honeycomb.io**
 
