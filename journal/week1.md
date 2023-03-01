@@ -131,8 +131,10 @@ CMD ["npm", "start"]
 - Change into project directory *(cd ..)*
 - Create an image from the dockerfile by running the above dockerfile 
 ```docker build -t  backend-flask ./backend-flask```
+
 - To run the container while also setting the environment variables,
 ```docker run --rm -p 4567:4567 -it  -e FRONTEND_URL="*" -e BACKEND_URL="*" backend-flask```
+
 *If run a container from the image that we created, without setting the variabl;es
 ```docker run --rm -p 4567:4567 -it backend-flask```
 We will find that it gives **error 404 - Not Found** , this shows that the server is running but not receiving requests.*
