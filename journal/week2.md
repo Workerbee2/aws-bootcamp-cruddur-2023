@@ -189,6 +189,24 @@ with tracer.start_as_current_span("http-handler"):
 - To install AWS X-ray daemon, we will need to install the SDK and paste the following line into requirements.txt 
 ```aws-xray-sdk```
 - Then in the terminal run ```pip install aws-xray-sdk```
+- To set up a sampling riule, we create an xray.json file in the backend and paste:
+```
+{
+    "SamplingRule": {
+        "RuleName": "Cruddur",
+        "ResourceARN": "*",
+        "Priority": 9000,
+        "FixedRate": 0.1,
+        "ReservoirSize": 5,
+        "ServiceName": "backend-flask",
+        "ServiceType": "*",
+        "Host": "*",
+        "HTTPMethod": "*",
+        "URLPath": "*",
+        "Version": 1
+    }
+  }
+```
 - 
 
 **Step 4 - Configure and provision X-Ray daemon within docker-compose and send data back to X-Ray API**
