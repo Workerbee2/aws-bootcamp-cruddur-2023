@@ -185,13 +185,13 @@ with tracer.start_as_current_span("http-handler"):
 ```
 
 **Step 3 - Instrument AWS X-Ray into backend flask application**
-
+-
 
 **Step 4 - Configure and provision X-Ray daemon within docker-compose and send data back to X-Ray API**
-
+-
 
 **Step 5 - Observe X-Ray traces within the AWS Console**
-
+-
 
 **Step 6 - Integrate Rollbar for Error Logging**
 
