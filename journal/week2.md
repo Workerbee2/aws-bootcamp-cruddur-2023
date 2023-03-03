@@ -188,8 +188,10 @@ with tracer.start_as_current_span("http-handler"):
 **Step 3 - Instrument AWS X-Ray into backend flask application**
 - To install AWS X-ray daemon, we will need to install the SDK and paste the following line into requirements.txt 
 ```aws-xray-sdk```
+
 - Then in the terminal run ```pip install aws-xray-sdk```
-- To set up a sampling riule, we create an xray.json file in the backend and paste:
+
+- To set up a sampling rule, we create an xray.json file in the backend and paste:
 ```
 {
     "SamplingRule": {
@@ -207,7 +209,13 @@ with tracer.start_as_current_span("http-handler"):
     }
   }
 ```
-- 
+
+- To create a group
+```
+aws xray create-group \
+   --group-name "Cruddur" \
+   --filter-expression "service(\"backend-flask\")"
+```
 
 **Step 4 - Configure and provision X-Ray daemon within docker-compose and send data back to X-Ray API**
 -
