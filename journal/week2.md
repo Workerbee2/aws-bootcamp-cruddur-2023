@@ -12,6 +12,7 @@ For the purposes of this Class/week we need to have set up a few resources that 
 We also need to set up the following :
 1. A Honeycomb.io account - Honeycomb makes it easy to understand and troubleshoot complex relationships within our distributed services.
 2. A Rollbar account - Proactively discover, predict, and resolve errors in real-time with Rollbar’s error monitoring platform.
+3. AWS SDK
 
 **What are Microservices ?**
 - Applications are simpler to build and maintain as smaller services.
@@ -185,7 +186,7 @@ with tracer.start_as_current_span("http-handler"):
 ```
 
 **Step 3 - Instrument AWS X-Ray into backend flask application**
--
+- 
 
 **Step 4 - Configure and provision X-Ray daemon within docker-compose and send data back to X-Ray API**
 -
@@ -211,3 +212,4 @@ with tracer.start_as_current_span("http-handler"):
 **RESOURCES**
 1. [Honeycomb Documentation](https://ui.honeycomb.io/gettingstarted/environments/bootcamp2023/send-data#)
 2. [MasterMnd DevOps/SRE Roles - Observability](https://www.youtube.com/watch?v=N2sOzYMwxJs&list=PLleOCN2eBn8KYJlW2kZ90ZNiUaYOy2fI4&index=8)
+3. [AWS SDK -Python Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/xray.html0)
