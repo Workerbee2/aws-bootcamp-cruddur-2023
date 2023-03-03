@@ -186,6 +186,9 @@ with tracer.start_as_current_span("http-handler"):
 ```
 
 **Step 3 - Instrument AWS X-Ray into backend flask application**
+- To install AWS X-ray daemon, we will need to install the SDK and paste the following line into requirements.txt 
+```aws-xray-sdk```
+- Then in the terminal run ```pip install aws-xray-sdk```
 - 
 
 **Step 4 - Configure and provision X-Ray daemon within docker-compose and send data back to X-Ray API**
