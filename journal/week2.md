@@ -3,7 +3,8 @@
 -For a beginner like me, I would like to present a few definitions before we get into the homework challenges and the stretch challenges too!
  
 ## Introduction
--
+- In traditional software and application designs , we use logging which has its own downsides i.e there is alot of data with no context for why something is wrong and finding the root cause of a problem is like trying to find a needle in a hay-stack.
+- And be honest, no one really reads logs for fun !!!
 
 ## Prerequisites
 We will cover a few definitions here that are necessary for us to Understand Distributed Tracing and Logging.
