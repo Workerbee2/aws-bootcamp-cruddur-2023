@@ -87,7 +87,7 @@ What are the issues with logging
 export HONEYCOMB_API_KEY="2vWapikeyapikey"
 gp env HONEYCOMB_API_KEY="2vWapikeyapikey"
 ```
-
+-
 - To see that its been set
 ``` env grep  | HONEY_COMB ```
 
