@@ -211,12 +211,17 @@ with tracer.start_as_current_span("http-handler"):
   }
 ```
 
-- To create a group
+- To create a group in XRay paste the following (while still in backend-flask):
 ```
 aws xray create-group \
    --group-name "Cruddur" \
    --filter-expression "service(\"backend-flask\")"
 ```
+
+- To create a sampling rule
+``` aws xray create-sampling-rule --cli-input-json file://aws/json/xray.json ```
+
+- 
 
 **Step 4 - Configure and provision X-Ray daemon within docker-compose and send data back to X-Ray API**
 -
