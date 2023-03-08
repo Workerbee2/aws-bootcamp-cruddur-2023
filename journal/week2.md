@@ -166,8 +166,6 @@ ports:
 - For the backend , paste the link in a new tab and add /api/activities/home at the end of the link
 *If we do not add the /api/activities/home at the end we will meet a 404 error*
 
--
-
 **Step 2 - Run queries to explore traces within Honeycomb.io**
 - To set up or acquire a tracer to only use the OpenTelemetry API, paste the follopwing code in:
 ```
@@ -221,7 +219,27 @@ aws xray create-group \
 - To create a sampling rule
 ``` aws xray create-sampling-rule --cli-input-json file://aws/json/xray.json ```
 
-- 
+- To install the XRay docker daemon, we paste the following code into Docker compose
+```
+  xray-daemon:
+    image: "amazon/aws-xray-daemon"
+    environment:
+      AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+      AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+      AWS_REGION: "us-east-1"
+    command:
+      - "xray -o -b xray-daemon:2000"
+    ports:
+      - 2000:2000/udp
+```
+
+- And also 
+```
+      AWS_XRAY_URL: "*4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}*"
+      AWS_XRAY_DAEMON_ADDRESS: "xray-daemon:2000"
+```
+
+-
 
 **Step 4 - Configure and provision X-Ray daemon within docker-compose and send data back to X-Ray API**
 -
