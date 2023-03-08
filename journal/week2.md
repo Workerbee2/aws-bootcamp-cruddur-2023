@@ -189,9 +189,10 @@ with tracer.start_as_current_span("http-handler"):
 - To install AWS X-ray daemon, we will need to install the SDK and paste the following line into requirements.txt 
 ```aws-xray-sdk```
 
-- Then in the terminal run ```pip install aws-xray-sdk```
+- Change into backend-flask then in the terminal run 
+```pip install -r requirements.txt```
 
-- To set up a sampling rule, we create an xray.json file in the backend and paste:
+- To set up a sampling rule, we create an xray.json file in a new json folder and paste:
 ```
 {
     "SamplingRule": {
