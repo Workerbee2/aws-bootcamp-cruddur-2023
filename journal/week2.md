@@ -219,6 +219,7 @@ aws xray create-group \
 - To create a sampling rule
 ``` aws xray create-sampling-rule --cli-input-json file://aws/json/xray.json ```
 
+**Step 4 - Configure and provision X-Ray daemon within docker-compose and send data back to X-Ray API**
 - To install the XRay docker daemon, we paste the following code into Docker compose
 ```
   xray-daemon:
@@ -239,13 +240,8 @@ aws xray create-group \
       AWS_XRAY_DAEMON_ADDRESS: "xray-daemon:2000"
 ```
 
--
-
-**Step 4 - Configure and provision X-Ray daemon within docker-compose and send data back to X-Ray API**
--
-
 **Step 5 - Observe X-Ray traces within the AWS Console**
--
+- 
 
 **Step 6 - Integrate Rollbar for Error Logging**
 
