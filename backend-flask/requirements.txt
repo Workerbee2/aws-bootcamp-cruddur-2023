@@ -10,3 +10,10 @@ opentelemetry-instrumentation-requests
 
 #installing Xray sdk to instrument 
 aws-xray-sdk
+
+#Cloudwatch - to send our logs to cloudwatch
+watchtower
+
+# Rollbar
+blinker
+rollbar
