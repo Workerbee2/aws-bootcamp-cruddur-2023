@@ -50,6 +50,14 @@ Amplify.configure({
    REACT_APP_CLIENT_ID:    
 ```
 
+An error that I kept on encountering while trying to run the command below
+
+aws cognito-idp admin-set-user-password --user-pool-id us-east-1_vvv --username maureen --password Nxxxxxxxx --permanent
+
+An error occurred (InvalidParameterException) when calling the AdminSetUserPassword operation: 1 validation error detected: Value at 'password' failed to satisfy constraint: Member must satisfy regular expression pattern: ^[\S]+.*[\S]+$
+
+I had to make sure to create a new user in the Cogniuto user pool and delete the previous one.
+
 
 **Step 3 - **
 -
