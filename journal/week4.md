@@ -76,12 +76,23 @@ psql -Upostgres --host localhost
 - As opposed to how we created the Database schema manually in our Dev.to tutorial , link below, here we will import it/ use a premade
 - Since our Database will be used to store information, it will be useful in the backend.
 - We will therefore create a new folder called **db** in the backend-flask folder, then we will create a file in the folder called **schema.sql**
+-Paste the following into the schema.sql 
+```
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+```
 
+- To create the extension located in the schema.sql file, change(cd) into backend-flask then run the following command(if prompted for password enter password):
+```
+cd backend-flask/
+psql cruddur < db/schema.sql -h localhost -U postgres
+```
+
+- 
 
 **Step 4 - T**
 
 
-**Step **
+**Step 5 - **
 
 
 ## Next Steps - Additional Homework Challenges
