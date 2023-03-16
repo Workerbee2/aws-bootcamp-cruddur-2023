@@ -55,18 +55,23 @@ aws rds create-db-instance \
   --no-deletion-protection
 ```
 
-- Switch over to the AWS Console and view the creation process of the database. 
-- When the database has been fully created, the status will read created.
+- Switch over to the AWS Console and view the creation process of the database instance. 
+- When the database instance has been fully created, the status will read created.
 - Click into the Database instance and Stop temporarily, it is stopped for 7 days (be sure to check on it after 7 days).
 - Start up Docker compose, then open the Docker extension and make sure that Postgres has started up,( we added Postgres into the Docker-compose file in the earlier weeks)
-- Open the Postgres bash then, to be able to run psql commands, run the following commands:
+- Open the Postgres bash then, to be able to run psql commands inside the database instance we created above, run the following commands:
 ```
 sudo apt update
 sudo apt install -y postgresql-client-12
+psql -Upostgres --host localhost
+(When it prompts for password enter: ***password***
 ```
 
-- 
+- Then to list existing databases run ```\l```
+- To create a new database called cruddur we will run
+``` CREATE database cruddur; ```
 
+- 
  
 **Step 3 -  **
 
