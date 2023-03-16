@@ -12,8 +12,18 @@
 
 ## Tasks
 
-**Step 1 - **
-
+**Step 1 - Spin up an PostgreSQL RDS(Relational Database System) via the AWS GUI**
+- We will first have to spin up an RDS instance on AWS then stop it.
+1. Search for RDS and choose **Create database**
+2. On **Engine options**, choose Postgres
+3. Choose the Free tier check box
+4. Choose the Instance configuration
+5. For Storage, leave the default option.
+6. For Connectivity and Network type leave the default options.
+7. For Public Access , allow public access
+8. Use the **Default VPC** security group.
+9. For **Database port**, leave it as the default 5432
+10. For **Database authentication**, 
 
 **Step 2 - **
 
