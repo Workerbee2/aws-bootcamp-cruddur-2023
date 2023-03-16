@@ -168,7 +168,8 @@ psql $CONNECTION_URL cruddur < db/schema.sql
 
 psql $CONNECTION_URL 
 ```
-- Change permissions then run ```./bin/db-connect```
+
+- Change permissions ```chmod u+x ./bin/db-connect``` then run ```./bin/db-connect```
 
 **Step 5 - Making the output nicer**
 
@@ -196,6 +197,7 @@ CREATE TABLE public.users (
 
 CREATE TABLE public.activities (
   uuid UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  user_uuid UUID NOT NULL,
   message text NOT NULL,
   replies_count integer DEFAULT 0,
   reposts_count integer DEFAULT 0,
@@ -206,7 +208,32 @@ CREATE TABLE public.activities (
 );
 ```
 
-- The drop table lkines will make sure that if there are any existing tables in the database, they are deleted first before the new tables are created.
+- The drop table lines will make sure that if there are any existing tables in the database, they are deleted first before the new tables are created.
+
+**Step 6 - Seeding/Adding data to the tables**
+- To add data, we will create a new file within db called seed.sql and add in the code below:
+```
+-- this file was manually created
+INSERT INTO public.users (display_name, handle, cognito_user_id)
+VALUES
+  ('Andrew Brown', 'andrewbrown' ,'MOCK'),
+  ('Andrew Bayko', 'bayko' ,'MOCK');
+
+INSERT INTO public.activities (user_uuid, message, expires_at)
+VALUES
+  (
+    (SELECT uuid from public.users WHERE users.handle = 'andrewbrown' LIMIT 1),
+    'This was imported as seed data!',
+    current_timestamp + interval '10 day'
+  )
+```
+
+- Also create a file db-seed in our bash script files.
+- Make sure to change permissions for the file in the terminal using:
+```chmod u+x ./bin/db-seed```
+
+- Then run ```./bin/db-seed``` in the terminal
+
 
 ## Next Steps - Additional Homework Challenges
 
