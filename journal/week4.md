@@ -162,6 +162,13 @@ psql $CONNECTION_URL cruddur < db/schema.sql
 
 - Run ```./bin/db-schema-load``
 
+- Create a db-connect file and paste
+```
+#! /usr/bin/bash
+
+psql $CONNECTION_URL 
+```
+- Change permissions then run ```./bin/db-connect```
 
 **Step 5 - Making the output nicer**
 
@@ -176,10 +183,13 @@ printf "${CYAN}== ${LABEL}${NO_COLOR}\n"
 **Step 6 - Making the output nicer**
 - To create tables within our database, paste the code into the schema.sql file:
 ```
+DROP TABLE IF EXISTS public.users;
+DROP TABLE IF EXISTS public.activities;
+
 CREATE TABLE public.users (
   uuid UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
   display_name text,
-  handle text
+  handle text,
   cognito_user_id text,
   created_at TIMESTAMP default current_timestamp NOT NULL
 );
@@ -196,6 +206,7 @@ CREATE TABLE public.activities (
 );
 ```
 
+- The drop table lkines will make sure that if there are any existing tables in the database, they are deleted first before the new tables are created.
 
 ## Next Steps - Additional Homework Challenges
 
