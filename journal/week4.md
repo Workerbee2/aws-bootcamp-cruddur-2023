@@ -102,7 +102,28 @@ psql $CONNECTION_URL
 ```
 
 
-**Step 4 - T**
+**Step 4 - Bash SCripting**
+- We will create 3 new files in backend-flask folder so that we can run bash scripts that enable us to quickly manage our databases.
+- In the terminal run 
+``` whereis bash```
+- Copy the path into all the three files above. Remember to create a shabang(#!) at the beginning of the files that will indicate that they are bash files. The files will look like:
+``` #! /usr/bin/bash ```
+
+- To enable us to run the files as scripts, we need to be able to change their permissions so that they are executable, we can do this by running the following command on all the 3 files:
+```
+chmod u+x bin/db-create
+chmod u+x bin/db-drop
+chmod u+x bin/db-schema-load 
+```
+
+- We can test that the db-drop scrpt is working by running:
+``` ./bin/db-drop ```
+
+-
+```
+echo $CONNECTION_URL
+postgresql://postgres:password@127.0.0.1:5432/cruddur
+```
 
 
 **Step 5 - **
