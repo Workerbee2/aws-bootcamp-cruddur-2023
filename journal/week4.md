@@ -80,14 +80,27 @@ psql -Upostgres --host localhost
 ```
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 ```
-
+***LONG METHOD (where we do not have to input the password each time)***
 - To create the extension located in the schema.sql file, change(cd) into backend-flask then run the following command(if prompted for password enter password):
 ```
 cd backend-flask/
 psql cruddur < db/schema.sql -h localhost -U postgres
 ```
 
-- 
+***SHORT METHOD (where we do not have to input the password each time)***
+- To be able to get into our cruddur database(the short method). Run the following in the terminal(This will show that it works):
+```
+psql postgresql://postgres:password@localhost:5432/cruddur 
+OR
+psql postgresql://postgres:password@127.0.0.1:5432/cruddur
+```
+
+- In the terminal, paste the follwoing in the terminal(we should still be in backend-flask):
+```
+export CONNECTION_URL="postgresql://postgres:password@127.0.0.1:5432/cruddur"
+psql $CONNECTION_URL
+```
+
 
 **Step 4 - T**
 
