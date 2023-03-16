@@ -134,7 +134,23 @@ NO_DB_CONNECTION_URL=$(sed 's/\/cruddur//g' <<< "$CONNECTION_URL")
 psql $NO_DB_CONNECTION_URL -c "DROP DATABASE cruddur;"
 ```
 
--
+- Then we can execute/run the sript by pasting into the terminal, to delete the cruddur database:
+```
+./bin/db-drop
+```
+
+- To use a script to create a cruddur database(again), paste the follwong in the db-create file:
+```
+#! /usr/bin/bash
+
+echo "db-create"
+
+NO_DB_CONNECTION_URL=$(sed 's/\/cruddur//g' <<< "$CONNECTION_URL")
+psql $NO_DB_CONNECTION_URL -c "CREATE DATABASE cruddur;"
+```
+
+- Run ```./bin/db-create```
+
 
 **Step 5 - **
 
