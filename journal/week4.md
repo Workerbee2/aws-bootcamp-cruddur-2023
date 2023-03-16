@@ -59,7 +59,14 @@ aws rds create-db-instance \
 - When the database has been fully created, the status will read created.
 - Click into the Database instance and Stop temporarily, it is stopped for 7 days (be sure to check on it after 7 days).
 - Start up Docker compose, then open the Docker extension and make sure that Postgres has started up,( we added Postgres into the Docker-compose file in the earlier weeks)
-- Open the Postgres bash 
+- Open the Postgres bash then, to be able to run psql commands, run the following commands:
+```
+sudo apt update
+sudo apt install -y postgresql-client-12
+```
+
+- 
+
  
 **Step 3 -  **
 
