@@ -31,7 +31,7 @@ Whry AWS RDS Postgres over AWS Aurora?
 14. Do not enable **Log exports**
 15. Do not **Enable Deletion protection**, which for production should be turned on for backup purposes.
 
-**Step 2 - Use the AWS CLI in Gitpod to create an RDS instance **
+**Step 2 - Use the AWS CLI in Gitpod to create/provision an RDS instance **
 - Use the 
 
 
