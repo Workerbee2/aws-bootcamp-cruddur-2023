@@ -164,7 +164,13 @@ psql $CONNECTION_URL cruddur < db/schema.sql
 
 
 **Step 5 - **
-
+- To make the bash script nicer, paste in db-schema-load
+```
+CYAN='\033[1;36m'
+NO_COLOR='\033[0m'
+LABEL="db-schema-load"
+printf "${CYAN}== ${LABEL}${NO_COLOR}\n"
+```
 
 ## Next Steps - Additional Homework Challenges
 
