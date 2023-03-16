@@ -31,7 +31,7 @@ Whry AWS RDS Postgres over AWS Aurora?
 14. Do not enable **Log exports**
 15. Do not **Enable Deletion protection**, which for production should be turned on for backup purposes.
 
-**Step 2 - Use the AWS CLI in Gitpod to create/provision an RDS instance **
+**Step 2 - Use the AWS CLI in Gitpod to create/provision an RDS instance**
 - Use the following command to create an RDS instance via the CLI, notice that the commands follow the set up in Step 1.
 ```
 aws rds create-db-instance \
@@ -59,7 +59,7 @@ aws rds create-db-instance \
 - When the database instance has been fully created, the status will read created.
 - Click into the Database instance and in the Actions tab Stop temporarily, it is stopped for 7 days (be sure to check on it after 7 days).
  
-**Step 3 - Create a Database inside the AWS Database Instance  **
+**Step 3 - Create a Database inside the AWS Database Instance**
 - Start up Docker compose, then open the Docker extension and make sure that Postgres has started up,( we added Postgres into the Docker-compose file in the earlier weeks).
 - Open the Postgres bash then, to be able to run psql commands inside the database instance we created above, run the following commands:
 ```
@@ -102,7 +102,7 @@ psql $CONNECTION_URL
 ```
 
 
-**Step 4 - Bash SCripting**
+**Step 4 - Bash Scripting**
 - We will create 3 new files in backend-flask folder so that we can run bash scripts that enable us to quickly manage our databases.
 - In the terminal run 
 ``` whereis bash```
@@ -116,15 +116,25 @@ chmod u+x bin/db-drop
 chmod u+x bin/db-schema-load 
 ```
 
-- We can test that the db-drop scrpt is working by running:
+- We can test that the db-drop script is working by running:
 ``` ./bin/db-drop ```
 
--
+- As we can see the command above will give an error, because we are still in the cruddur database(remember the command we ran above?):
 ```
-echo $CONNECTION_URL
-postgresql://postgres:password@127.0.0.1:5432/cruddur
+echo $CONNECTION_URL   (output)======>postgresql://postgres:password@127.0.0.1:5432/cruddur
 ```
 
+- Therefore, if we want to get into psql with the command without going into our cruddur databse, we will paste the following into our db-drop script:
+```
+#! /usr/bin/bash
+
+echo "db-drop"
+
+NO_DB_CONNECTION_URL=$(sed 's/\/cruddur//g' <<< "$CONNECTION_URL")
+psql $NO_DB_CONNECTION_URL -c "DROP DATABASE cruddur;"
+```
+
+-
 
 **Step 5 - **
 
