@@ -2,6 +2,7 @@
 
 ## Introduction
 
+Whry AWS RDS Postgres over AWS Aurora?
 ## Prerequisites
 1. AWS FRee Tier account
 2. AWS CLI on your local environment
@@ -30,8 +31,8 @@
 14. Do not enable **Log exports**
 15. Do not **Enable Deletion protection**, which for production should be turned on for backup purposes.
 
-**Step 2 - **
-
+**Step 2 - Use the AWS CLI in Gitpod to create an RDS instance **
+- Use the 
 
 
 **Step 3 -  **
@@ -50,4 +51,5 @@
 
 
 **RESOURCES**
-1. 
+1. [AWS RDS CLI - Documentation](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)
+2. 
