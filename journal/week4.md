@@ -4,7 +4,7 @@
 
 Whry AWS RDS Postgres over AWS Aurora?
 ## Prerequisites
-1. AWS FRee Tier account
+1. AWS Free Tier account
 2. AWS CLI on your local environment
 3. Knowledge of SQL and PostgreSQL.
 4. 
@@ -101,4 +101,4 @@ psql cruddur < db/schema.sql -h localhost -U postgres
 
 **RESOURCES**
 1. [AWS RDS CLI - Documentation](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)
-2. 
+2. [Postgres Connection RUL](https://stackoverflow.com/questions/3582552/what-is-the-format-for-the-postgresql-connection-string-url)
