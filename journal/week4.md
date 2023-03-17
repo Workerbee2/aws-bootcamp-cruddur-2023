@@ -13,7 +13,7 @@ Whry AWS RDS Postgres over AWS Aurora?
 
 ## Tasks
 
-**Step 1 - Spin up an PostgreSQL RDS(Relational Database System) via the AWS GUI**
+#### Step 1 - Spin up an PostgreSQL RDS(Relational Database System) via the AWS GUI
 - We will first have to spin up an RDS instance on AWS then stop it.
 1. Search for RDS and choose **Create database**
 2. On **Engine options**, choose Postgres
@@ -31,7 +31,7 @@ Whry AWS RDS Postgres over AWS Aurora?
 14. Do not enable **Log exports**
 15. Do not **Enable Deletion protection**, which for production should be turned on for backup purposes.
 
-**Step 2 - Use the AWS CLI in Gitpod to create/provision an RDS instance**
+#### Step 2 - Use the AWS CLI in Gitpod to create a RDS instance and create a Cruddur databse in the instance**
 - Use the following command to create an RDS instance via the CLI, notice that the commands follow the set up in Step 1.
 ```
 aws rds create-db-instance \
@@ -59,7 +59,7 @@ aws rds create-db-instance \
 - When the database instance has been fully created, the status will read created.
 - Click into the Database instance and in the Actions tab Stop temporarily, it is stopped for 7 days (be sure to check on it after 7 days).
  
-**Step 3 - Create a Database inside the AWS Database Instance**
+#### Step 3 - Create a local Cruddur Database in PostgreSQL
 - Start up Docker compose, then open the Docker extension and make sure that Postgres has started up,( we added Postgres into the Docker-compose file in the earlier weeks).
 - Open the Postgres bash then, to be able to run psql commands inside the database instance we created above, run the following commands:
 ```
@@ -84,7 +84,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 - To create the extension located in the schema.sql file, change(cd) into backend-flask then run the following command(if prompted for password enter password):
 ```
 cd backend-flask/
-psql cruddur < db/schema.sql -h localhost -U postgres
+psql cruddur < db/schema.sql -h localhost -U postgres   =====> this will create an extension from schema.sql
 ```
 
 ***SHORT METHOD (where we do not have to input the password each time)***
@@ -101,12 +101,12 @@ export CONNECTION_URL="postgresql://postgres:password@127.0.0.1:5432/cruddur"
 psql $CONNECTION_URL
 ```
 
-
-**Step 4 - Bash Scripting**
-- We will create 3 new files in backend-flask folder so that we can run bash scripts that enable us to quickly manage our databases.
+#### Step 4 - Bash Scripting
+- We will create 3 new files in backend-flask folder so that we can run bash scripts that enable us to quickly manage our databases; db-create, db-seed, db-drop, db-schema-load
 - In the terminal run 
 ``` whereis bash```
-- Copy the path into all the three files above. Remember to create a shabang(#!) at the beginning of the files that will indicate that they are bash files. The files will look like:
+
+- Copy the path into all the three files above. Remember to create a shabang(#!) at the beginning of all the files that will indicate that they are bash files. The files will look like:
 ``` #! /usr/bin/bash ```
 
 - To enable us to run the files as scripts, we need to be able to change their permissions so that they are executable, we can do this by running the following command on all the 3 files:
@@ -171,7 +171,7 @@ psql $CONNECTION_URL
 
 - Change permissions ```chmod u+x ./bin/db-connect``` then run ```./bin/db-connect```
 
-**Step 5 - Making the output nicer**
+#### STEP 5 - Making the output nicer
 
 - To make the bash script nicer, paste in db-schema-load
 ```
@@ -181,7 +181,7 @@ LABEL="db-schema-load"
 printf "${CYAN}== ${LABEL}${NO_COLOR}\n"
 ```
 
-**Step 6 - Making the output nicer**
+#### STEP 6 - Making the output nicer
 - To create tables within our database, paste the code into the schema.sql file:
 ```
 DROP TABLE IF EXISTS public.users;
@@ -210,7 +210,7 @@ CREATE TABLE public.activities (
 
 - The drop table lines will make sure that if there are any existing tables in the database, they are deleted first before the new tables are created.
 
-**Step 6 - Seeding/Adding data to the tables**
+#### STEP 7 - Seeding/Adding data to the tables
 - To add data, we will create a new file within db called seed.sql and add in the code below:
 ```
 -- this file was manually created
@@ -234,6 +234,81 @@ VALUES
 
 - Then run ```./bin/db-seed``` in the terminal
 
+#### STEP 8 - Connect to the database using the Databse explorer
+- We will now need to connect to our database,(via the short method i.e calling the db-connect script);
+- I the terminal, run ```./bin/db-connect```
+- Once we are in the cruddur databse, run
+```
+\dt                                         =====> to view all tables
+SELECT * FROM cruddur;                       =====> to show all culumns/fields in the cruddur DB
+\ x on
+\ x auto 
+```
+
+- Choose Database explorer from the left hand side of the console, click on the + tab , then 
+choose database type as postgres
+type in cruddur as the connection name
+username should be postgres and port 5432
+type in password as password
+then enter cruddur as databases
+then click connect
+
+- If we attempt to drop the database using the script from the terminal, we will find that it 
+the response will be that other connections are using it, as shown in the point above.
+
+**DB_SESSIONS - A shell script to see active connections**
+- To see other connections/sessions accesing our db, we will create a new script ```db-sessions```  and paste the code:
+```
+#! /usr/bin/bash
+
+CYAN='\035[1;36m'
+NO_COLOR='\035[0m'
+LABEL="db-sessions"
+printf "${CYAN}== ${LABEL}${NO_COLOR}\n"
+
+if ["$1" = "prod" ]; then
+    echo "using production"
+    URL=$PROD_CONNECTION_URL
+else
+    URL=$CONNECTION_URL
+fi
+
+NO_DB_URL=$(sed 's/\/cruddur//g' <<<"$CONNECTION_URL")
+psql $NO_DB_URL -c "select pid as process_id, \
+       usename as user,  \
+       datname as db, \
+       client_addr, \
+       application_name as app,\
+       state \
+from pg_stat_activity;"
+```
+
+- We will then execute, ```./bin/db-sessions``` in the terminal to see the live connections.
+- We can disable the connection from the Database explorer and then run ```./bin/db-sessions``` to see see if the se3rvice is still active.
+- Use DOCKER_COMPOSE UP to forcefully kill all the sessions.(not recommended).
+
+
+**DB_SETUP - A shell script to see speedup our workflow**
+- To enable us to execute commands faster, we will create a new script ```db-setup``` and paste in 
+```
+#! /usr/bin/bash
+
+CYAN='\035[1;36m'
+NO_COLOR='\035[0m'
+LABEL="db-setup"
+printf "${CYAN}== ${LABEL}${NO_COLOR}\n"
+
+bin_path="$(realpath .)/bin/"
+
+source "$bin_path/db-drop"
+source "$bin_path/db-create"
+source "$bin_path/db-schema-load"
+source "$bin_path/db-seed"
+```
+
+- 
+
+
 
 
 
@@ -250,21 +325,6 @@ psql: error: could not connect to server: No such file or directory
         Is the server running locally and accepting
         connections on Unix domain socket "/var/run/postgresql/.s.PGSQL.5432"?
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## Next Steps - Additional Homework Challenges
 
