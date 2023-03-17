@@ -283,8 +283,8 @@ psql $NO_DB_URL -c "select pid as process_id, \
 from pg_stat_activity;"
 ```
 
-- We will then execute it in the terminal to see the live connections.
-
+- We will then execute, ```./bin/db-sessions``` in the terminal to see the live connections.
+- We can disable the connection from the Database explorer and then run ```./bin/db-sessions``` to see see if the se3rvice is still active.
 
 
 
@@ -305,21 +305,6 @@ psql: error: could not connect to server: No such file or directory
         Is the server running locally and accepting
         connections on Unix domain socket "/var/run/postgresql/.s.PGSQL.5432"?
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## Next Steps - Additional Homework Challenges
 
