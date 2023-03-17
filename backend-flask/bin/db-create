@@ -2,8 +2,8 @@
 
 echo "db-create"
 
-CYAN='\035[1;36m'
-NO_COLOR='\035[0m'
+CYAN='\033[1;36m'
+NO_COLOR='\033[0m'
 LABEL="db-create"
 printf "${CYAN}== ${LABEL}${NO_COLOR}\n"
 
