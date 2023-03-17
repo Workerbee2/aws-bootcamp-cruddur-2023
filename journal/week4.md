@@ -84,7 +84,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 - To create the extension located in the schema.sql file, change(cd) into backend-flask then run the following command(if prompted for password enter password):
 ```
 cd backend-flask/
-psql cruddur < db/schema.sql -h localhost -U postgres
+psql cruddur < db/schema.sql -h localhost -U postgres   =====> this will create an extension from schema.sql
 ```
 
 ***SHORT METHOD (where we do not have to input the password each time)***
@@ -100,7 +100,6 @@ psql postgresql://postgres:password@127.0.0.1:5432/cruddur
 export CONNECTION_URL="postgresql://postgres:password@127.0.0.1:5432/cruddur"
 psql $CONNECTION_URL
 ```
-
 
 **Step 4 - Bash Scripting**
 - We will create 3 new files in backend-flask folder so that we can run bash scripts that enable us to quickly manage our databases.
