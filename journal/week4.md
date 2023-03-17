@@ -171,7 +171,7 @@ psql $CONNECTION_URL
 
 - Change permissions ```chmod u+x ./bin/db-connect``` then run ```./bin/db-connect```
 
-#### Step 5 - Making the output nicer
+#### STEP 5 - Making the output nicer
 
 - To make the bash script nicer, paste in db-schema-load
 ```
@@ -181,7 +181,7 @@ LABEL="db-schema-load"
 printf "${CYAN}== ${LABEL}${NO_COLOR}\n"
 ```
 
-#### Step 6 - Making the output nicer
+#### STEP 6 - Making the output nicer
 - To create tables within our database, paste the code into the schema.sql file:
 ```
 DROP TABLE IF EXISTS public.users;
@@ -210,7 +210,7 @@ CREATE TABLE public.activities (
 
 - The drop table lines will make sure that if there are any existing tables in the database, they are deleted first before the new tables are created.
 
-#### Step 6 - Seeding/Adding data to the tables
+#### STEP 7 - Seeding/Adding data to the tables
 - To add data, we will create a new file within db called seed.sql and add in the code below:
 ```
 -- this file was manually created
@@ -234,7 +234,7 @@ VALUES
 
 - Then run ```./bin/db-seed``` in the terminal
 
-#### STEP 7 - 
+#### STEP 8 - Connect to the database using the Databse explorer
 - We will now need to connect to our database,(via the short method i.e calling the db-connect script);
 - I the terminal, run ```./bin/db-connect```
 - Once we are in the cruddur databse, run
@@ -244,6 +244,8 @@ SELECT * FROM cruddur;                       =====> to show all culumns/fields i
 \ x on
 \ x auto 
 ```
+
+
 
 
 **Errors encountered**
