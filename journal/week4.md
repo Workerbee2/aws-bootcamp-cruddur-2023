@@ -253,6 +253,46 @@ type in password as password
 then enter cruddur as databases
 then click connect
 
+- If we attempt to drop the database using the script from the terminal, we will find that it 
+the response will be that other connections are using it, as shown in the point above.
+
+**To see active connections**
+- To see other connections/sessions accesing our db, we will create a new script ```db-sessions```  and paste the code:
+```
+#! /usr/bin/bash
+
+CYAN='\035[1;36m'
+NO_COLOR='\035[0m'
+LABEL="db-sessions"
+printf "${CYAN}== ${LABEL}${NO_COLOR}\n"
+
+if ["$1" = "prod" ]; then
+    echo "using production"
+    URL=$PROD_CONNECTION_URL
+else
+    URL=$CONNECTION_URL
+fi
+
+NO_DB_URL=$(sed 's/\/cruddur//g' <<<"$CONNECTION_URL")
+psql $NO_DB_URL -c "select pid as process_id, \
+       usename as user,  \
+       datname as db, \
+       client_addr, \
+       application_name as app,\
+       state \
+from pg_stat_activity;"
+```
+
+- We will then execute it in the terminal to see the live connections.
+
+
+
+
+
+
+
+
+
 
 **Errors encountered**
 - When running ./bin/db-schema-load this was the error that I was encountering(i had begun video 2? the next day):
