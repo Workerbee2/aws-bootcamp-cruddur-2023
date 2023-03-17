@@ -235,6 +235,37 @@ VALUES
 - Then run ```./bin/db-seed``` in the terminal
 
 
+
+
+
+
+**Errors encountered**
+- When running ./bin/db-schema-load this was the error that I was encountering(i had begun video 2? the next day):
+``` 
+== db-schema-load
+== db-schema-load
+/workspace/aws-bootcamp-cruddur-2023/backend-flask/db/schema.sql
+./bin/db-schema-load: line 13: [: =: unary operator expected
+psql: error: could not connect to server: No such file or directory
+        Is the server running locally and accepting
+        connections on Unix domain socket "/var/run/postgresql/.s.PGSQL.5432"?
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Next Steps - Additional Homework Challenges
 
 
