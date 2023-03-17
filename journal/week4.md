@@ -306,7 +306,22 @@ source "$bin_path/db-schema-load"
 source "$bin_path/db-seed"
 ```
 
+**To install the Python postgresql client**
+- We will install the binaries by pasting the following into ```requirements.txt``
+```
+psycopg[binary]
+psycopg[pool]
+```
+
+- Then running ```pip install requirements.txt``` in the terminal.
+
+**Database Creation pool**
+- We will now create a **connection pool**(connection pooling is the process of having a pool of active connections on the backend servers. These can be used any time a user sends a request. Instead of opening, maintaining, and closing a connection when a user sends a request, the server will assign an active connection to the user.)
 - 
+
+
+
+
 
 
 
@@ -333,3 +348,4 @@ psql: error: could not connect to server: No such file or directory
 **RESOURCES**
 1. [AWS RDS CLI - Documentation](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)
 2. [Postgres Connection RUL](https://stackoverflow.com/questions/3582552/what-is-the-format-for-the-postgresql-connection-string-url)
+3. [Postgres Python drivers session 3](https://www.tutorialspoint.com/postgresql/postgresql_python.htm#:~:text=The%20PostgreSQL%20can%20be%20integrated,and%20stable%20as%20a%20rock.)
