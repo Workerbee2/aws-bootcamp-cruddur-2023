@@ -17,3 +17,7 @@ watchtower
 # Rollbar
 blinker
 rollbar
+
+#Postgresql-python client binaries
+psycopg[binary]
+psycopg[pool]
