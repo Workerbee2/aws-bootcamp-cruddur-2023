@@ -245,7 +245,13 @@ SELECT * FROM cruddur;                       =====> to show all culumns/fields i
 \ x auto 
 ```
 
-
+- Choose Database explorer from the left hand side of the console, click on the + tab , then 
+choose database type as postgres
+type in cruddur as the connection name
+username should be postgres and port 5432
+type in password as password
+then enter cruddur as databases
+then click connect
 
 
 **Errors encountered**
