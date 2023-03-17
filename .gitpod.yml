@@ -16,6 +16,10 @@ tasks:
       sudo apt update
       sudo apt install -y postgresql-client-13 libpq-dev
 
+    command: |
+      export GITPOD_IP=$(curl ifconfig.me)
+      source  "$THEIA_WORKSPACE_ROOT/backend-flask/bin/rds-update-sg-rules"
+
 vscode:
   extensions:
     - 42Crunch.vscode-openapi
@@ -32,5 +36,3 @@ ports:
     port: 2000
     visibility: public
 
-image: 
-  file: Dockerfile
