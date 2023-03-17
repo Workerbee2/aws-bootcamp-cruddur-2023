@@ -239,8 +239,10 @@ VALUES
 - Once we are in the cruddur databse, run
 ```
 \dt                                         =====> to view all tables
-SELECT * FROM cruddur;                      =====> to show all culumns/fields in the cruddur DB
-
+SELECT * FROM cruddur;                       =====> to show all culumns/fields in the cruddur DB
+\ x on
+\ x auto 
+```
 
 
 **Errors encountered**
