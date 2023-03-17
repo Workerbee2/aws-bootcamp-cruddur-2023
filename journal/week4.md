@@ -233,8 +233,13 @@ VALUES
 
 - Then run ```./bin/db-seed``` in the terminal
 
-
-
+**STEP 7 - **
+- We will now need to connect to our database,(via the short method i.e calling the db-connect script);
+- I the terminal, run ```./bin/db-connect```
+- Once we are in the cruddur databse, run
+```
+\dt                                         =====> to view all tables
+SELECT * FROM cruddur;                      =====> to show all culumns/fields in the cruddur DB
 
 
 
