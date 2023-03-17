@@ -256,7 +256,7 @@ then click connect
 - If we attempt to drop the database using the script from the terminal, we will find that it 
 the response will be that other connections are using it, as shown in the point above.
 
-**To see active connections**
+**DB_SESSIONS - A shell script to see active connections**
 - To see other connections/sessions accesing our db, we will create a new script ```db-sessions```  and paste the code:
 ```
 #! /usr/bin/bash
@@ -285,8 +285,28 @@ from pg_stat_activity;"
 
 - We will then execute, ```./bin/db-sessions``` in the terminal to see the live connections.
 - We can disable the connection from the Database explorer and then run ```./bin/db-sessions``` to see see if the se3rvice is still active.
+- Use DOCKER_COMPOSE UP to forcefully kill all the sessions.(not recommended).
 
 
+**DB_SETUP - A shell script to see speedup our workflow**
+- To enable us to execute commands faster, we will create a new script ```db-setup``` and paste in 
+```
+#! /usr/bin/bash
+
+CYAN='\035[1;36m'
+NO_COLOR='\035[0m'
+LABEL="db-setup"
+printf "${CYAN}== ${LABEL}${NO_COLOR}\n"
+
+bin_path="$(realpath .)/bin/"
+
+source "$bin_path/db-drop"
+source "$bin_path/db-create"
+source "$bin_path/db-schema-load"
+source "$bin_path/db-seed"
+```
+
+- 
 
 
 
