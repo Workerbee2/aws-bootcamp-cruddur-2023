@@ -317,9 +317,10 @@ psycopg[pool]
 
 **Database Creation pool**
 - We will now create a **connection pool**(connection pooling is the process of having a pool of active connections on the backend servers. These can be used any time a user sends a request. Instead of opening, maintaining, and closing a connection when a user sends a request, the server will assign an active connection to the user.)
+
+#### STEP 9 - Cognito Post Confirmation Lambda
+- Created a Lambda in AWS LAMBDA called ```cruddur-post-confirmation```
 - 
-
-
 
 
 
