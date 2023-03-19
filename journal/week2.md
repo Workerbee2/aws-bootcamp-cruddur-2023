@@ -347,23 +347,23 @@ AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
 
 ### Instrumenting our backend Flask application iwth Rollbar for Error Logging
 **Step 7 - Integrate Rollbar for Error Logging**
-- Paste the following into requirements.txt in the backend-folder then run 
+- Paste the following into requirements.txt in the backend-folder then run it:
 ```
 blinker
 rollbar
 pip install -r requirements.txt
 ```
 
-- Then from the rollbar page, we will take the access token and set it as an environment variable(it appears like below):
+- Then from the rollbar page, we will take the access token for our flask application and set it as an environment variable(it appears like below):
 ```
 # access token
-        '3d78xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+'3d78xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
 export ROLLBAR_ACCESS_TOKEN="'3d78xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'"
 gp env ROLLBAR_ACCESS_TOKEN="'3d78xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'"
 env | grep ROLLBAR 
 ```
 
-- To instrument our code, we will paste the following from the rollbar page into app.py
+- To instrument our code, we will paste the following from the rollbar page into app.py:
 ```
 import os
 import rollbar
@@ -371,7 +371,7 @@ import rollbar.contrib.flask
 from flask import got_request_exception
 ```
 
-- gg
+- To enable initialization for our application, we will paste the code below into 
 ```
 rollbar_access_token = os.getenv('ROLLBAR_ACCESS_TOKEN')
 @app.before_first_request
@@ -391,7 +391,7 @@ def init_rollbar():
     got_request_exception.connect(rollbar.contrib.flask.report_exception, app)
 ```
 
-- To have our first endpoint , we will paste the following:
+- To have our first endpoint , we will paste the following into app.py:
 ```
 @app.route('/rollbar/test')
 def rollbar_test():
@@ -399,8 +399,11 @@ def rollbar_test():
     return "Hello World!"
 ```
 
+- Add the following to the Docker-compose file:
+``` ROLLBAR_ACCESS_TOKEN: "${ROLLBAR_ACCESS_TOKEN}" ```
 
-**Step 8 - Trigger an error an observe an error with Rollbar**
+
+**Step 8 - **
 
 
 
@@ -411,6 +414,7 @@ def rollbar_test():
 2. Add custom instrumentation to Honeycomb to add more attributes eg. UserId, Add a custom span
 3. Run custom queries in Honeycomb and save them later eg. Latency by UserID, Recent Traces
 4. Add segment and subsegments to our Xray query.
+5. Add additional infoprmation to Rollbar to trigger an error and observe.
 
 **RESOURCES**
 1. [Honeycomb Documentation](https://ui.honeycomb.io/gettingstarted/environments/bootcamp2023/send-data#)
