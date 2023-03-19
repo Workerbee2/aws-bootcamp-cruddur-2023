@@ -77,9 +77,13 @@ What are the issues with logging
 - ***Logs*** - provide unique 'WTF' information.
 
 ## Use Cases
+- 
+1. We will be instrumenting HONEYCOMB to send traces/data about our backend application.
+
 
 ## Tasks
 
+### Instrumenting our backend Flask application with Honeycomb
 **Step 1 - Instrument our backend flask application to use Open Telemetry (OTEL) with Honeycomb.io as the provider**
 - First we will configure the environment to use our Honeycomb.io account API key.
 - Create a new onment in Honeycomb and copy its API key then
@@ -183,6 +187,7 @@ tracer = trace.get_tracer(__name__)
 with tracer.start_as_current_span("http-handler"):
 ```
 
+### Instrumenting our backend Flask application with AWS X-Ray
 **Step 3 - Instrument AWS X-Ray into backend flask application**
 - To install AWS X-ray daemon, we will need to install the SDK and paste the following line into requirements.txt 
 ```aws-xray-sdk```
@@ -243,6 +248,7 @@ aws xray create-group \
 **Step 5 - Observe X-Ray traces within the AWS Console**
 - 
 
+### Instrumenting our backend Flask application iwth Rollbar for Error Logging
 **Step 6 - Integrate Rollbar for Error Logging**
 - Paste the following into requirements.txt in the backend-folder then run 
 ```
