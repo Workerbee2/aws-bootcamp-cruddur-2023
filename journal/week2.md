@@ -320,10 +320,22 @@ LOGGER.addHandler(cw_handler)
 LOGGER.info("some message")
 ```
 
-- 
+- To log errors after every request, we will also paste in:
+```
+@app.after_request
+def after_request(response):
+    timestamp = strftime('[%Y-%b-%d %H:%M]')
+    LOGGER.error('%s %s %s %s %s %s', timestamp, request.remote_addr, request.method, request.scheme, request.full_path, response.status)
+    return response
+```
+
+-
+
+
+
 
 ### Instrumenting our backend Flask application iwth Rollbar for Error Logging
-**Step 6 - Integrate Rollbar for Error Logging**
+**Step 7 - Integrate Rollbar for Error Logging**
 - Paste the following into requirements.txt in the backend-folder then run 
 ```
 blinker
@@ -377,10 +389,10 @@ def rollbar_test():
 ```
 
 
-**Step 7 - Trigger an error an observe an error with Rollbar**
+**Step 8 - Trigger an error an observe an error with Rollbar**
 
 
-**Step 8 - Install WatchTower and write a custom logger to send application log data to a CloudWatch Log group**
+**Step 9 - Install WatchTower and write a custom logger to send application log data to a CloudWatch Log group**
 
 
 ## Next Steps - Additional Homework Challenges
