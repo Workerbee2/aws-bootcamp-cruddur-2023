@@ -137,7 +137,7 @@ trace.set_tracer_provider(provider)
 tracer = trace.get_tracer(__name__)
 ```
 
-- To initialize automatic instrumentation with Flask:
+- To initialize automatic instrumentation with Flask(do not copy app = Flask(__name__) as it already exists in our app.py page):
 ```
 FlaskInstrumentor().instrument_app(app)
 RequestsInstrumentor().instrument()
