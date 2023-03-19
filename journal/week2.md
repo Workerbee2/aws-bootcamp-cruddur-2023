@@ -1,6 +1,6 @@
 # Week 2 — Distributed Tracing
 - Hey guys , welcome back to Week 2!
--For a beginner like me, I would like to present a few definitions before we get into the homework challenges and the stretch challenges too!
+- I would like to present a few definitions before we get into the homework challenges and the stretch challenges too!
  
 ## Introduction
 - In traditional software and application designs , we use logging which has its own downsides i.e there is alot of data with no context for why something is wrong and finding the root cause of a problem is like trying to find a needle in a hay-stack.
@@ -85,18 +85,17 @@ What are the issues with logging
 
 ### Instrumenting our backend Flask application with Honeycomb
 **Step 1 - Instrument our backend flask application to use Open Telemetry (OTEL) with Honeycomb.io as the provider**
-- First we will configure the environment to use our Honeycomb.io account API key.
-- Create a new onment in Honeycomb and copy its API key then
+- First things first, we will configure the environment to use our Honeycomb.io account API key.
+- Create a new environment in Honeycomb and copy its API key, then set the API key as an environment variable by running the following commands in the terminal:
 ```
 export HONEYCOMB_API_KEY="2vWapikeyapikey"
 gp env HONEYCOMB_API_KEY="2vWapikeyapikey"
 ```
--
-- To see that its been set
-``` env grep  | HONEY_COMB ```
+- To see that its been set run ``` env grep  | HONEY_COMB ```
 
-- To configure Open Telemtry to send to Honeycomb, we will set the following in the Docker-compose.yml file, just below the BACKEND_URL line.
+- To configure Open Telemetry to send to Honeycomb, we will set the following in the ```Docker-compose.yml``` file, just below the BACKEND_URL line(We should not to set the environment service name in the terminal as it will remain consistent over differently named projects).
 ```
+OTEL_SERVICE_NAME: "backend-flask"
 OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io"
 OTEL_EXPORTER_OTLP_HEADERS: "x-honeycomb-team=${HONEYCOMB_API_KEY}"
 ```
@@ -107,7 +106,7 @@ cd backend-flask
 pip install opentelemetry-api
 ```
 
-- Since our backend is written in Python, we will use the Python tab to instrument our flask app with opentelemtry. Copy the code from the honeycomb.io page and paste into our requirements.txt file in the backend-flask-app folder.
+- Since our backend is written in Python, we will use the Python tab to instrument our flask app with opentelemtry. Copy the code from the home page of honeycomb.io, Python page and paste into our requirements.txt file in the backend-flask-app folder.
 ```
 opentelemetry-api 
 opentelemetry-sdk 
@@ -116,10 +115,10 @@ opentelemetry-instrumentation-flask
 opentelemetry-instrumentation-requests
 ```
 
-- Then run 
+- Then in the terminal ,run 
 ``` pip install -r requirements.txt ```
 
-- In our app.py, paste the foolowing code:
+- In our app.py, paste the following code after the existing import statements(these will create and initialize a tracer and Flask instrumentation to send data to Honeycomb):
 ```
 from opentelemetry import trace
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
@@ -129,7 +128,7 @@ from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 ```
 
-- Top enable tracing
+- To initialize tracing and an exporter that can send data to Honeycomb, paste the follwoing into app.py:
 ```
 provider = TracerProvider()
 processor = BatchSpanProcessor(OTLPSpanExporter())
