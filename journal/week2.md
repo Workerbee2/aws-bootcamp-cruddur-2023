@@ -98,8 +98,14 @@ The way we can break down the entire application into multiple processes , and h
 - AWS CloudWatch Metrics
 - AWS X Ray Traces
 
+**LAB - Intergrating AWS CloudTrail with CloudWatch Events**
+- Creating a log group within Cloudwatch, so that we can then create metrics for the log group.
 
-- SIEM
+**How to enable a Central Observability Platform for Security**
+- Enabling Central Observability Platform with AWS Securtiy Hub with Amazon Eventbridge.
+- SIEM(Security Incident and Event Management)
+- Enable and ELK stack
+- Use Event Driven Architecture
 
 ### Instrumenting our backend Flask application with Honeycomb
 **Step 1 - Instrument our backend flask application to use Open Telemetry (OTEL) with Honeycomb.io as the provider**
