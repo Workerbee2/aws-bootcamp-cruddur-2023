@@ -2,14 +2,17 @@ from datetime import datetime, timedelta, timezone
 #Honeycomb Creating a trace 
 from opentelemetry import trace
 
+# CloudWatch Logs ----
+import logging
+
 from lib.db import pool, query_wrap_array
 #Honeycomb Creating a trace
 tracer = trace.get_tracer("home.activities")
 
 class HomeActivities:
-  def run(cognito_user_id=None):
-    print("===home-activities")
-    #logger.info("HomeActivities")
+  def run():
+    #Cloudwatch logs
+    #logger.info("HomeActivities") #turned off to save on spend
     #Honeycomb Creating a trace
     with tracer.start_as_current_span("home-activites-mock-data"):
       #span

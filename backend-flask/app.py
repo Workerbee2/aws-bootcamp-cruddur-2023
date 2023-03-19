@@ -41,14 +41,14 @@ import rollbar
 import rollbar.contrib.flask
 from flask import got_request_exception
 
-# Configuring Logger to Use CloudWatch
-# LOGGER = logging.getLogger(__name__)
-# LOGGER.setLevel(logging.DEBUG)
-# console_handler = logging.StreamHandler()
-# cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
-# LOGGER.addHandler(console_handler)
-# LOGGER.addHandler(cw_handler)
-# LOGGER.info("test log")
+# Configuring Logger to Use CloudWatch == turned off to save on logging spend
+#LOGGER = logging.getLogger(__name__)
+#LOGGER.setLevel(logging.DEBUG)
+#console_handler = logging.StreamHandler()
+#cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
+#LOGGER.addHandler(console_handler)
+#LOGGER.addHandler(cw_handler)
+#LOGGER.info("test log")
 
 # HoneyComb ---------
 # Initialize tracing and an exporter that can send data to Honeycomb
@@ -56,7 +56,7 @@ provider = TracerProvider()
 processor = BatchSpanProcessor(OTLPSpanExporter())
 provider.add_span_processor(processor)
 
-# X-RAY ----------
+# X-RAY middleware  == turned off to save on spend
 #xray_url = os.getenv("AWS_XRAY_URL")
 #xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
 
@@ -76,7 +76,7 @@ cognito_jwt_token = CognitoJwtToken(
   region=os.getenv("AWS_DEFAULT_REGION")
 )
 
-# X-RAY ----------
+# X-RAY middleware
 #XRayMiddleware(app, xray_recorder)
 
 # HoneyComb ---------
@@ -95,7 +95,7 @@ cors = CORS(
   methods="OPTIONS,GET,HEAD,POST"
 )
 
-# CloudWatch Logs -----
+# CloudWatch Logs ----- turned off to save on spend
 #@app.after_request
 #def after_request(response):
 #    timestamp = strftime('[%Y-%b-%d %H:%M]')
@@ -175,7 +175,7 @@ def data_home():
     # unauthenicatied request
     app.logger.debug(e)
     app.logger.debug("unauthenicated")
-    data = HomeActivities.run()
+    data = HomeActivities.run(logger=LOGGER)
   return data, 200
 
 @app.route("/api/activities/@<string:handle>", methods=['GET'])
