@@ -212,13 +212,33 @@ with tracer.start_as_current_span("http-handler"):
 
 ### Instrumenting our backend Flask application with AWS X-Ray
 **Step 3 - Instrument AWS X-Ray into backend flask application**
-- To install AWS X-ray daemon, we will need to install the SDK and paste the following line into requirements.txt 
+- AWS uses an X-Ray daemon that runs alongside your application ,to which logs from your application are sent , and then they send the data to the X-Ray API.
+
+- To make sure that we have the reactfolder loaded each trime, we will paste the follwoing into .gitpod.yml:
+```  
+    name: react-js
+    command: |
+      cd frontend-react-js
+      npm i
+```
+
+- To install the AWS X-ray daemon in our terminal/environment, we will need to install the SDK. Therefore,paste the following line into requirements.txt 
 ```aws-xray-sdk```
 
 - Change into backend-flask then in the terminal run 
 ```pip install -r requirements.txt```
 
-- To set up a sampling rule, we create an xray.json file in a new json folder and paste:
+- We will then install middleware into our app.py
+```
+from aws_xray_sdk.core import xray_recorder
+from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
+
+xray_url = os.getenv("AWS_XRAY_URL")
+xray_recorder.configure(service='Cruddur', dynamic_naming=xray_url)
+XRayMiddleware(app, xray_recorder)
+```
+
+- To set up a sampling rule, we create an ```xray.json``` file in a new json folder and paste:
 ```
 {
     "SamplingRule": {
@@ -262,17 +282,71 @@ aws xray create-group \
       - 2000:2000/udp
 ```
 
-- And also 
+- And also to add environment variables , we paste the following code into the Docker-compose file:
 ```
       AWS_XRAY_URL: "*4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}*"
       AWS_XRAY_DAEMON_ADDRESS: "xray-daemon:2000"
 ```
 
 **Step 5 - Observe X-Ray traces within the AWS Console**
-- 
+
+### Install WatchTower and write a custom logger to send application log data to a CloudWatch Log group
+**Step 6 - Connect our logs to CloudWatch to implement Cloud Watch logs for our application**
+- In our requirements.txt in the backend-flask folder, paste in:
+``` watchtower ```
+
+- Change into the backend-flask folder, then run:
+```
+cd backend-flask
+pip i -r requirements.txt
+```
+
+- Then go to the ```app.py``` file and paste:
+```
+import watchtower
+import logging
+from time import strftime
+```
+
+- Then we will also configure a Logger to use Cloudwatch by pasting in app.py:
+```
+# Configuring Logger to Use CloudWatch
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.DEBUG)
+console_handler = logging.StreamHandler()
+cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
+LOGGER.addHandler(console_handler)
+LOGGER.addHandler(cw_handler)
+LOGGER.info("test log")
+
+```
+
+- To log errors after every request, we will also paste in:
+```
+@app.after_request
+def after_request(response):
+    timestamp = strftime('[%Y-%b-%d %H:%M]')
+    LOGGER.error('%s %s %s %s %s %s', timestamp, request.remote_addr, request.method, request.scheme, request.full_path, response.status)
+    return response
+```
+
+- In home_activities.py, also add in:
+```
+# CloudWatch Logs ----
+import logging
+
+```
+
+- In the Docker-compose file, we will then add environment variables that Watchtower will use for the backend-flask application:
+```
+AWS_DEFAULT_REGION: "${AWS_DEFAULT_REGION}"
+AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+```
+
 
 ### Instrumenting our backend Flask application iwth Rollbar for Error Logging
-**Step 6 - Integrate Rollbar for Error Logging**
+**Step 7 - Integrate Rollbar for Error Logging**
 - Paste the following into requirements.txt in the backend-folder then run 
 ```
 blinker
@@ -326,17 +400,17 @@ def rollbar_test():
 ```
 
 
-**Step 7 - Trigger an error an observe an error with Rollbar**
+**Step 8 - Trigger an error an observe an error with Rollbar**
 
 
-**Step 8 - Install WatchTower and write a custom logger to send application log data to a CloudWatch Log group**
+
 
 
 ## Next Steps - Additional Homework Challenges
 1. Instrument Honeycomb for the frontend-application to observe network latency between frontend and backend[HARD]
 2. Add custom instrumentation to Honeycomb to add more attributes eg. UserId, Add a custom span
 3. Run custom queries in Honeycomb and save them later eg. Latency by UserID, Recent Traces
-
+4. Add segment and subsegments to our Xray query.
 
 **RESOURCES**
 1. [Honeycomb Documentation](https://ui.honeycomb.io/gettingstarted/environments/bootcamp2023/send-data#)
