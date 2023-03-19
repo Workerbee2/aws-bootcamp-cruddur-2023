@@ -83,6 +83,24 @@ What are the issues with logging
 
 ## Tasks
 
+### Observability and Monitoring in AWS with Ashish
+- Differentiating Factors that differentiate between Monitoring vs Observability?
+1. Availability      - Is my system available vs How long was my system up?
+2. Perfomance        - Is my system healthy vs What is my system doing?
+3. Fault Management  - When & where did it occur vs Why did it occur?
+4. Recovery          - Is my system back up vs What i can do better next time?
+
+**What is Observability in AWS?**
+The way we can break down the entire application into multiple processes , and have an exact trace of where a function is calling, where it is going for logging, what metric we can look out for metric capabilities?
+
+**AWS Observability Services**
+- AWS CloudWatch Logs
+- AWS CloudWatch Metrics
+- AWS X Ray Traces
+
+
+- SIEM
+
 ### Instrumenting our backend Flask application with Honeycomb
 **Step 1 - Instrument our backend flask application to use Open Telemetry (OTEL) with Honeycomb.io as the provider**
 - First things first, we will configure the environment to use our Honeycomb.io account API key.
