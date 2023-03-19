@@ -151,6 +151,7 @@ psql $NO_DB_CONNECTION_URL -c "CREATE DATABASE cruddur;"
 
 - Run ```./bin/db-create```
 
+
 - To load the schema, paste the following in db-schema-load
 ```
 #! /usr/bin/bash
