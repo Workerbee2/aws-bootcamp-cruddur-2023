@@ -282,7 +282,7 @@ aws xray create-group \
       - 2000:2000/udp
 ```
 
-- And also 
+- And also to add environment variables , we paste the following code into the Docker-compose file:
 ```
       AWS_XRAY_URL: "*4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}*"
       AWS_XRAY_DAEMON_ADDRESS: "xray-daemon:2000"
