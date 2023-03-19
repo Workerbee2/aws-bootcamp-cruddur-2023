@@ -289,7 +289,9 @@ aws xray create-group \
 ```
 
 **Step 5 - Observe X-Ray traces within the AWS Console**
-- 
+
+### Implementing Cloud Watch logs for our application
+**Step 6 - **
 
 ### Instrumenting our backend Flask application iwth Rollbar for Error Logging
 **Step 6 - Integrate Rollbar for Error Logging**
@@ -356,7 +358,7 @@ def rollbar_test():
 1. Instrument Honeycomb for the frontend-application to observe network latency between frontend and backend[HARD]
 2. Add custom instrumentation to Honeycomb to add more attributes eg. UserId, Add a custom span
 3. Run custom queries in Honeycomb and save them later eg. Latency by UserID, Recent Traces
-
+4. Add segment and subsegments to our Xray query.
 
 **RESOURCES**
 1. [Honeycomb Documentation](https://ui.honeycomb.io/gettingstarted/environments/bootcamp2023/send-data#)
