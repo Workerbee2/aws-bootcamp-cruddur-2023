@@ -1,6 +1,6 @@
 # Week 2 — Distributed Tracing
 - Hey guys , welcome back to Week 2!
--For a beginner like me, I would like to present a few definitions before we get into the homework challenges and the stretch challenges too!
+- I would like to present a few definitions before we get into the homework challenges and the stretch challenges too!
  
 ## Introduction
 - In traditional software and application designs , we use logging which has its own downsides i.e there is alot of data with no context for why something is wrong and finding the root cause of a problem is like trying to find a needle in a hay-stack.
@@ -77,22 +77,49 @@ What are the issues with logging
 - ***Logs*** - provide unique 'WTF' information.
 
 ## Use Cases
+- 
+1. We will be instrumenting HONEYCOMB to send traces/data about our backend application.
+
 
 ## Tasks
 
+### Observability and Monitoring in AWS with Ashish
+- Differentiating Factors that differentiate between Monitoring vs Observability?
+1. Availability      - Is my system available vs How long was my system up?
+2. Perfomance        - Is my system healthy vs What is my system doing?
+3. Fault Management  - When & where did it occur vs Why did it occur?
+4. Recovery          - Is my system back up vs What i can do better next time?
+
+**What is Observability in AWS?**
+The way we can break down the entire application into multiple processes , and have an exact trace of where a function is calling, where it is going for logging, what metric we can look out for metric capabilities?
+
+**AWS Observability Services**
+- AWS CloudWatch Logs
+- AWS CloudWatch Metrics
+- AWS X Ray Traces
+
+**LAB - Intergrating AWS CloudTrail with CloudWatch Events**
+- Creating a log group within Cloudwatch, so that we can then create metrics for the log group.
+
+**How to enable a Central Observability Platform for Security**
+- Enabling Central Observability Platform with AWS Securtiy Hub with Amazon Eventbridge.
+- SIEM(Security Incident and Event Management)
+- Enable and ELK stack
+- Use Event Driven Architecture
+
+### Instrumenting our backend Flask application with Honeycomb
 **Step 1 - Instrument our backend flask application to use Open Telemetry (OTEL) with Honeycomb.io as the provider**
-- First we will configure the environment to use our Honeycomb.io account API key.
-- Create a new onment in Honeycomb and copy its API key then
+- First things first, we will configure the environment to use our Honeycomb.io account API key.
+- Create a new environment in Honeycomb and copy its API key, then set the API key as an environment variable by running the following commands in the terminal:
 ```
 export HONEYCOMB_API_KEY="2vWapikeyapikey"
 gp env HONEYCOMB_API_KEY="2vWapikeyapikey"
 ```
--
-- To see that its been set
-``` env grep  | HONEY_COMB ```
+- To see that its been set run ``` env grep  | HONEY_COMB ```
 
-- To configure Open Telemtry to send to Honeycomb, we will set the following in the Docker-compose.yml file, just below the BACKEND_URL line.
+- To configure Open Telemetry to send to Honeycomb, we will set the following in the ```Docker-compose.yml``` file, just below the BACKEND_URL line(We should not to set the environment service name in the terminal as it will remain consistent over differently named projects).
 ```
+OTEL_SERVICE_NAME: "backend-flask"
 OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io"
 OTEL_EXPORTER_OTLP_HEADERS: "x-honeycomb-team=${HONEYCOMB_API_KEY}"
 ```
@@ -103,7 +130,7 @@ cd backend-flask
 pip install opentelemetry-api
 ```
 
-- Since our backend is written in Python, we will use the Python tab to instrument our flask app with opentelemtry. Copy the code from the honeycomb.io page and paste into our requirements.txt file in the backend-flask-app folder.
+- Since our backend is written in Python, we will use the Python tab to instrument our flask app with opentelemtry. Copy the code from the home page of honeycomb.io, Python page and paste into our requirements.txt file in the backend-flask-app folder.
 ```
 opentelemetry-api 
 opentelemetry-sdk 
@@ -112,10 +139,10 @@ opentelemetry-instrumentation-flask
 opentelemetry-instrumentation-requests
 ```
 
-- Then run 
+- Then in the terminal ,run 
 ``` pip install -r requirements.txt ```
 
-- In our app.py, paste the foolowing code:
+- In our app.py, paste the following code after the existing import statements(these will create and initialize a tracer and Flask instrumentation to send data to Honeycomb):
 ```
 from opentelemetry import trace
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
@@ -125,7 +152,7 @@ from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 ```
 
-- Top enable tracing
+- To initialize tracing and an exporter that can send data to Honeycomb, paste the follwoing into app.py:
 ```
 provider = TracerProvider()
 processor = BatchSpanProcessor(OTLPSpanExporter())
@@ -134,7 +161,7 @@ trace.set_tracer_provider(provider)
 tracer = trace.get_tracer(__name__)
 ```
 
-- To initialize automatic instrumentation with Flask:
+- To initialize automatic instrumentation with Flask(do not copy app = Flask(__name__) as it already exists in our app.py page):
 ```
 FlaskInstrumentor().instrument_app(app)
 RequestsInstrumentor().instrument()
@@ -183,6 +210,7 @@ tracer = trace.get_tracer(__name__)
 with tracer.start_as_current_span("http-handler"):
 ```
 
+### Instrumenting our backend Flask application with AWS X-Ray
 **Step 3 - Instrument AWS X-Ray into backend flask application**
 - To install AWS X-ray daemon, we will need to install the SDK and paste the following line into requirements.txt 
 ```aws-xray-sdk```
@@ -243,6 +271,7 @@ aws xray create-group \
 **Step 5 - Observe X-Ray traces within the AWS Console**
 - 
 
+### Instrumenting our backend Flask application iwth Rollbar for Error Logging
 **Step 6 - Integrate Rollbar for Error Logging**
 - Paste the following into requirements.txt in the backend-folder then run 
 ```
