@@ -403,12 +403,6 @@ def rollbar_test():
 ``` ROLLBAR_ACCESS_TOKEN: "${ROLLBAR_ACCESS_TOKEN}" ```
 
 
-**Step 8 - **
-
-
-
-
-
 ## Next Steps - Additional Homework Challenges
 1. Instrument Honeycomb for the frontend-application to observe network latency between frontend and backend[HARD]
 2. Add custom instrumentation to Honeycomb to add more attributes eg. UserId, Add a custom span
