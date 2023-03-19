@@ -399,8 +399,11 @@ def rollbar_test():
     return "Hello World!"
 ```
 
+- Add the following to the Docker-compose file:
+``` ROLLBAR_ACCESS_TOKEN: "${ROLLBAR_ACCESS_TOKEN}" ```
 
-**Step 8 - Trigger an error an observe an error with Rollbar**
+
+**Step 8 - **
 
 
 
@@ -411,6 +414,7 @@ def rollbar_test():
 2. Add custom instrumentation to Honeycomb to add more attributes eg. UserId, Add a custom span
 3. Run custom queries in Honeycomb and save them later eg. Latency by UserID, Recent Traces
 4. Add segment and subsegments to our Xray query.
+5. Add additional infoprmation to Rollbar to trigger an error and observe.
 
 **RESOURCES**
 1. [Honeycomb Documentation](https://ui.honeycomb.io/gettingstarted/environments/bootcamp2023/send-data#)
