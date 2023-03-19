@@ -291,7 +291,36 @@ aws xray create-group \
 **Step 5 - Observe X-Ray traces within the AWS Console**
 
 ### Implementing Cloud Watch logs for our application
-**Step 6 - **
+**Step 6 - Connect our logs to CloudWatch**
+- In our requirements.txt in the backend-flask folder, paste in:
+``` watchtower ```
+
+- Change into the backend-flask folder, then run:
+```
+cd backend-flask
+pip i -r requirements.txt
+```
+
+- Then go to the ```app.py``` file and paste:
+```
+import watchtower
+import logging
+from time import strftime
+```
+
+- Then we will also configure a Logger to use Cloudwatch by pasting in app.py:
+```
+# Configuring Logger to Use CloudWatch
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.DEBUG)
+console_handler = logging.StreamHandler()
+cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
+LOGGER.addHandler(console_handler)
+LOGGER.addHandler(cw_handler)
+LOGGER.info("some message")
+```
+
+- 
 
 ### Instrumenting our backend Flask application iwth Rollbar for Error Logging
 **Step 6 - Integrate Rollbar for Error Logging**
