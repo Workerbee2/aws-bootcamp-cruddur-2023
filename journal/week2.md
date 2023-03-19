@@ -290,8 +290,8 @@ aws xray create-group \
 
 **Step 5 - Observe X-Ray traces within the AWS Console**
 
-### Implementing Cloud Watch logs for our application
-**Step 6 - Connect our logs to CloudWatch**
+### Install WatchTower and write a custom logger to send application log data to a CloudWatch Log group
+**Step 6 - Connect our logs to CloudWatch to implement Cloud Watch logs for our application**
 - In our requirements.txt in the backend-flask folder, paste in:
 ``` watchtower ```
 
@@ -343,8 +343,6 @@ AWS_DEFAULT_REGION: "${AWS_DEFAULT_REGION}"
 AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
 AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
 ```
-
-- 
 
 
 ### Instrumenting our backend Flask application iwth Rollbar for Error Logging
@@ -405,7 +403,7 @@ def rollbar_test():
 **Step 8 - Trigger an error an observe an error with Rollbar**
 
 
-**Step 9 - Install WatchTower and write a custom logger to send application log data to a CloudWatch Log group**
+
 
 
 ## Next Steps - Additional Homework Challenges
