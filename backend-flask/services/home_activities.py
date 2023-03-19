@@ -1,18 +1,21 @@
 from datetime import datetime, timedelta, timezone
-#Creating a trace
+#Honeycomb Creating a trace 
 from opentelemetry import trace
 
 from lib.db import pool, query_wrap_array
-
+#Honeycomb Creating a trace
 tracer = trace.get_tracer("home.activities")
 
 class HomeActivities:
   def run(cognito_user_id=None):
     print("===home-activities")
     #logger.info("HomeActivities")
+    #Honeycomb Creating a trace
     with tracer.start_as_current_span("home-activites-mock-data"):
+      #span
       span = trace.get_current_span()
       now = datetime.now(timezone.utc).astimezone()
+      #span
       span.set_attribute("app.now", now.isoformat())
 
     sql = query_wrap_array("""
@@ -44,4 +47,5 @@ SELECT
     print("-----")
     print(json[0])
     return json[0]
+    #span.set_attributes("app.result_length", len(results))
     return results
