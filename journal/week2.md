@@ -212,13 +212,33 @@ with tracer.start_as_current_span("http-handler"):
 
 ### Instrumenting our backend Flask application with AWS X-Ray
 **Step 3 - Instrument AWS X-Ray into backend flask application**
-- To install AWS X-ray daemon, we will need to install the SDK and paste the following line into requirements.txt 
+- AWS uses an X-Ray daemon that runs alongside your application ,to which logs from your application are sent , and then they send the data to the X-Ray API.
+
+- To make sure that we have the reactfolder loaded each trime, we will paste the follwoing into .gitpod.yml:
+```  
+    name: react-js
+    command: |
+      cd frontend-react-js
+      npm i
+```
+
+- To install the AWS X-ray daemon in our terminal/environment, we will need to install the SDK. Therefore,paste the following line into requirements.txt 
 ```aws-xray-sdk```
 
 - Change into backend-flask then in the terminal run 
 ```pip install -r requirements.txt```
 
-- To set up a sampling rule, we create an xray.json file in a new json folder and paste:
+- We will then install middleware into our app.py
+```
+from aws_xray_sdk.core import xray_recorder
+from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
+
+xray_url = os.getenv("AWS_XRAY_URL")
+xray_recorder.configure(service='Cruddur', dynamic_naming=xray_url)
+XRayMiddleware(app, xray_recorder)
+```
+
+- To set up a sampling rule, we create an ```xray.json``` file in a new json folder and paste:
 ```
 {
     "SamplingRule": {
