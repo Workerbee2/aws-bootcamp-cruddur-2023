@@ -317,7 +317,8 @@ console_handler = logging.StreamHandler()
 cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
 LOGGER.addHandler(console_handler)
 LOGGER.addHandler(cw_handler)
-LOGGER.info("some message")
+LOGGER.info("test log")
+
 ```
 
 - To log errors after every request, we will also paste in:
@@ -329,9 +330,21 @@ def after_request(response):
     return response
 ```
 
--
+- In home_activities.py, also add in:
+```
+# CloudWatch Logs ----
+import logging
 
+```
 
+- In the Docker-compose file, we will then add environment variables that Watchtower will use for the backend-flask application:
+```
+AWS_DEFAULT_REGION: "${AWS_DEFAULT_REGION}"
+AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+```
+
+- 
 
 
 ### Instrumenting our backend Flask application iwth Rollbar for Error Logging
