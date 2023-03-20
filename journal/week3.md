@@ -2,6 +2,8 @@
 
  
 ## Introduction
+**What is Decentralized Authentication?**
+
 
 ## Prerequisites
 
@@ -9,7 +11,20 @@
 ## Use Cases
 
 ## Tasks
+Provision via ClickOps a Amazon Cognito User Pool
+Implement API calls to Amazon Coginto for custom login, signup, recovery and forgot password page
+Show conditional elements and data based on logged in or logged out
+Verify JWT Token server side to serve authenticated API endpoints in Flask Application
 
+### Decentralized Authentication in AWS Cloud
+Types of Authentication:
+- OAuth
+- OpenID Connect
+- Username/Password
+- SAML/ Single Sign on & Identity Provider
+- Traditional Authentication
+
+### Install and configure Amplify client-side library for Amazon Congito
 **Step 1 - Configure a User pool using AWS Cognito**
 - We will first use the AWS Console to configure a Userpool.
 
