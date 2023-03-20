@@ -2,16 +2,48 @@
 
  
 ## Introduction
+**What is Decentralized Authentication?**
+
+**What is Amazon Cognito?**
+
+**User pools vs User Identity pools in AWS Cognito?**
+
+**Benefits of using AWS Cognito**
+- Provides a User Directory for Customers.
+- Provides ability to access AWS Resources for the Application being built.
+- Identity Broker for AWS Resources with Temporary Credentials.
+- Can extend users to AWS resources easily.
+
+**What is User Lifecycle Management?**
+
+
 
 ## Prerequisites
 
 
+
 ## Use Cases
+1. AWS Cognito is a User Directory for Customer that can be used to access AWS resources.
 
 ## Tasks
+Provision via ClickOps a Amazon Cognito User Pool
+Implement API calls to Amazon Coginto for custom login, signup, recovery and forgot password page
+Show conditional elements and data based on logged in or logged out
+Verify JWT Token server side to serve authenticated API endpoints in Flask Application
 
-**Step 1 - Configure a User pool using AWS Cognito**
-- We will first use the AWS Console to configure a Userpool.
+### Decentralized Authentication in AWS Cloud
+Types of Authentication:
+- OAuth
+- OpenID Connect (used with OAuth)
+- Username/Password
+- SAML/ Single Sign on & Identity Provider
+- Traditional Authentication
+
+
+### Intergrating Amazon Cognito with the backend application with custom login branches
+### Install and configure Amplify client-side library for Amazon Congito
+**Step 1 - Configure a User pool using AWS Cognito Cosnole**
+- We will first use the AWS Console to configure a Userpool which is necessary to intergrate an application and we want to authenticate users.
 
 **Step 2 - **
 - In the front-end-js folder, we will install the AWS Amplify libraries in the package.json file by pasting in and running the code in ```frontend-js```
@@ -42,7 +74,7 @@ Amplify.configure({
 });
 ```
 
--In the Docker-compose file, we will add in the following:
+-In the Docker-compose file, in the frontend section, we will add in the following:
 ```
    REACT_AWS_PROJECT_REGION:
    REACT_APP_AWS_COGNITO_REGION:
@@ -105,4 +137,4 @@ import { Auth } from 'aws-amplify';
 
 
 **RESOURCES**
-1. 
+1. [](https://docs.amplify.aws/lib/auth/emailpassword/q/platform/js/)
