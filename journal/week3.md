@@ -14,9 +14,12 @@
 - Identity Broker for AWS Resources with Temporary Credentials.
 - Can extend users to AWS resources easily.
 
+**What is User Lifecycle Management?**
+
 
 
 ## Prerequisites
+
 
 
 ## Use Cases
