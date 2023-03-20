@@ -4,6 +4,8 @@
 ## Introduction
 **What is Decentralized Authentication?**
 
+**What is Amazon Cognito?**
+
 
 ## Prerequisites
 
@@ -19,10 +21,12 @@ Verify JWT Token server side to serve authenticated API endpoints in Flask Appli
 ### Decentralized Authentication in AWS Cloud
 Types of Authentication:
 - OAuth
-- OpenID Connect
+- OpenID Connect (used with OAuth)
 - Username/Password
 - SAML/ Single Sign on & Identity Provider
 - Traditional Authentication
+
+
 
 ### Install and configure Amplify client-side library for Amazon Congito
 **Step 1 - Configure a User pool using AWS Cognito**
