@@ -5,24 +5,27 @@ from opentelemetry import trace
 # CloudWatch Logs ----
 import logging
 
+#Postgresql
 from lib.db import pool, query_wrap_array
+
 #Honeycomb Creating a trace
-tracer = trace.get_tracer("home.activities")
+#tracer = trace.get_tracer("home.activities")
 
 class HomeActivities:
-  def run():
+  def run(cognito_user_id=None):
+    #print("====home activities")
     #Cloudwatch logs
     #logger.info("HomeActivities") #turned off to save on spend
     #Honeycomb Creating a trace
-    with tracer.start_as_current_span("home-activites-mock-data"):
+    #with tracer.start_as_current_span("home-activites-mock-data"):
       #span
-      span = trace.get_current_span()
-      now = datetime.now(timezone.utc).astimezone()
+      #span = trace.get_current_span()
+      #now = datetime.now(timezone.utc).astimezone()
       #span
-      span.set_attribute("app.now", now.isoformat())
+      #span.set_attribute("app.now", now.isoformat())
 
     sql = query_wrap_array("""
-SELECT
+      SELECT
         activities.uuid,
         users.display_name,
         users.handle,
@@ -35,11 +38,11 @@ SELECT
         activities.created_at
       FROM public.activities
       LEFT JOIN public.users ON users.uuid = activities.user_uuid
-      ORDER BY activities.created_at DESC    """)
+      ORDER BY activities.created_at DESC    
+    """)
     print("SQL-------")
     print(sql)
     print("SQL________")
-
 
     with pool.connection() as conn:
       with conn.cursor() as cur:
