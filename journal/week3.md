@@ -42,7 +42,7 @@ Types of Authentication:
 
 ### Intergrating Amazon Cognito with the backend application with custom login branches
 ### Install and configure Amplify client-side library for Amazon Congito
-**Step 1 - Configure a User pool using AWS Cognito**
+**Step 1 - Configure a User pool using AWS Cognito Cosnole**
 - We will first use the AWS Console to configure a Userpool which is necessary to intergrate an application and we want to authenticate users.
 
 **Step 2 - **
@@ -74,7 +74,7 @@ Amplify.configure({
 });
 ```
 
--In the Docker-compose file, we will add in the following:
+-In the Docker-compose file, in the frontend section, we will add in the following:
 ```
    REACT_AWS_PROJECT_REGION:
    REACT_APP_AWS_COGNITO_REGION:
