@@ -40,7 +40,7 @@ Types of Authentication:
 - Traditional Authentication
 
 
-
+### Intergrating Amazon Cognito with the backend application with custom login branches
 ### Install and configure Amplify client-side library for Amazon Congito
 **Step 1 - Configure a User pool using AWS Cognito**
 - We will first use the AWS Console to configure a Userpool.
