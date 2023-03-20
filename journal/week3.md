@@ -6,11 +6,21 @@
 
 **What is Amazon Cognito?**
 
+**User pools vs User Identity pools in AWS Cognito?**
+
+**Benefits of using AWS Cognito**
+- Provides a User Directory for Customers.
+- Provides ability to access AWS Resources for the Application being built.
+- Identity Broker for AWS Resources with Temporary Credentials.
+- Can extend users to AWS resources easily.
+
+
 
 ## Prerequisites
 
 
 ## Use Cases
+1. AWS Cognito is a User Directory for Customer that can be used to access AWS resources.
 
 ## Tasks
 Provision via ClickOps a Amazon Cognito User Pool
