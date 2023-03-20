@@ -15,6 +15,8 @@ import {
   RouterProvider
 } from "react-router-dom";
 
+//Decentralized Authentication
+
 import { Amplify } from 'aws-amplify';
 
 Amplify.configure({
