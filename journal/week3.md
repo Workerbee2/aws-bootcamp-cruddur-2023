@@ -43,7 +43,7 @@ Types of Authentication:
 ### Intergrating Amazon Cognito with the backend application with custom login branches
 ### Install and configure Amplify client-side library for Amazon Congito
 **Step 1 - Configure a User pool using AWS Cognito**
-- We will first use the AWS Console to configure a Userpool.
+- We will first use the AWS Console to configure a Userpool which is necessary to intergrate an application and we want to authenticate users.
 
 **Step 2 - **
 - In the front-end-js folder, we will install the AWS Amplify libraries in the package.json file by pasting in and running the code in ```frontend-js```
@@ -137,4 +137,4 @@ import { Auth } from 'aws-amplify';
 
 
 **RESOURCES**
-1. 
+1. [](https://docs.amplify.aws/lib/auth/emailpassword/q/platform/js/)
