@@ -10,6 +10,12 @@ Whry AWS RDS Postgres over AWS Aurora?
 4. 
 
 ## Use Cases
+- Postgresql is a type of Relational Database System.
+- A Relational Database System maintains the following ACID principle:
+1. Atomicity
+2. Consistency
+3. Isolation
+4. Durability
 
 ## Tasks
 Provision an RDS instance
