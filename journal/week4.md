@@ -12,8 +12,22 @@ Whry AWS RDS Postgres over AWS Aurora?
 ## Use Cases
 
 ## Tasks
+Provision an RDS instance
+Temporarily stop an RDS instance
+Remotely connect to RDS instance
+Programmatically update a security group rule
+Write several bash scripts for database operations
+Operate common SQL commands
+Create a schema SQL file by hand
+Work with UUIDs and PSQL extensions
+Implement a postgres client for python using a connection pool
+Troubleshoot common SQL errors
+Implement a Lambda that runs in a VPC and commits code to RDS
+Work with PSQL json functions to directly return json from the database
+Correctly sanitize parameters passed to SQL to execute
 
-### Step 1 - Spin up an PostgreSQL RDS(Relational Database System) via the AWS GUI
+### Spin up an PostgreSQL RDS(Relational Database System) via the AWS Console
+**Step 1 - Provision an RDS instance**
 - We will first have to spin up an RDS instance on AWS then stop it.
 1. Search for RDS and choose **Create database**
 2. On **Engine options**, choose Postgres
@@ -31,7 +45,7 @@ Whry AWS RDS Postgres over AWS Aurora?
 14. Do not enable **Log exports**
 15. Do not **Enable Deletion protection**, which for production should be turned on for backup purposes.
 
-### Step 2 - Use the AWS CLI in Gitpod to create a RDS instance and create a Cruddur databse in the instance**
+### Step 2 - Use the AWS CLI in Gitpod to create a RDS instance and create a Cruddur database in the instance**
 - Use the following command to create an RDS instance via the CLI, notice that the commands follow the set up in Step 1.
 ```
 aws rds create-db-instance \
