@@ -60,9 +60,11 @@ What are base tables?
 What is a GSI?-Global Secondary Index
 What are LSI? Local Secondary Indexes
 GSI vs LSI?
+4kb in read 1kb in writes.
 
-
-
+Adavntagews of DynamoDB
+Fast
+Consistent
 
 **Step 3 -  **
 
