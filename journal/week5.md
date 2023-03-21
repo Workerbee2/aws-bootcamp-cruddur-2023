@@ -1,6 +1,6 @@
 # Week 5 — DynamoDB and Serverless Caching
 Hi guys! Welcome back to week 5!! It getting hotter in the kitchen but lets learn about a few definitions today.
-This wewe will be learning about NoSQl Databases and the different types that exist.
+This week will be learning about NoSQl Databases and the different types that exist.
 - Then we will learn about NoSQL database in AWS which is DynamoDB. So lets start!!
 
  
@@ -10,8 +10,15 @@ This wewe will be learning about NoSQl Databases and the different types that ex
 - Non-relational, distributed and scalable. and partition tolerant and 
 
 **Why use NoSQL?**
-- 
+- Application Development Productivity.
+- Large scale data
 
+**What are the characteristics of NoSQL databases?
+- Non-relational
+- Distributed system that can manage large scale data while maintaining high throughput and availability.
+- Scalable
+
+**What are the differences between Non-Relational vs Relational Databases?**
 
 
 ## Prerequisites
