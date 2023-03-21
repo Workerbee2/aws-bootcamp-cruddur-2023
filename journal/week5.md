@@ -13,7 +13,7 @@ This week will be learning about NoSQl Databases and the different types that ex
 - Application Development Productivity.
 - Large scale data
 
-**What are the characteristics of NoSQL databases?
+**What are the characteristics of NoSQL databases?**
 - Non-relational
 - Distributed system that can manage large scale data while maintaining high throughput and availability.
 - Scalable
@@ -48,7 +48,19 @@ This week will be learning about NoSQl Databases and the different types that ex
 **Step 1 - gf**
 A flat table as we do not hva ejoins as is the case with Relational databases.
 
-**Step 2 - **
+**Step 2 - fffgg**
+NoSQL workbench
+DynamoDB Data Modelling
+
+It is better to put similar items in the same table/ reduces complexity in the application
+Globale tables?
+Sort keys?
+Access Patterns?
+What are base tables?
+What is a GSI?-Global Secondary Index
+What are LSI? Local Secondary Indexes
+GSI vs LSI?
+
 
 
 
@@ -66,3 +78,4 @@ A flat table as we do not hva ejoins as is the case with Relational databases.
 
 
 **RESOURCES**
+1. [NoSQL DynamoDB Workbench](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.html)
