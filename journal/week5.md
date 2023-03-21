@@ -38,13 +38,15 @@ This week will be learning about NoSQl Databases and the different types that ex
 
 
 ## Use Cases
-
+1. Will be used with our application for message caching
+2. 
 
 ## Tasks
 
 
 
-**Step 1 - **
+**Step 1 - gf**
+A flat table as we do not hva ejoins as is the case with Relational databases.
 
 **Step 2 - **
 
