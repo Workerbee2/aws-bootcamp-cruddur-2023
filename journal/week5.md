@@ -24,6 +24,14 @@ This week will be learning about NoSQl Databases and the different types that ex
 - Flexible schema vs Fixed Schema
 - Scales out(horizontally scaling) vs Scales up(vertical scaling)
 
+**What are the types of NoSQL database types?**
+- key-value,
+- document, 
+- tabular and 
+- graphs
+- Multi-model type
+
+
 
 ## Prerequisites
 
