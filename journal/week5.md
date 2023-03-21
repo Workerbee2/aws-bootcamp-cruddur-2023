@@ -19,6 +19,10 @@ This week will be learning about NoSQl Databases and the different types that ex
 - Scalable
 
 **What are the differences between Non-Relational vs Relational Databases?**
+| ---Non-Relational Databases---  | ---Relational Databases |
+- NOT ONLY tables with fixed columns and rows vs Tables with fixed columns and rows
+- Flexible schema vs Fixed Schema
+- Scales out(horizontally scaling) vs Scales up(vertical scaling)
 
 
 ## Prerequisites
