@@ -9,6 +9,11 @@ This wewe will be learning about NoSQl Databases and the different types that ex
 - A flexible document management system for key-value,document, tabular and graphs.
 - Non-relational, distributed and scalable. and partition tolerant and 
 
+**Why use NoSQL?**
+- 
+
+
+
 ## Prerequisites
 
 
