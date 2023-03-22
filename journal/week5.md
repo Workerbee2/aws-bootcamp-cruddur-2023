@@ -98,6 +98,101 @@ pip install -r requirements.txt
 #! /usr/bin/env python3 
 
 import boto3
+import sys 
+
+attrs = ('endpoint_url': 'hhtp://l;ocalhost:8000')
+
+if len(sys.argv) == 2:
+ if "prod" in sysy.argv[1]:
+  attrs = {}
+
+dynamodb = boto3.client('dynamodb', ""attrs )
+
+table_name = 'cruddur-message'
+
+response = client.create_table(
+    TableName='string',
+    AttributeDefinitions=[
+        {
+            'AttributeName': 'pk',
+            'AttributeType': 'S'
+        },
+    ],
+    KeySchema=[
+        {
+            'AttributeName': 'string',
+            'KeyType': 'HASH'|'RANGE'
+        },
+    ],
+    LocalSecondaryIndexes=[
+        {
+            'IndexName': 'string',
+            'KeySchema': [
+                {
+                    'AttributeName': 'string',
+                    'KeyType': 'HASH'|'RANGE'
+                },
+            ],
+            'Projection': {
+                'ProjectionType': 'ALL'|'KEYS_ONLY'|'INCLUDE',
+                'NonKeyAttributes': [
+                    'string',
+                ]
+            }
+        },
+    ],
+    GlobalSecondaryIndexes=[
+        {
+            'IndexName': 'string',
+            'KeySchema': [
+                {
+                    'AttributeName': 'string',
+                    'KeyType': 'HASH'|'RANGE'
+                },
+            ],
+            'Projection': {
+                'ProjectionType': 'ALL'|'KEYS_ONLY'|'INCLUDE',
+                'NonKeyAttributes': [
+                    'string',
+                ]
+            },
+            'ProvisionedThroughput': {
+                'ReadCapacityUnits': 123,
+                'WriteCapacityUnits': 123
+            }
+        },
+    ],
+    BillingMode='PROVISIONED'|'PAY_PER_REQUEST',
+    ProvisionedThroughput={
+        'ReadCapacityUnits': 123,
+        'WriteCapacityUnits': 123
+    },
+    StreamSpecification={
+        'StreamEnabled': True|False,
+        'StreamViewType': 'NEW_IMAGE'|'OLD_IMAGE'|'NEW_AND_OLD_IMAGES'|'KEYS_ONLY'
+    },
+    SSESpecification={
+        'Enabled': True|False,
+        'SSEType': 'AES256'|'KMS',
+        'KMSMasterKeyId': 'string'
+    },
+    Tags=[
+        {
+            'Key': 'string',
+            'Value': 'string'
+        },
+    ],
+    TableClass='STANDARD'|'STANDARD_INFREQUENT_ACCESS',
+    DeletionProtectionEnabled=True|False
+)
+
+```
+
+- Change the permissions of the schema-load bash script file by running, in the terminal:
+```chmod u+x bin/ddb/schema-load```
+
+- 
+
 
 
 
@@ -140,4 +235,4 @@ AWS recommends using Client side encryption when storing sensitive information. 
 
 **RESOURCES**
 1. [NoSQL DynamoDB Workbench](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.html)
-2. [AWS SDK Boto3 Python DynamoDB Documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/dynamodb.html)
+2. [AWS SDK Boto3 Python DynamoDB Documentation]([https://boto3.amazonaws.com/v1/documentation/api/latest/guide/dynamodb.html](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb/client/create_table.html))
