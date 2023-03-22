@@ -208,7 +208,9 @@ chmod u+x bin/ddb/drop-tables
 #! /usr/bin/env python3
 
 import boto3
-import datetime, timedata, timezone
+import os
+import sys
+from datetime import datetime, timedata, timezone
 
 current_path = os.path.dirname(os.path.abspath(__file__))
 parent_path = os.path.abspath(os.path.join(current_path, '..', '..'))
@@ -241,8 +243,15 @@ users = db.query_array_json(sql,{
    'my_handle':  'andrewbrown',
    'other_handle': 'bayko'
  })
-print("users====")
-print(users)
+ my_user    = next((item for item in users if item["handle"] == 'andrewbrown'), None)
+ other_user = next((item for item in users if item["handle"] == 'bayko'), None)
+ results = {
+   'my_user': my_user,
+   'other_user': other_user
+ }
+ print('get_user_uuids')
+ print(results)
+ return results
 
 
 def create_message_group(client,message_group_uuid, my_user_uuid, last_message_at=None, message=None, other_user_uuid=None, other_user_display_name=None, other_user_handle=None):
