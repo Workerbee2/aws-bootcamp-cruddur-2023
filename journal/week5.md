@@ -154,7 +154,8 @@ print(response)
 - In the ddb folder, create a new file named ``list-tables`` to list our tables:
 ```
 #! /usr/bin/env python3 
-set -e #stop if it fails at ay point
+set -e #stop if it fails at any point
+
 if [ "$1" = "prod" ]; then
   ENDPOINT_URL=""
 else
@@ -164,12 +165,40 @@ else
 aws dynamodb list-tables $ENDPOINT_URL \  --query TableNames --output table
 ```
 
-- Change the permissions of the list-tables bash script file by running, in the terminal:
-```chmod u+x bin/ddb/list-tables```
-- 
+- Change the permissions of the list-tables bash script file, then running in the terminal:
+```
+chmod u+x bin/ddb/list-tables
+./bin/ddb/list-tables
+``` 
 
+-  In the ddb folder, create a new file named ``drop-tables`` to drop our tables:
+```
+#! /usr/bin/bash 
 
+set -e #stop if it fails at any point
 
+if [ -z "$1" ]; then
+  echo "NO TABLE_NAME argument supplied e.g # ./bin/ddb/drop cruddur-messages prod "
+  exit 1
+  TABLE_NAME=$1
+  
+if [ "$1" = "prod" ]; then
+  ENDPOINT_URL=""
+else
+  ENDPOINT_URL="--endpoint=https://local:8000"
+ fi
+
+aws dynamodb delete-tables $ENDPOINT_URL \  
+--table-name "TABLE_NAME" 
+```
+
+- - Change the permissions of the list-tables bash script file by running, in the terminal:
+```
+chmod u+x bin/ddb/drop-tables
+./bin/ddb/drop-tables
+```
+
+ - 
 
 
 
