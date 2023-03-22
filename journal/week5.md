@@ -12,6 +12,8 @@ This week will be learning about NoSQl Databases and the different types that ex
 **Why use NoSQL?**
 - Application Development Productivity.
 - Large scale data
+- They mainatin perfomance no matter the scale of  
+
 
 **What are the characteristics of NoSQL databases?**
 - Non-relational
@@ -37,9 +39,11 @@ This week will be learning about NoSQl Databases and the different types that ex
 
 
 
-## Use Cases
+## Business Use Cases
 1. Will be used with our application for message caching
-2. 
+2. To create Amazon DynamoDB table for developers to use for their Web Application in AWS to allow for ***uninterrupted flow for a large amount of traffic in microseconds.***
+3. For ***milli-second response times***, we add a Amazon DynamoDB Accelerator (DAX) to improve the response time of the DynamoDB tables that has been linked to the Web Application in AWS.
+4. 
 
 ## Tasks
 Have a lecture about data modeling (Single Table Design) for NoSQL
@@ -71,6 +75,7 @@ Adavntagews of DynamoDB
 Fast
 Consistent
 
+
 **Step 2 - fffgg**
 
 
@@ -82,6 +87,12 @@ Consistent
 
 **Step **
 
+### Security best practises for DynamoDB
+**Types of Access to DynamoDB**
+- Using Internet Gateway.
+- Using VPC/Gateway Endpoints
+- DynamoDB Accelerator(DAX)
+- Cross Account
 
 ## Next Steps - Additional Homework Challenges
 
