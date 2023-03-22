@@ -211,6 +211,7 @@ import boto3
 import os
 import sys
 from datetime import datetime, timedata, timezone
+import uuid
 
 current_path = os.path.dirname(os.path.abspath(__file__))
 parent_path = os.path.abspath(os.path.join(current_path, '..', '..'))
@@ -224,7 +225,7 @@ attrs = {
 if len(sys.argv) == 2:
   if "prod" in sys.argv[1]:
     attrs = {}
-dynamodb = boto3.client('dynamodb',**attrs)
+ddb = boto3.client('dynamodb',**attrs)
 
 def get_user_uuids():
   sql = """
@@ -253,9 +254,72 @@ users = db.query_array_json(sql,{
  print(results)
  return results
 
+def create_message_group(client,message_group_uuid, my_user_uuid, last_message_at=None, message=None, other_user_uuid=None, other_user_display_name=None, other_user_handle=None):
+  table_name = 'cruddur-messages'
+  record = {
+    'pk':   {'S': f"GRP#{my_user_uuid}"},
+    'sk':   {'S': last_message_at},
+    'message_group_uuid': {'S': message_group_uuid},
+    'message':  {'S': message},
+    'user_uuid': {'S': other_user_uuid},
+    'user_display_name': {'S': other_user_display_name},
+    'user_handle': {'S': other_user_handle}
+  }
+
+  response = client.put_item(
+    TableName=table_name,
+    Item=record
+  )
+  print(response)
+
+def create_message(client,message_group_uuid, created_at, message, my_user_uuid, my_user_display_name, my_user_handle):
+  table_name = 'cruddur-messages'
+  # Entity # Message Group Id
+  record = {
+    'pk':   {'S': f"MSG#{message_group_uuid}"},
+    'sk':   {'S': created_at },
+    'message_uuid': { 'S': str(uuid.uuid4()) },
+    'message': {'S': message},
+    'user_uuid': {'S': my_user_uuid},
+    'user_display_name': {'S': my_user_display_name},
+    'user_handle': {'S': my_user_handle}
+  }
+  # insert the record into the table
+    response = client.put_item(
+    TableName=table_name,
+    Item=record
+  )
+  # print the response
+  print(response)
 
 def create_message_group(client,message_group_uuid, my_user_uuid, last_message_at=None, message=None, other_user_uuid=None, other_user_display_name=None, other_user_handle=None):
   print("")
+
+message_group_uuid = "5ae290ed-55d1-47a0-bc6d-fe2bc2700399" 
+time.now(timezone.utc).astimezone()
+users = get_user_uuid()
+
+create_message_group(
+  client=ddb,
+  message_group_uuid=message_group_uuid,
+  my_user_uuid=users['my_user']['uuid'],
+  other_user_uuid=users['other_user']['uuid'],
+  other_user_handle=users['other_user']['handle'],
+  other_user_display_name=users['other_user']['display_name'],
+  last_message_at=now.isoformat(),
+  message="this is a filler message"
+)
+
+create_message_group(
+  client=ddb,
+  message_group_uuid=message_group_uuid,
+  my_user_uuid=users['other_user']['uuid'],
+  other_user_uuid=users['my_user']['uuid'],
+  other_user_handle=users['my_user']['handle'],
+  other_user_display_name=users['my_user']['display_name'],
+  last_message_at=now.isoformat(),
+  message="this is a filler message"
+)
 
 conversation = """
 Person 1: Have you ever watched Babylon 5? It's one of my favorite TV shows!
@@ -364,8 +428,6 @@ Person 1: And Zathras was just one example of that. He was a small but important
 Person 2: Definitely. I think his character is a great example of the show's ability to balance humor and heart, and to create memorable and beloved characters that fans will cherish for years to come.
 """
 
-time.now(timezone.utc).astimezone()
-
 
 #Convert the conversation to lines
 lines = conversation.lstrip('\n').rstrip('\n').split('\n')
@@ -379,7 +441,9 @@ for i in range(len(lines)):
   else:
     print(lines[i])
     raise 'invalid line'
-  created_at = (now + timedelta(minutes=i).isoformat())
+    
+  created_at = (now + timedelta(minutes=i)).isoformat()
+  
   create_message(
    client=ddb,
    message_group_id=message_group_uuid,
@@ -391,28 +455,118 @@ for i in range(len(lines)):
  )
 ```
 
-
 - Change the permissions of the seed bash script file by running, in the terminal:
 ```
 chmod u+x bin/ddb/seed
 ./bin/ddb/seed
 ```
 
-- 
-- Change the permissions of the seed bash script file by running, in the terminal:
+- First, we need to load the RDS table, therefore run in the terminal:
 ```
 ./bin/db/create
 ./bin/db/schema-load
 ./bin/db/seed
 ```
 
-- 
+### Write AWS SDK code for DynamoDB to query and scan put-item, for predefined endpoints
+**Step 6 -  Confirming that data was seeded by creating a scan Bash Script**
+-  In the ddb folder, create a new file named ``scan`` to scan/query our tables:
+```
+#! /usr/bin/env python3
+
+import bot3
+
+attrs = {
+  'endpoint_url': 'http://localhost:8000'
+}
+
+ddb = boto3.resource('dynamodb',**attrs)
+table_name = 'cruddur-messages'
+
+table = ddb.Table(table_name)
+response = table.scan()
+
+items = response['Items']
+for item in items:
+  print(item)
+```
+
+- Change the permissions of the scan bash script file by running, in the terminal:
+```
+chmod u+x bin/ddb/scan
+./bin/ddb/scan
+```
+
+**Step 7 - Creating a patterns folder in ddb**
+-  In the ddb folder, create a new folder named ```patterns```.
+-  In the ddb/patterns folder, create a new file named ```get-conversations```.
+-  In the ddb/patterns folder, create a new file named ```list-conversations```.
+-  In the ddb/patterns/get-conversations file, paste in :
+```
+#!/usr/bin/env python3
+
+import boto3
+import sys
+import json
+import datetime
+
+attrs = {
+  'endpoint_url': 'http://localhost:8000'
+}
+
+if len(sys.argv) == 2:
+  if "prod" in sys.argv[1]:
+    attrs = {}
+
+dynamodb = boto3.client('dynamodb',**attrs)
+table_name = 'cruddur-messages'
+
+message_group_uuid = "5ae290ed-55d1-47a0-bc6d-fe2bc2700399"
+
+# define the query parameters
+query_params = {
+  'TableName': table_name,
+  'KeyConditionExpression': 'pk = :pk AND BEGINS_WITH(sk,:year)',
+  'ScanIndexForward': True,
+  'Limit': 20,
+  'ExpressionAttributeValues': {
+    ':pkey': {'S': f"MSG#{message_group_uuid}"}
+    ':year': {'S': '2023'}
+  },
+  'ReturnConsumedCapacity': 'TOTAL'
+}
+
+# query the table
+response = dynamodb.query(**query_params)
+
+# print the items returned by the query
+print(json.dumps(response, sort_keys=True, indent=2))
+
+# print the consumed capacity
+print(json.dumps(response['ConsumedCapacity'], sort_keys=True, indent=2))
+
+items = response['Items']
+reversed_array = items[::-1]
+
+for item in reversed_array:
+  sender_handle = item['user_handle']['S']
+  message       = item['message']['S']
+  timestamp     = item['sk']['S']
+  dt_object = datetime.datetime.strptime(timestamp, '%Y-%m-%dT%H:%M:%S.%f%z')
+  formatted_datetime = dt_object.strftime('%Y-%m-%d %I:%M %p')
+  print(f'{sender_handle: <16}{formatted_datetime: <22}{message[:40]}...')
+```
+
+- Change the permissions of the scan bash script file by running, in the terminal:
+```
+chmod u+x bin/ddb/patterns/get-conversations
+./bin/ddb/patterns/get-conversations
+```
+
+-
 
 
-**Step 4 - **
-
-
-**Step **
+**Step -jjkk**
 
 ### Security best practises for DynamoDB
 **Types of Access to DynamoDB**
