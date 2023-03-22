@@ -117,73 +117,30 @@ response = client.create_table(
             'AttributeName': 'pk',
             'AttributeType': 'S'
         },
+        {
+            'AttributeName': 'sk',
+            'AttributeType': 'S'
+        },
     ],
     KeySchema=[
         {
-            'AttributeName': 'string',
-            'KeyType': 'HASH'|'RANGE'
+            'AttributeName': 'pk',
+            'KeyType': 'HASH'
         },
-    ],
-    LocalSecondaryIndexes=[
         {
-            'IndexName': 'string',
-            'KeySchema': [
-                {
-                    'AttributeName': 'string',
-                    'KeyType': 'HASH'|'RANGE'
-                },
-            ],
-            'Projection': {
-                'ProjectionType': 'ALL'|'KEYS_ONLY'|'INCLUDE',
-                'NonKeyAttributes': [
-                    'string',
-                ]
-            }
-        },
+            'AttributeName': 'sk',
+            'KeyType': 'RANGE'
+        },      
     ],
-    GlobalSecondaryIndexes=[
-        {
-            'IndexName': 'string',
-            'KeySchema': [
-                {
-                    'AttributeName': 'string',
-                    'KeyType': 'HASH'|'RANGE'
-                },
-            ],
-            'Projection': {
-                'ProjectionType': 'ALL'|'KEYS_ONLY'|'INCLUDE',
-                'NonKeyAttributes': [
-                    'string',
-                ]
-            },
-            'ProvisionedThroughput': {
-                'ReadCapacityUnits': 123,
-                'WriteCapacityUnits': 123
-            }
-        },
-    ],
-    BillingMode='PROVISIONED'|'PAY_PER_REQUEST',
+    
+    #GlobalSecondaryIndexes=[
+     #      ],
+    BillingMode='PROVISIONED',
     ProvisionedThroughput={
-        'ReadCapacityUnits': 123,
-        'WriteCapacityUnits': 123
+        'ReadCapacityUnits': 5,
+        'WriteCapacityUnits': 5
     },
-    StreamSpecification={
-        'StreamEnabled': True|False,
-        'StreamViewType': 'NEW_IMAGE'|'OLD_IMAGE'|'NEW_AND_OLD_IMAGES'|'KEYS_ONLY'
-    },
-    SSESpecification={
-        'Enabled': True|False,
-        'SSEType': 'AES256'|'KMS',
-        'KMSMasterKeyId': 'string'
-    },
-    Tags=[
-        {
-            'Key': 'string',
-            'Value': 'string'
-        },
-    ],
-    TableClass='STANDARD'|'STANDARD_INFREQUENT_ACCESS',
-    DeletionProtectionEnabled=True|False
+    
 )
 
 ```
