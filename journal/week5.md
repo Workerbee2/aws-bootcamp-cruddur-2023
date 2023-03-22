@@ -106,11 +106,11 @@ if len(sys.argv) == 2:
  if "prod" in sysy.argv[1]:
   attrs = {}
 
-dynamodb = boto3.client('dynamodb', ""attrs )
+ddb = boto3.client('dynamodb', ""attrs )
 
 table_name = 'cruddur-message'
 
-response = client.create_table(
+response = ddb.create_table(
     TableName='string',
     AttributeDefinitions=[
         {
@@ -143,13 +143,14 @@ response = client.create_table(
     
 )
 
+print(response)
 ```
 
 - Change the permissions of the schema-load bash script file by running, in the terminal:
 ```chmod u+x bin/ddb/schema-load```
 
-- 
-
+- Run in the terminal ```./bin/ddb/schema-load```
+- Make sure that dynamodb local is running by making sure it is not commented out in the Docker-compose file.   
 
 
 
