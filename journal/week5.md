@@ -149,8 +149,27 @@ print(response)
 - Change the permissions of the schema-load bash script file by running, in the terminal:
 ```chmod u+x bin/ddb/schema-load```
 
+- Make sure that dynamodb local is running by making sure it is not commented out in the Docker-compose file then start up Docker-compose again. 
 - Run in the terminal ```./bin/ddb/schema-load```
-- Make sure that dynamodb local is running by making sure it is not commented out in the Docker-compose file.   
+- In the ddb folder, create a new file named ``list-tables`` to list our tables:
+```
+#! /usr/bin/env python3 
+set -e #stop if it fails at ay point
+if [ "$1" = "prod" ]; then
+  ENDPOINT_URL=""
+else
+  ENDPOINT_URL="--endpoint=https://local:8000"
+ fi
+
+aws dynamodb list-tables $ENDPOINT_URL \  --query TableNames --output table
+```
+
+- Change the permissions of the list-tables bash script file by running, in the terminal:
+```chmod u+x bin/ddb/list-tables```
+- 
+
+
+
 
 
 
