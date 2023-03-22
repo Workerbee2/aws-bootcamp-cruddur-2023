@@ -42,13 +42,18 @@ This week will be learning about NoSQl Databases and the different types that ex
 2. 
 
 ## Tasks
+Have a lecture about data modeling (Single Table Design) for NoSQL
+Launch DynamoDB local
+Seed our DynamoDB tables with data using Faker
+Write AWS SDK code for DynamoDB to query and scan put-item, for predefined endpoints
+Create a production DynamoDB table
+Update our backend app to use the production DynamoDB
+Add a caching layer using Momento Severless Cache
 
 
-
-**Step 1 - gf**
+## A lecture about data modeling (Single Table Design) for NoSQL
+**Step 1 - DynamoDB Data Modelling Youtube video**
 A flat table as we do not hva ejoins as is the case with Relational databases.
-
-**Step 2 - fffgg**
 NoSQL workbench
 DynamoDB Data Modelling
 
@@ -65,6 +70,9 @@ GSI vs LSI?
 Adavntagews of DynamoDB
 Fast
 Consistent
+
+**Step 2 - fffgg**
+
 
 **Step 3 -  **
 
