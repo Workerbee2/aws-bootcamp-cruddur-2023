@@ -75,11 +75,25 @@ Adavntagews of DynamoDB
 Fast
 Consistent
 
+### Launch DynamoDB local
+**Step 2 - Start up DynamoDB locally**
+- In the backend-flask directory, install Boto3(the AWS python SDK) in our backend by pasting line 2 into ```requirements.txt``` and running line 3:
+``` 
+cd backend-flask/
+boto3
+pip install -r requirements.txt
+```
 
-**Step 2 - fffgg**
+- Run ```Docker-compose up``` to start up Dynamo-db local.
+- In the existing ```bin``` directory, create a new folder named ```db``` and move all the db script files except for the rds script file.
+- In the existing ```bin``` directory, create a new folder named ```rds``` and move the remaining rds script file.
 
-
+### Seed our DynamoDB tables with data using Faker
 **Step 3 -  **
+- In the existing ```bin``` directory, create a new folder named ```ddb```.
+- In Dynamodb, we create tables instead of databases. Therefore one of the scripts will be, ```schema-load```, ```seed```, ```drop```.
+
+
 
 
 **Step 4 - **
