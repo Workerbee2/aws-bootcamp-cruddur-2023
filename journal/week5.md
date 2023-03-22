@@ -93,6 +93,11 @@ pip install -r requirements.txt
 - In the existing ```bin``` directory, create a new folder named ```ddb```.
 - In Dynamodb, we create tables instead of databases. Therefore one of the scripts will be, ```schema-load```, ```seed```, ```drop```.
 
+- We will then paste into the schema-load script:
+```
+#! /usr/bin/env python3 
+
+import boto3
 
 
 
@@ -135,3 +140,4 @@ AWS recommends using Client side encryption when storing sensitive information. 
 
 **RESOURCES**
 1. [NoSQL DynamoDB Workbench](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.html)
+2. [AWS SDK Boto3 Python DynamoDB Documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/dynamodb.html)
