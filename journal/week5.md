@@ -526,20 +526,18 @@ message_group_uuid = "5ae290ed-55d1-47a0-bc6d-fe2bc2700399"
 # define the query parameters
 query_params = {
   'TableName': table_name,
-  #'KeyConditionExpression': 'pk = :pk AND begins_with(sk,:year)',
-  'KeyConditionExpression': 'pk = :pk AND sk BETWEEN :start_date AND :end_date',  
   'ScanIndexForward': True,
   'Limit': 20,
+  'KeyConditionExpression': 'pk = :pk AND begins_with(sk,:year)',
+  #'KeyConditionExpression': 'pk = :pk AND sk BETWEEN :start_date AND :end_date',  
   'ExpressionAttributeValues': {
-    #':year': {'S': '2023'},
-    ':start_date': { "S": "2023-03-01T00:00:00.000000+00:00"},
-    'end_date": { "S": "2023-03-19T23:59:59.999999+00:00"}   
+    ':year': {'S': '2023'},
+    #':start_date': { "S": "2023-03-01T00:00:00.000000+00:00"},
+    #':end_date': { "S": "2023-03-19T23:59:59.999999+00:00"},  
     ':pkey': {'S': f"MSG#{message_group_uuid}"}
   },
   'ReturnConsumedCapacity': 'TOTAL'
 }
-
-
 
 # query the table
 response = dynamodb.query(**query_params)
@@ -568,8 +566,79 @@ chmod u+x bin/ddb/patterns/get-conversations
 ./bin/ddb/patterns/get-conversations
 ```
 
--
+- In the ddb/patterns/list-conversations file, paste in :
+```
+#!/usr/bin/env python3
 
+import boto3
+import sys
+import json
+import os
+
+current_path = os.path.dirname(os.path.abspath(__file__))
+parent_path = os.path.abspath(os.path.join(current_path, '..', '..', '..'))
+sys.path.append(parent_path)
+from lib.db import db
+
+attrs = {
+  'endpoint_url': 'http://localhost:8000'
+}
+
+if len(sys.argv) == 2:
+  if "prod" in sys.argv[1]:
+    attrs = {}
+
+dynamodb = boto3.client('dynamodb',**attrs)
+table_name = 'cruddur-messages'
+
+def get_my_user_uuid():
+  sql = """
+    SELECT 
+      users.uuid,
+    FROM users
+    WHERE
+      users.handle=%(my_handle)s,
+  """
+
+uuid = db.query_value(sql,{
+   'handle':  'andrewbrown',
+ })
+return uuid 
+ 
+my_user_uuid = get_my_user_uuid()
+print(f"my-uuid: {my_user_id}")
+
+# define the query parameters
+query_params = {
+  'TableName': table_name,
+  'KeyConditionExpression': 'pk = :pk',
+  'ExpressionAttributeValues': {
+    ':pk': {'S': f"GRP#{brown_user_uuid}"}
+  },
+  'ReturnConsumedCapacity': 'TOTAL'
+}
+
+# query the table
+response = dynamodb.query(**query_params)
+
+# print the items returned by the query
+print(json.dumps(response, sort_keys=True, indent=2))
+```
+
+- To get the value of 
+"my_user_uuid = "1506fa16-d775-4808-9f46-456661029af2", in the terminal, make sure that we are in backend-flask folder and run , then in the cruddur prompt, run line 2:
+```
+./bin/db-connect
+SELECT uuid, handle from users;
+```
+***(this value will always have to be updated whenever we seed the database because the uuid is ever-changing and the )***
+
+- Then copy the uuid of andrew brown and paste into the line as above.
+- Change the permissions of the scan bash script file by running, in the terminal:
+```
+chmod u+x bin/ddb/patterns/list-conversations
+./bin/ddb/patterns/list-conversations
+```
 
 **Step -jjkk**
 
