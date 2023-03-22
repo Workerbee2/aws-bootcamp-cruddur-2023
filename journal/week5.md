@@ -94,14 +94,24 @@ Consistent
 - DynamoDB Accelerator(DAX)
 - Cross Account
 
-**Security best Practises - AWS***
+**Security best Practises - AWS**
 Amazon Dynamodb is part of an  account NOT a virtual Network
 - Use VPC endpoints: Use Amazon VPC to create a private network from our application or Lambda to a DynamoDB . This prevents unauthorized access to the instance from the public internet.
 - Data Security & Compliance: Compliance standard should be followed for the business requirements.
 - Amazon DynamoDB should only be in the AWS region that we are legally allowed to hold user data in.
 - Amazon organizations SCP - to manage DynamoDB Table deletion, DynbamoDB creation, region lock.
-- AWS CloudTrail is enabled & monitored to trigger alerts on malicious DynamoDB behabv=viou by an identity in AWS.
+- AWS CloudTrail is enabled & monitored to trigger appropriate alerts on malicious DynamoDB behaviour by an identity in AWS.
 - AWS Config rules is enabled in the account and region of DynamoDB.
+
+**Security best Practises - Application**
+AWS recommends using Client side encryption when storing sensitive information. But dynamoDB should not be used to store sensitive information, RDS databases should be used instead to store sensitive information for long periods.
+- DynamoDB to use appropriate Authentication - Use IAM Roles/ AWS Cognito Identity Pool (Avoid IAM Users/Groups).
+- DynamoDB User Lifecycle Management - Create, Modify, Delete Users.
+- AWS IAM roles instead of individual users to access and manage DynamoDB.
+- DAX Service9IAM) Role to have Read Only Access to DynamoDB.
+- Not have DynamoDB be accessed from the internet(use VPC endpoints instead).
+- Site-to-Site VPN or Direct Connect for Onpremise and DynamoDB Access.
+- Client side encryption is recommended by Amazon for DynamoDB.
 
 
 
