@@ -210,8 +210,43 @@ chmod u+x bin/ddb/drop-tables
 import boto3
 import datetime, timedata, timezone
 
+current_path = os.path.dirname(os.path.abspath(__file__))
+parent_path = os.path.abspath(os.path.join(current_path, '..', '..'))
+sys.path.append(parent_path)
+from lib.db import db
+
+attrs = {
+  'endpoint_url': 'http://localhost:8000'
+}
+# unset endpoint url for use with production database
+if len(sys.argv) == 2:
+  if "prod" in sys.argv[1]:
+    attrs = {}
+dynamodb = boto3.client('dynamodb',**attrs)
+
+def get_user_uuids():
+  sql = """
+    SELECT 
+      users.uuid,
+      users.display_name,
+      users.handle
+    FROM users
+    WHERE
+      users.handle IN(
+        %(my_handle)s,
+        %(other_handle)s
+        )
+  """
+users = db.query_array_json(sql,{
+   'my_handle':  'andrewbrown',
+   'other_handle': 'bayko'
+ })
+print("users====")
+print(users)
+
+
 def create_message_group(client,message_group_uuid, my_user_uuid, last_message_at=None, message=None, other_user_uuid=None, other_user_display_name=None, other_user_handle=None):
-print("")
+  print("")
 
 conversation = """
 Person 1: Have you ever watched Babylon 5? It's one of my favorite TV shows!
@@ -354,7 +389,15 @@ chmod u+x bin/ddb/seed
 ./bin/ddb/seed
 ```
 
+- 
+- Change the permissions of the seed bash script file by running, in the terminal:
+```
+./bin/db/create
+./bin/db/schema-load
+./bin/db/seed
+```
 
+- 
 
 
 **Step 4 - **
