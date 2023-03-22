@@ -640,6 +640,20 @@ chmod u+x bin/ddb/patterns/list-conversations
 ./bin/ddb/patterns/list-conversations
 ```
 
+- Paste the following code in lib/db.py
+```
+# when we want to return a a single value
+  def query_value(self,sql,params={}):
+    self.print_sql('value',sql,params)
+
+    with self.pool.connection() as conn:
+      with conn.cursor() as cur:
+        cur.execute(sql,params)
+        json = cur.fetchone()
+        return json[0]
+
+```
+
 **Step -jjkk**
 
 ### Security best practises for DynamoDB
