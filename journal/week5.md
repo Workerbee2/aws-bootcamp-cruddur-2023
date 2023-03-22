@@ -94,6 +94,17 @@ Consistent
 - DynamoDB Accelerator(DAX)
 - Cross Account
 
+**Security best Practises - AWS***
+Amazon Dynamodb is part of an  account NOT a virtual Network
+- Use VPC endpoints: Use Amazon VPC to create a private network from our application or Lambda to a DynamoDB . This prevents unauthorized access to the instance from the public internet.
+- Data Security & Compliance: Compliance standard should be followed for the business requirements.
+- Amazon DynamoDB should only be in the AWS region that we are legally allowed to hold user data in.
+- Amazon organizations SCP - to manage DynamoDB Table deletion, DynbamoDB creation, region lock.
+- AWS CloudTrail is enabled & monitored to trigger alerts on malicious DynamoDB behabv=viou by an identity in AWS.
+- AWS Config rules is enabled in the account and region of DynamoDB.
+
+
+
 ## Next Steps - Additional Homework Challenges
 
 
