@@ -526,15 +526,20 @@ message_group_uuid = "5ae290ed-55d1-47a0-bc6d-fe2bc2700399"
 # define the query parameters
 query_params = {
   'TableName': table_name,
-  'KeyConditionExpression': 'pk = :pk AND BEGINS_WITH(sk,:year)',
+  #'KeyConditionExpression': 'pk = :pk AND begins_with(sk,:year)',
+  'KeyConditionExpression': 'pk = :pk AND sk BETWEEN :start_date AND :end_date',  
   'ScanIndexForward': True,
   'Limit': 20,
   'ExpressionAttributeValues': {
+    #':year': {'S': '2023'},
+    ':start_date': { "S": "2023-03-01T00:00:00.000000+00:00"},
+    'end_date": { "S": "2023-03-19T23:59:59.999999+00:00"}   
     ':pkey': {'S': f"MSG#{message_group_uuid}"}
-    ':year': {'S': '2023'}
   },
   'ReturnConsumedCapacity': 'TOTAL'
 }
+
+
 
 # query the table
 response = dynamodb.query(**query_params)
