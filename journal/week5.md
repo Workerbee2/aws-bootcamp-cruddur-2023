@@ -668,8 +668,8 @@ command: |
 ```psql $NO_DB_CONNECTION_URL -c "drop database IF EXISTS cruddur;"```
 
 - In the terminal, run ```pip install -r requirements.txt``` then run Docker compose up in the terminal.
-- Open the front-end application tab and sign in
-- Switch to the messages tab
+- Open our front-end application in a new tab and try to sign in.
+- Switch to the messages tab.
 - Create a DynamoDB object by creating a ddb.py file in the backend-flask/lib folder.
 ```
 import boto3
@@ -734,7 +734,54 @@ class Ddb:
 
 - Change into the ```backend-flask directory``` and in the terminal paste in line 2:
 ```
-aws cogniro-idp list-users --user-profile 
+aws cognito-idp list-users --user-pool-id-(paste in user id here)
+```
+
+- We need to set the cognito user pool environment, so we will first retrieve the cognito user pool id for the cruddur-user-pool and then set it as an environment variable by entering in the terminal:
+```
+export AWS_COGNITO_USER_POOL_ID="valuevaluevalue"
+gp env AWS_COGNITO_USER_POOL_ID="valuevaluevalue"
+env | grep AWS_COGNITO
+```
+
+- We will then update it in the backend by editing the Docker-compose file(to hard code it into the backend file):
+```
+AWS_COGNITO_USER_POOL_ID: "${AWS_COGNITO_USER_POOL_ID}"
+```
+
+-
+
+```
+#!/usr/bin/env python3
+
+import boto3
+import os
+import json
+
+userpool_id = os.getenv("AWS_COGNITO_USER_POOL_ID")
+client = boto3.client('cognito-idp')
+params = {
+  'UserPoolId': userpool_id,
+  'AttributesToGet': [
+      'preferred_username',
+      'sub'
+  ]
+}
+response = client.list_users(**params)
+users = response['Users']
+
+print(json.dumps(users, sort_keys=True, indent=2, default=str))
+
+dict_users = {}
+for user in users:
+  attrs = user['Attributes']
+  sub    = next((a for a in attrs if a["Name"] == 'sub'), None)
+  handle = next((a for a in attrs if a["Name"] == 'preferred_username'), None)
+  dict_users[handle['Value']] = sub['Value']
+
+print(dict_users)
+```
+
 
 
 
