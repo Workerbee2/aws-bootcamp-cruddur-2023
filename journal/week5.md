@@ -719,19 +719,9 @@ class Ddb:
         'created_at': last_sent_at
       })
     return results
-
-
-
-
-
-
 ```
 
 - In the list-conversation file, paste in  ```'ScanIndexForward': False,```:
-- In the bin directory, create a new file called cognito that will list users.
-```
-```
-
 - Change into the ```backend-flask directory``` and in the terminal paste in line 2:
 ```
 aws cognito-idp list-users --user-pool-id-(paste in user id here)
@@ -749,8 +739,7 @@ env | grep AWS_COGNITO
 AWS_COGNITO_USER_POOL_ID: "${AWS_COGNITO_USER_POOL_ID}"
 ```
 
--
-
+- In the bin directory, create a new folder called cognito that will contain a file named list-users that will list users.
 ```
 #!/usr/bin/env python3
 
@@ -779,11 +768,84 @@ for user in users:
   handle = next((a for a in attrs if a["Name"] == 'preferred_username'), None)
   dict_users[handle['Value']] = sub['Value']
 
-print(dict_users)
+print(json.dumps(dict_users, sort_keys=True, indent=2, default=str))
+
 ```
 
+- Change the permissions of the list-users file by running in the terminal:
+```
+chmod u+x bin/cognito/list-users
+.bin/cognito/list-users
+```
+
+**Step 9 - jjkk**
+- We now need to create a script to update the user ids into our database.
+- In the db directory, create a new bash update-cognito-user id script 
+```
+#!/usr/bin/env python3
+
+import boto3
+import os
+import sys
+
+current_path = os.path.dirname(os.path.abspath(__file__))
+parent_path = os.path.abspath(os.path.join(current_path, '..', '..'))
+sys.path.append(parent_path)
+from lib.db import db
+
+def update_users_with_cognito_user_id(handle,sub):
+  sql = """
+    UPDATE public.users
+    SET cognito_user_id = %(sub)s
+    WHERE
+      users.handle = %(handle)s;
+  """
+  db.query_commit(sql,{
+    'handle' : handle,
+    'sub' : sub
+  })
+
+def get_cognito_user_ids():
+  userpool_id = os.getenv("AWS_COGNITO_USER_POOL_ID")
+  client = boto3.client('cognito-idp')
+  params = {
+    'UserPoolId': userpool_id,
+    'AttributesToGet': [
+        'preferred_username',
+        'sub'
+    ]
+  }
+  response = client.list_users(**params)
+  users = response['Users']
+  dict_users = {}
+  for user in users:
+    attrs = user['Attributes']
+    sub    = next((a for a in attrs if a["Name"] == 'sub'), None)
+    handle = next((a for a in attrs if a["Name"] == 'preferred_username'), None)
+    dict_users[handle['Value']] = sub['Value']
+  return dict_users
 
 
+users = get_cognito_user_ids()
+
+for handle, sub in users.items():
+  print('----',handle,sub)
+  update_users_with_cognito_user_id(
+    handle=handle,
+    sub=sub
+  )
+```
+
+- In the db/setup file, we will add a new line
+``` source "$bin_path/db/update_cognito_user_ids" ```
+
+- Before seeding our data , we need to make sure that Docker-compose is up and running then we will run
+```
+chmod u+x bin/db/update_cognito_user_ids
+./bin/db/setup
+```
+
+- 
 
 
 ### Security best practises for DynamoDB
