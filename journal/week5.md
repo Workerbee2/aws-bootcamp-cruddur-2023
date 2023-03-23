@@ -54,7 +54,6 @@ Create a production DynamoDB table
 Update our backend app to use the production DynamoDB
 Add a caching layer using Momento Severless Cache
 
-
 ## A lecture about data modeling (Single Table Design) for NoSQL
 **Step 1 - DynamoDB Data Modelling Youtube video**
 A flat table as we do not hva ejoins as is the case with Relational databases.
@@ -612,6 +611,7 @@ print(f"my-uuid: {my_user_id}")
 query_params = {
   'TableName': table_name,
   'KeyConditionExpression': 'pk = :pk',
+  #'ScanIndexForward': False,
   'ExpressionAttributeValues': {
     ':pk': {'S': f"GRP#{brown_user_uuid}"}
   },
@@ -654,7 +654,90 @@ chmod u+x bin/ddb/patterns/list-conversations
 
 ```
 
-**Step -jjkk**
+### Update our backend app to use the production DynamoDB
+**Step 8 - jjkk**
+- In gitpod.yml add in:
+```
+name: flask
+command: |
+  cd backend-flask
+  pip install -r requirements.txt
+```
+
+- In the bin/ddb/seed file, add/replace the last line with:
+```psql $NO_DB_CONNECTION_URL -c "drop database IF EXISTS cruddur;"```
+
+- In the terminal, run ```pip install -r requirements.txt``` then run Docker compose up in the terminal.
+- Open the front-end application tab and sign in
+- Switch to the messages tab
+- Create a DynamoDB object by creating a ddb.py file in the backend-flask/lib folder.
+```
+import boto3
+import sys
+from datetime import datetime, timedelta, timezone
+import uuid
+import os
+
+class Ddb:
+  def client():
+    endpoint_url = os.getenv("AWS_ENDPOINT_URL")
+    if endpoint_url:
+      attrs = { 'endpoint_url': endpoint_url }
+    else:
+      attrs = {}
+    dynamodb = boto3.client('dynamodb',**attrs)
+    return dynamodb
+
+ def list_message_groups(client,my_user_uuid):
+    table_name = 'cruddur-messages'
+    query_params = {
+      'TableName': table_name,
+      'KeyConditionExpression': 'pk = :pk',
+      'ScanIndexForward': False,
+      'Limit': 20,
+      'ExpressionAttributeValues': {
+        ':pk': {'S': f"GRP#{my_user_uuid}"}
+      }
+    }
+    print('query-params')
+    print(query_params)
+    print('client')
+    print(client)
+
+    # query the table
+    response = client.query(**query_params)
+    items = response['Items']
+    
+    results = []
+    for item in items:
+      last_sent_at = item['sk']['S']
+      results.append({
+        'uuid': item['message_group_uuid']['S'],
+        'display_name': item['user_display_name']['S'],
+        'handle': item['user_handle']['S'],
+        'message': item['message']['S'],
+        'created_at': last_sent_at
+      })
+    return results
+
+
+
+
+
+
+```
+
+- In the list-conversation file, paste in  ```'ScanIndexForward': False,```:
+- In the bin directory, create a new file called cognito that will list users.
+```
+```
+
+- Change into the ```backend-flask directory``` and in the terminal paste in line 2:
+```
+aws cogniro-idp list-users --user-profile 
+
+
+
 
 ### Security best practises for DynamoDB
 **Types of Access to DynamoDB**
