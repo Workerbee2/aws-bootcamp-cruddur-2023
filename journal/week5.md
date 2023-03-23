@@ -845,7 +845,8 @@ chmod u+x bin/db/update_cognito_user_ids
 ./bin/db/setup
 ```
 
-- 
+- Update a line into d.py file
+-  
 
 
 ### Security best practises for DynamoDB
