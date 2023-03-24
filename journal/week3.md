@@ -169,7 +169,42 @@ const signOut = async () => {
 
 - Make sure that our up is running without errors by starting up the container using Docker-compose up.
 
-**Setp 4 - Modifying the sign in page**
+**Step 4 - Modifying the sign in page**
+- In the ```Signin.js``` page, we will replace the Athentication with cookies page with the code below:
+```
+cd frontend-js/src/pages/SignInPage.js
+import Cookies from 'js-cookie';
+
+with
+
+import { Auth } from 'aws-amplify';
+```
+
+- Then add in:
+```
+const onsubmit = async (event) => {
+  setErrors('')
+  event.preventDefault();
+  try {
+    Auth.signIn(email, password)
+      .then(user => {
+        localStorage.setItem("access_token", user.signInUserSession.accessToken.jwtToken)
+        window.location.href = "/"
+      })
+      .catch(err => { console.log('Error!', err) });
+  } catch (error) {
+    if (error.code == 'UserNotConfirmedException') {
+      window.location.href = "/confirm"
+    }
+    setCognitoErrors(error.message)
+  }
+  return false
+}
+
+```
+
+
+**Step 5 - Modifying the sign up **
 - Paste the following in the ```frontend-js/signup.js/```:
 ```
 import { Auth } from 'aws-amplify';
