@@ -29,7 +29,7 @@
 Provision via ClickOps a Amazon Cognito User Pool
 Implement API calls to Amazon Coginto for custom login, signup, recovery and forgot password page
 Show conditional elements and data based on logged in or logged out
-Verify JWT Token server side to serve authenticated API endpoints in Flask Application
+Verify JWT server side to serve authenticated API endpoints in Flask Application
 
 ### Decentralized Authentication in AWS Cloud
 **Types of Authentication**
@@ -61,7 +61,7 @@ Verify JWT Token server side to serve authenticated API endpoints in Flask Appli
 - Token Lifecycle Management - Issue new tokens, revoke compromised tokens, where to store (client/server).
 - Security tests of the application thropugh penetration testing.
 - Access Token Scope - should be limited
-- JWT Token best practise - no sensitive info
+- JWT(JSON Web Token) best practise - no sensitive info
 - Encryption in Transit for API calls
 
 
