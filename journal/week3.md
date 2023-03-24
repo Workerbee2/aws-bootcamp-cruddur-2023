@@ -8,7 +8,7 @@
 
 **User pools vs User Identity pools in AWS Cognito?**
 
-**What is User Lifecycle Management?**
+**What is the User Lifecycle Management?**
 
 ## Prerequisites
 1. An AWS Account.
@@ -25,8 +25,7 @@ Show conditional elements and data based on logged in or logged out
 Verify JWT Token server side to serve authenticated API endpoints in Flask Application
 
 ### Decentralized Authentication in AWS Cloud
-**Amazon Cognito Security Best Practises**
-Types of Authentication:
+**Types of Authentication**
 - OAuth
 - OpenID Connect (used with OAuth)
 - Username/Password
@@ -39,6 +38,7 @@ Types of Authentication:
 - Identity Broker for AWS Resources with Temporary Credentials.
 - Can extend users to AWS resources easily.
 
+**Amazon Cognito Security Best Practises**
 
 
 
