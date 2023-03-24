@@ -66,9 +66,11 @@
 - Encryption in Transit for API calls
 
 ### Install and configure Amplify client-side library for Amazon Congito
+### Provision via ClickOps a Amazon Cognito User Pool
 **Step 1 - Configure a User pool using AWS Cognito Cosnole**
 - We will first use the AWS Console to configure a Userpool which is necessary to intergrate an application and we want to authenticate users.
 
+### 
 **Step 2 - implementing the Cognito Authentication in our frontend-js application**
 - In the front-end-js folder, we will install the AWS Amplify libraries in the package.json file by pasting in and running the code in the terminal:
 ```
@@ -113,8 +115,61 @@ Amplify.configure({
 An error occurred (InvalidParameterException) when calling the AdminSetUserPassword operation: 1 validation error detected: Value at 'password' failed to satisfy constraint: Member must satisfy regular expression pattern: ^[\S]+.*[\S]+$***
 ***I had to make sure to create a new user in the Cognito user pool and delete the previous one.***
 
+### Show conditional elements and data based on logged in or logged out
+**Step 3 - Home Page to show components only when logged in/out**
+- In the frontend add the follwoing lines:
+```
+cd frontend-js/src/pages/HomeFeedPage.js
+import { Amplify } from 'aws-amplify';
+```
 
-**Step 3 - Sign Up Page **
+- We will replace the existing on-submit code-block with:
+```
+// check if we are authenicated
+const checkAuth = async () => {
+  Auth.currentAuthenticatedUser({
+    // Optional, By default is false. 
+    // If set to true, this call will send a 
+    // request to Cognito to get the latest user data
+    bypassCache: false 
+  })
+  .then((user) => {
+    console.log('user',user);
+    return Auth.currentAuthenticatedUser()
+  }).then((cognito_user) => {
+      setUser({
+        display_name: cognito_user.attributes.name,
+        handle: cognito_user.attributes.preferred_username
+      })
+  })
+  .catch((err) => console.log(err));
+};
+```
+
+- In the ```ProfileInfo.js``` page, we will replace the Athentication with cookies page with the code in line 2below:
+```
+import Cookies from 'js-cookie';
+
+with
+
+import { Auth } from 'aws-amplify';
+```
+
+- Since we will not be using cookies anymore, we will paste in the code below:
+```
+const signOut = async () => {
+  try {
+      await Auth.signOut({ global: true });
+      window.location.href = "/"
+  } catch (error) {
+      console.log('error signing out: ', error);
+  }
+}
+```
+
+- Make sure that our up is running without errors by starting up the container using Docker-compose up.
+
+**Setp 4 - Modifying the sign in page**
 - Paste the following in the ```frontend-js/signup.js/```:
 ```
 import { Auth } from 'aws-amplify';
