@@ -203,6 +203,7 @@ const onsubmit = async (event) => {
 
 ```
 
+- Go to the AWS Cognito userpool console page and create a user.
 
 **Step 5 - Modifying the sign up **
 - Paste the following in the ```frontend-js/signup.js/```:
