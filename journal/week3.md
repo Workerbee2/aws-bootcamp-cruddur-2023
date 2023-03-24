@@ -27,10 +27,10 @@
 2. AWS Cognito is a User Directory for Customer that can be used to access AWS resources.
 
 ## Tasks
-Provision via ClickOps a Amazon Cognito User Pool
-Implement API calls to Amazon Coginto for custom login, signup, recovery and forgot password page
-Show conditional elements and data based on logged in or logged out
-Verify JWT server side to serve authenticated API endpoints in Flask Application
+- Provision via ClickOps a Amazon Cognito User Pool
+- Implement API calls to Amazon Coginto for custom login, signup, recovery and forgot password page
+- Show conditional elements and data based on logged in or logged out
+- Verify JWT server side to serve authenticated API endpoints in Flask Application
 
 ### Decentralized Authentication in AWS Cloud
 **Types of Authentication**
@@ -65,27 +65,27 @@ Verify JWT server side to serve authenticated API endpoints in Flask Application
 - JWT(JSON Web Token) best practise - no sensitive info
 - Encryption in Transit for API calls
 
-
-### 
 ### Install and configure Amplify client-side library for Amazon Congito
 **Step 1 - Configure a User pool using AWS Cognito Cosnole**
 - We will first use the AWS Console to configure a Userpool which is necessary to intergrate an application and we want to authenticate users.
 
-**Step 2 - kkhj**
-- In the front-end-js folder, we will install the AWS Amplify libraries in the package.json file by pasting in and running the code in ```frontend-js```
+**Step 2 - implementing the Cognito Authentication in our frontend-js application**
+- In the front-end-js folder, we will install the AWS Amplify libraries in the package.json file by pasting in and running the code in the terminal:
 ```
+cd frontend-js
 npm i aws-amplify --save
 ```
 
-- To connect/hook-up our front-end application with AWS , we will open the ```app.js``` file in ```frontend-js/src/``` and paste in:
+- To connect/hook-up our front-end application with AWS , we will open the ```app.js``` file in ```frontend-js/src/``` and paste in line 2:
 ```
+cd frontend-js/src/app.js
 import { Amplify } from 'aws-amplify';
 ```
 
-- To connect our cognito pool to our frontend app.js, we will paste in the following
+- To configure amplify and connect our cognito pool to our frontend app.js, we will paste in the following in the ```app.js``` file.
 ```
 Amplify.configure({
-  "AWS_PROJECT_REGION": process.env.REACT_AWS_PROJECT_REGION,
+  "AWS_PROJECT_REGION": process.env.REACT_APP_AWS_PROJECT_REGION,
   "aws_cognito_region": process.env.REACT_APP_AWS_COGNITO_REGION,
   "aws_user_pools_id": process.env.REACT_APP_AWS_USER_POOLS_ID,
   "aws_user_pools_web_client_id": process.env.REACT_APP_CLIENT_ID,
@@ -100,21 +100,18 @@ Amplify.configure({
 });
 ```
 
--In the Docker-compose file, in the frontend section, we will add in the following:
+-In the Docker-compose file, in the frontend section of the code, we will add in the following:
 ```
-   REACT_AWS_PROJECT_REGION:
-   REACT_APP_AWS_COGNITO_REGION:
-   REACT_APP_AWS_USER_POOLS_ID:
-   REACT_APP_CLIENT_ID:    
+   REACT_APP_AWS_PROJECT_REGION: "${AWS_DEFAULT_REGION}"
+   REACT_APP_AWS_COGNITO_REGION: "${AWS_DEFAULT_REGION}"
+   REACT_APP_AWS_USER_POOLS_ID: "us-east-1_randomrandom"
+   REACT_APP_CLIENT_ID: ""    
 ```
 
-An error that I kept on encountering while trying to run the command below
-
-aws cognito-idp admin-set-user-password --user-pool-id us-east-1_vvv --username maureen --password Nxxxxxxxx --permanent
-
-An error occurred (InvalidParameterException) when calling the AdminSetUserPassword operation: 1 validation error detected: Value at 'password' failed to satisfy constraint: Member must satisfy regular expression pattern: ^[\S]+.*[\S]+$
-
-I had to make sure to create a new user in the Cogniuto user pool and delete the previous one.
+***An error that I kept on encountering while trying to run the command below
+``` aws cognito-idp admin-set-user-password --user-pool-id us-east-1_vvv --username maureen --password Nxxxxxxxx --permanent```
+An error occurred (InvalidParameterException) when calling the AdminSetUserPassword operation: 1 validation error detected: Value at 'password' failed to satisfy constraint: Member must satisfy regular expression pattern: ^[\S]+.*[\S]+$***
+***I had to make sure to create a new user in the Cognito user pool and delete the previous one.***
 
 
 **Step 3 - Sign Up Page **
