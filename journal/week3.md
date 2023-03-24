@@ -4,11 +4,18 @@
 ## Introduction
 **What is Decentralized Authentication?**
 
+
 **What is Amazon Cognito?**
+
 
 **User pools vs User Identity pools in AWS Cognito?**
 
+
 **What is the User Lifecycle Management?**
+
+
+**What is Token Lifecycle Management?**
+
 
 ## Prerequisites
 1. An AWS Account.
@@ -38,8 +45,16 @@ Verify JWT Token server side to serve authenticated API endpoints in Flask Appli
 - Identity Broker for AWS Resources with Temporary Credentials.
 - Can extend users to AWS resources easily.
 
-**Amazon Cognito Security Best Practises**
+**Amazon Cognito Security Best Practises - for AWS**
+- AWS Services - API GATEWAY, AWS Resourcesz shared with the App Client(Backend or Back Channels).
+- AWS WAF with Web ACLs for Rate Limiting, Allow/Deny List, Deny access from region & many more waf managementrules similar to OWASP.
+- Amazon Cognito Compliance standard is what your business requires.
+- Amazon Cognito should only be in the AWs region that you are legally allowed to be holding user data in.
+- Amazon Organizations SCP - to manage User Pool deletion, creation, region lock etc
+- AWS CloudTrail is enabled & monitored to trigger alerts on malicious Cognito behaviour by an identity in AWS.
 
+**Amazon Cognito Security Best Practises - for AWS**
+- 
 
 
 ### Intergrating Amazon Cognito with the backend application with custom login branches
