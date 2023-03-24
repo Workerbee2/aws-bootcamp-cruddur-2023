@@ -46,15 +46,23 @@ Verify JWT Token server side to serve authenticated API endpoints in Flask Appli
 - Can extend users to AWS resources easily.
 
 **Amazon Cognito Security Best Practises - for AWS**
-- AWS Services - API GATEWAY, AWS Resourcesz shared with the App Client(Backend or Back Channels).
+- AWS Services - API Gateway, AWS Resources shared with the App Client(Backend or Back Channels).
 - AWS WAF with Web ACLs for Rate Limiting, Allow/Deny List, Deny access from region & many more waf managementrules similar to OWASP.
 - Amazon Cognito Compliance standard is what your business requires.
 - Amazon Cognito should only be in the AWs region that you are legally allowed to be holding user data in.
 - Amazon Organizations SCP - to manage User Pool deletion, creation, region lock etc
 - AWS CloudTrail is enabled & monitored to trigger alerts on malicious Cognito behaviour by an identity in AWS.
 
-**Amazon Cognito Security Best Practises - for AWS**
-- 
+**Amazon Cognito Security Best Practises - for the Application**
+- Application should use an industry standard for Authentication & Authorization(SAML, OpenID Connect, OAuth2.0)
+- App User Lifecycle Management - create, Modify, Delete users
+- AWS User Access Lifecycle Management - Change of roles/ Revoke Roles
+- Role based Access to manage how much access to AWS resources for the Application being built
+- Token Lifecycle Management - Issue new tokens, revoke compromised tokens, where to store (client/server).
+- Security tests of the application thropugh penetration testing.
+- Access Token Scope - should be limited
+- JWT Token best practise - no sensitive info
+- Encryption in Transit for API calls
 
 
 ### Intergrating Amazon Cognito with the backend application with custom login branches
