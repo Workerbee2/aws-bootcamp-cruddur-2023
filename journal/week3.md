@@ -8,19 +8,12 @@
 
 **User pools vs User Identity pools in AWS Cognito?**
 
-**Benefits of using AWS Cognito**
-- Provides a User Directory for Customers.
-- Provides ability to access AWS Resources for the Application being built.
-- Identity Broker for AWS Resources with Temporary Credentials.
-- Can extend users to AWS resources easily.
-
 **What is User Lifecycle Management?**
 
-
-
 ## Prerequisites
-
-
+1. An AWS Account.
+2. Github account
+3. Gitpod account
 
 ## Use Cases
 1. AWS Cognito is a User Directory for Customer that can be used to access AWS resources.
@@ -32,12 +25,21 @@ Show conditional elements and data based on logged in or logged out
 Verify JWT Token server side to serve authenticated API endpoints in Flask Application
 
 ### Decentralized Authentication in AWS Cloud
+**Amazon Cognito Security Best Practises**
 Types of Authentication:
 - OAuth
 - OpenID Connect (used with OAuth)
 - Username/Password
 - SAML/ Single Sign on & Identity Provider
 - Traditional Authentication
+
+**Benefits of using AWS Cognito**
+- Provides a User Directory for Customers.
+- Provides ability to access AWS Resources for the Application being built.
+- Identity Broker for AWS Resources with Temporary Credentials.
+- Can extend users to AWS resources easily.
+
+
 
 
 ### Intergrating Amazon Cognito with the backend application with custom login branches
