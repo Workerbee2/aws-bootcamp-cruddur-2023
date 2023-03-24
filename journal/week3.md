@@ -169,7 +169,7 @@ const signOut = async () => {
 
 - Make sure that our up is running without errors by starting up the container using Docker-compose up.
 
-**Step 4 - Modifying the sign in page**
+**Step 4 - Modifying the Sign in page**
 - In the ```Signin.js``` page, we will replace the Athentication with cookies page with the code below:
 ```
 cd frontend-js/src/pages/SignInPage.js
@@ -188,6 +188,7 @@ const onsubmit = async (event) => {
   try {
     Auth.signIn(email, password)
       .then(user => {
+        console.log('user', user)
         localStorage.setItem("access_token", user.signInUserSession.accessToken.jwtToken)
         window.location.href = "/"
       })
@@ -205,25 +206,35 @@ const onsubmit = async (event) => {
 
 - Go to the AWS Cognito userpool console page and create a user.
 
-**Step 5 - Modifying the sign up **
+
+**Step 5 - Attempting Log in using the Sign In tab **
+- In the terminal, run:
+```
+aws cognito-idp admin-set-user-password --username andrewbrown --password Testing1234 --userpoolid numbernumber --permanent
+```
+
+- Run the frontend page again and it should not give an error when we use the password and username set above. The page should be working!
+
+**Step 6 - Modifying the Sign Up page**
 - Paste the following in the ```frontend-js/signup.js/```:
 ```
+cd frontend-js/src/pages/SignUpPage.js
 import { Auth } from 'aws-amplify';
 ```
 
 - We will replace the existing on-submit code-block with:
 ```
   const onsubmit = async (event) => {
-    event.preventDefault();
-    setErrors('')
-    try {
+  event.preventDefault();
+  setErrors('')
+  try {
       const { user } = await Auth.signUp({
         username: email,
         password: password,
         attributes: {
-          name: name,
-          email: email,
-          preferred_username: username,
+            name: name,
+            email: email,
+            preferred_username: username,
         },
         autoSignIn: { // optional - enables auto sign in after user is confirmed
             enabled: true,
@@ -231,20 +242,64 @@ import { Auth } from 'aws-amplify';
       });
       console.log(user);
       window.location.href = `/confirm?email=${email}`
-    } catch (error) {
-        console.log(error);
-        setErrors(error.message)
-    }
-    return false
+  } catch (error) {
+      console.log(error);
+      setCognitoErrors(error.message)
   }
+  return false
+}
 ```
 
 - Refresh to see if it works, try signing in in the front page
 
-**Step 4 - T**
+**Step 7 - Modifying the Confirmation Page **
+- Paste the following in the ```frontend-js/confimation.js/```:
+```
+cd frontend-js/src/pages/ConfirmationPage.js
+import { Auth } from 'aws-amplify';
+```
 
+- We will replace the existing on-submit code-block with:
+```
+const resend_code = async (event) => {
+  setErrors('')
+  try {
+    await Auth.resendSignUp(email);
+    console.log('code resent successfully');
+    setCodeSent(true)
+  } catch (err) {
+    // does not return a code
+    // does cognito always return english
+    // for this to be an okay match?
+    console.log(err)
+    if (err.message == 'Username cannot be empty'){
+      setCognitoErrors("You need to provide an email in order to send Resend Activiation Code")   
+    } else if (err.message == "Username/client id combination not found."){
+      setCognitoErrors("Email is invalid or cannot be found.")   
+    }
+  }
+}
+```
 
-**Step **
+- We will replace the existing on-submit code-block with:
+```
+const onsubmit = async (event) => {
+  event.preventDefault();
+  setErrors('')
+  try {
+    await Auth.confirmSignUp(email, code);
+    window.location.href = "/"
+  } catch (error) {
+    setCognitoErrors(error.message)
+  }
+  return false
+}
+```
+
+- Refresh the page and attempt to use the sign up page and create a new user. This should work and an email should be sent to the email address you have provided!
+- G to the AWS Cognito user pool console to confirm that the user has been created.
+
+**Step 8 - Modifying the Confirmation Page**
 
 
 ## Next Steps - Additional Homework Challenges
