@@ -23,7 +23,8 @@
 3. Gitpod account
 
 ## Use Cases
-1. AWS Cognito is a User Directory for Customer that can be used to access AWS resources.
+1. For the purpose of this application, we will be intergrating Amazon Cognito with our backend application with custom login pages.
+2. AWS Cognito is a User Directory for Customer that can be used to access AWS resources.
 
 ## Tasks
 Provision via ClickOps a Amazon Cognito User Pool
@@ -65,12 +66,12 @@ Verify JWT server side to serve authenticated API endpoints in Flask Application
 - Encryption in Transit for API calls
 
 
-### Intergrating Amazon Cognito with the backend application with custom login branches
+### 
 ### Install and configure Amplify client-side library for Amazon Congito
 **Step 1 - Configure a User pool using AWS Cognito Cosnole**
 - We will first use the AWS Console to configure a Userpool which is necessary to intergrate an application and we want to authenticate users.
 
-**Step 2 - **
+**Step 2 - kkhj**
 - In the front-end-js folder, we will install the AWS Amplify libraries in the package.json file by pasting in and running the code in ```frontend-js```
 ```
 npm i aws-amplify --save
@@ -162,4 +163,5 @@ import { Auth } from 'aws-amplify';
 
 
 **RESOURCES**
-1. [](https://docs.amplify.aws/lib/auth/emailpassword/q/platform/js/)
+1. [AWS Cognito Amplify documentation](https://docs.amplify.aws/lib/auth/emailpassword/q/platform/js/)
+2. 
