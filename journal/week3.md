@@ -238,6 +238,7 @@ import { Auth } from 'aws-amplify';
   }
 ```
 
+- Refresh to see if it works, try signing in in the front page
 
 **Step 4 - T**
 
