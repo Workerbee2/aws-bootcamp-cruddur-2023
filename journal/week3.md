@@ -297,9 +297,61 @@ const onsubmit = async (event) => {
 ```
 
 - Refresh the page and attempt to use the sign up page and create a new user. This should work and an email should be sent to the email address you have provided!
-- G to the AWS Cognito user pool console to confirm that the user has been created.
+- Go to the AWS Cognito user pool console to confirm that the user has been created.
+- Sign in after verification so that it can be seen as having logged in.
 
-**Step 8 - Modifying the Confirmation Page**
+**Step 8 - Modifying the Recovery Page**
+- Paste the following in the ```frontend-js/RecoveryPage.js/```:
+```
+cd frontend-js/src/pages/RecoveryPage.js
+import { Auth } from 'aws-amplify';
+```
+
+- Then paste in the following code:
+```
+const resend_code = async (event) => {
+  setErrors('')
+  try {
+    await Auth.resendSignUp(email);
+    console.log('code resent successfully');
+    setCodeSent(true)
+  } catch (err) {
+    // does not return a code
+    // does cognito always return english
+    // for this to be an okay match?
+    console.log(err)
+    if (err.message == 'Username cannot be empty'){
+      setErrors("You need to provide an email in order to send Resend Activiation Code")   
+    } else if (err.message == "Username/client id combination not found."){
+      setCognitoErrors("Email is invalid or cannot be found.")   
+    }
+  }
+}
+
+const onsubmit = async (event) => {
+  event.preventDefault();
+  setErrors('')
+  try {
+    await Auth.confirmSignUp(email, code);
+    window.location.href = "/"
+  } catch (error) {
+    setErrors(error.message)
+  }
+  return false
+}
+```
+
+- Refresh the page and attempt to use the Recover password page and attempt to send your password. This should work and an email should be sent to the email address you have provided with the reset code!
+
+### Backend Implementation for AWS Cognito
+**Step 9 - Access Token to protect our API endpoints**
+- Add in the `HomeFeedPage.js` a header eto pass along the access token
+
+```js
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("access_token")}`
+  }
+
 
 
 ## Next Steps - Additional Homework Challenges
