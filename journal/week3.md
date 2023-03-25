@@ -363,7 +363,63 @@ print (
   )
 ```
 
-- 
+- For when we run itno CORS errors when trying to access the frontend-page
+```
+cors = CORS(
+  app, 
+  resources={r"/api/*": {"origins": origins}},
+  headers=['Content-Type', 'Authorization'], 
+  expose_headers='Authorization',
+  methods="OPTIONS,GET,HEAD,POST"
+)
+```
+
+- In backend-flask, create a new folder called lib and create a new file called cognito_token_verification.py:
+```
+import time
+import requests
+from jose import jwk, jwt
+from jose.exceptions import JOSEError
+from jose.utils import base64url_decode
+from flask_awscognito.exceptions import FlaskAWSCognitoError, TokenVerifyError
+
+
+class TokenService:
+    def __init__(self, user_pool_id, user_pool_client_id, region, request_client=None):
+        self.region = region
+        if not self.region:
+            raise FlaskAWSCognitoError("No AWS region provided")
+        self.user_pool_id = user_pool_id
+        self.user_pool_client_id = user_pool_client_id
+        self.claims = None
+        if not request_client:
+            self.request_client = requests.get
+        else:
+            self.request_client = request_client
+        self._load_jwk_keys()
+
+    def _load_jwk_keys(self):
+        keys_url = f"https://cognito-idp.{self.region}.amazonaws.com/{self.user_pool_id}/.well-known/jwks.json"
+        try:
+            response = self.request_client(keys_url)
+            self.jwk_keys = response.json()["keys"]
+        except requests.exceptions.RequestException as e:
+            raise FlaskAWSCognitoError(str(e)) from e
+
+    @staticmethod
+    def _extract_headers(token):
+        try:
+            headers = jwt.get_unverified_headers(token)
+            return headers
+        except JOSEError as e:
+            raise TokenVerifyError(str(e)) from e
+
+    def _find_pkey(self, headers):
+        kid = headers["kid"]
+        # search for the kid in the downloaded public keys
+        key_index = -1
+```
+
 
 ## Next Steps - Additional Homework Challenges
 
