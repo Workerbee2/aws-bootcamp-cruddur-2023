@@ -394,6 +394,8 @@ AWS_COGNITO_USER_POOL_CLIENT_ID: 'YYY'
 - Then restart the containers by running docker-compose up.
 - In backend-flask, create a new folder called lib and create a new file called cognito_token_verification.py:
 ```
+HTTP_HEADER = "Authorization"
+
 import time
 import requests
 from jose import jwk, jwt
@@ -406,7 +408,7 @@ class FlaskAWSCognitoError(Exception):
 class TokenVerifyError(Exception):
     pass
 
-class CognitoTokenVerification:
+class CognitoJWTToken:
     def __init__(self, user_pool_id, user_pool_client_id, region, request_client=None):
         self.region = region
         if not self.region:
@@ -419,6 +421,16 @@ class CognitoTokenVerification:
         else:
             self.request_client = request_client
         self._load_jwk_keys()
+        
+    
+@classmethod
+def extract_access_token(request_headers):
+    access_token = None
+    auth_header = request_headers.get(HTTP_HEADER)
+    if auth_header and " " in auth_header:
+        _, access_token = auth_header.split()
+    return access_token
+
 
     def _load_jwk_keys(self):
         keys_url = f"https://cognito-idp.{self.region}.amazonaws.com/{self.user_pool_id}/.well-known/jwks.json"
@@ -505,7 +517,7 @@ class CognitoTokenVerification:
 ``` 
 from lib.cognito_token_verification import CognitoTokenVerification
 
-Cognito_token_verification = CognitoTokenVerification(
+cognito_jwt_token = CognitoJWTToken(
   user_pool_id= os.getenv("AWS_COGNITO_USER_POOL_ID"), 
   user_pool_client_id= os.getenv("AWS_COGNITO_USER_POOL_CLIENT_ID"), 
   region= os.getenv("AWS_DEFAULT_REGION"))
