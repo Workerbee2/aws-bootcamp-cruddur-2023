@@ -345,14 +345,25 @@ const onsubmit = async (event) => {
 
 ### Backend Implementation for AWS Cognito
 **Step 9 - Access Token to protect our API endpoints**
+- To implement on the backend to differentiate between authenticated and unauthenticated requests.
 - Add in the `HomeFeedPage.js` a header eto pass along the access token
 
-```js
+```
   headers: {
     Authorization: `Bearer ${localStorage.getItem("access_token")}`
   }
+```
 
+- Run Docker-compose up .
+- Change to the backend folder then paste in line 2:
+```
+cd backend-flask/app.py
+print (
+  request.headers.get("Authorization")
+  )
+```
 
+- 
 
 ## Next Steps - Additional Homework Challenges
 
