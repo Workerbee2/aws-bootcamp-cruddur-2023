@@ -511,11 +511,12 @@ def extract_access_token(request_headers):
         self._check_audience(claims)
 
         self.claims = claims
+        return claims
 ```
 
 - In our ```app.py```, paste in:
 ``` 
-from lib.cognito_token_verification import CognitoTokenVerification
+from lib.cognito_jwt_token import CognitoTokenVerification
 
 cognito_jwt_token = CognitoJWTToken(
   user_pool_id= os.getenv("AWS_COGNITO_USER_POOL_ID"), 
@@ -523,8 +524,19 @@ cognito_jwt_token = CognitoJWTToken(
   region= os.getenv("AWS_DEFAULT_REGION"))
 ```
 
-- 
+- Then paste in app.py:
+```
+ access_token = CognitoJWTToken.extract_access_token(request.headers)
+            try:
+                claims = cognito_jwt_token.token_service.verify(access_token)
+                g.cognito_claims = self.claims
+            except TokenVerifyError as e:
+                _ = request.data
+                abort(make_response(jsonify(message=str(e)), 401))
+                
+ ```
 
+- Refrsh the frontend page.
 
 
 
