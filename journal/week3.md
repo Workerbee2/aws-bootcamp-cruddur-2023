@@ -8,6 +8,9 @@
 **What is Amazon Cognito?**
 
 
+**What is AWS Amplify?**
+
+
 **User pools vs User Identity pools in AWS Cognito?**
 
 
@@ -71,10 +74,10 @@
 - We will first use the AWS Console to configure a Userpool which is necessary to intergrate an application and we want to authenticate users.
 
 ### 
-**Step 2 - implementing the Cognito Authentication in our frontend-js application**
+**Step 2 - Implementing the Cognito Authentication in our frontend-js application**
 - In the front-end-js folder, we will install the AWS Amplify libraries in the package.json file by pasting in and running the code in the terminal:
 ```
-cd frontend-js
+cd frontend-react-js
 npm i aws-amplify --save
 ```
 
