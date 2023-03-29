@@ -211,11 +211,12 @@ const onsubmit = async (event) => {
 
 
 **Step 5 - Attempting Log in using the Sign In tab**
-- In the terminal, run:
+- To confirm the user that we create for the User-pool via the terminal/CLI, paste and run in the terminal:
 ```
-aws cognito-idp admin-set-user-password --username andrewbrown --password Testing1234 --userpoolid numbernumber --permanent
+aws cognito-idp admin-set-user-password --username andrewbrown --password Testing1234 --user-pool-id numbernumber --permanent
 ```
 
+- Check the status of the user in the AWS Cognito page, we will see that the user has been verified.
 - Run the frontend page again and it should not give an error when we use the password and username set above. The page should be working!
 
 **Step 6 - Modifying the Sign Up page**
@@ -255,7 +256,7 @@ import { Auth } from 'aws-amplify';
 
 - Refresh to see if it works, try signing in in the front page
 
-**Step 7 - Modifying the Confirmation Page **
+**Step 7 - Modifying the Confirmation Page**
 - Paste the following in the ```frontend-js/confimation.js/```:
 ```
 cd frontend-js/src/pages/ConfirmationPage.js
