@@ -18,6 +18,8 @@ watchtower
 blinker
 rollbar
 
+Flask-AWSCognito
+
 #Postgresql-python client binaries
 psycopg[binary]
 psycopg[pool]
