@@ -3,7 +3,7 @@ import React from "react";
 import { useParams } from 'react-router-dom';
 import {ReactComponent as Logo} from '../components/svg/logo.svg';
 
-// [TODO] Authenication
+// [TODO] Authentication
 import { Auth } from 'aws-amplify';
 
 export default function ConfirmationPage() {
@@ -35,11 +35,11 @@ export default function ConfirmationPage() {
       if (err.message == 'Username cannot be empty'){
         setCognitoErrors("You need to provide an email in order to send Resend Activiation Code")   
       } else if (err.message == "Username/client id combination not found."){
-        setErrors("Email is invalid or cannot be found.")   
+        setCognitoErrors("Email is invalid or cannot be found.")   
       }
     }
   }
-
+  
   const onsubmit = async (event) => {
     event.preventDefault();
     setErrors('')
@@ -56,7 +56,6 @@ export default function ConfirmationPage() {
   if (errors){
     el_errors = <div className='errors'>{errors}</div>;
   }
-
 
   let code_button;
   if (codeSent){
