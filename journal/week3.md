@@ -217,7 +217,10 @@ aws cognito-idp admin-set-user-password --username andrewbrown --password Testin
 ```
 
 - Check the status of the user in the AWS Cognito page, we will see that the user has been verified.
+- This also means that we can log in with the user from our frontend application.
 - Run the frontend page again and it should not give an error when we use the password and username set above. The page should be working!
+- To make sure that our userpage on the frontend application displays the prefered username, we can add these details to the user profile in the AWS Cognito user pool profile and refresh our frontend application page to display this.
+***How do we manage this when we have thousands of users signing up each minute?***
 
 **Step 6 - Modifying the Sign Up page**
 - Paste the following in the ```frontend-js/signup.js/```:
