@@ -257,7 +257,7 @@ import { Auth } from 'aws-amplify';
 }
 ```
 
-- Refresh to see if it works, try signing in in the front page
+- Refresh to see if it works, try signing up in the front page
 
 **Step 7 - Modifying the Confirmation Page**
 - Paste the following in the ```frontend-js/confimation.js/```:
@@ -266,7 +266,7 @@ cd frontend-js/src/pages/ConfirmationPage.js
 import { Auth } from 'aws-amplify';
 ```
 
-- We will replace the existing on-submit code-block with:
+- We will replace the existing resend code-block with:
 ```
 const resend_code = async (event) => {
   setErrors('')
