@@ -200,7 +200,7 @@ const onsubmit = async (event) => {
     if (error.code == 'UserNotConfirmedException') {
       window.location.href = "/confirm"
     }
-    setCognitoErrors(error.message)
+    setErrors(error.message)
   }
   return false
 }
@@ -210,7 +210,7 @@ const onsubmit = async (event) => {
 - Go to the AWS Cognito userpool console page and create a user.
 
 
-**Step 5 - Attempting Log in using the Sign In tab **
+**Step 5 - Attempting Log in using the Sign In tab**
 - In the terminal, run:
 ```
 aws cognito-idp admin-set-user-password --username andrewbrown --password Testing1234 --userpoolid numbernumber --permanent
@@ -247,7 +247,7 @@ import { Auth } from 'aws-amplify';
       window.location.href = `/confirm?email=${email}`
   } catch (error) {
       console.log(error);
-      setCognitoErrors(error.message)
+      setErrors(error.message)
   }
   return false
 }
