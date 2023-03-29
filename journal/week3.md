@@ -200,7 +200,7 @@ const onsubmit = async (event) => {
     if (error.code == 'UserNotConfirmedException') {
       window.location.href = "/confirm"
     }
-    setCognitoErrors(error.message)
+    setErrors(error.message)
   }
   return false
 }
@@ -210,13 +210,17 @@ const onsubmit = async (event) => {
 - Go to the AWS Cognito userpool console page and create a user.
 
 
-**Step 5 - Attempting Log in using the Sign In tab **
-- In the terminal, run:
+**Step 5 - Attempting Log in using the Sign In tab**
+- To confirm the user that we create for the User-pool via the terminal/CLI, paste and run in the terminal:
 ```
-aws cognito-idp admin-set-user-password --username andrewbrown --password Testing1234 --userpoolid numbernumber --permanent
+aws cognito-idp admin-set-user-password --username andrewbrown --password Testing1234 --user-pool-id numbernumber --permanent
 ```
 
+- Check the status of the user in the AWS Cognito page, we will see that the user has been verified.
+- This also means that we can log in with the user from our frontend application.
 - Run the frontend page again and it should not give an error when we use the password and username set above. The page should be working!
+- To make sure that our userpage on the frontend application displays the prefered username, we can add these details to the user profile in the AWS Cognito user pool profile and refresh our frontend application page to display this.
+***How do we manage this when we have thousands of users signing up each minute?***
 
 **Step 6 - Modifying the Sign Up page**
 - Paste the following in the ```frontend-js/signup.js/```:
@@ -247,22 +251,22 @@ import { Auth } from 'aws-amplify';
       window.location.href = `/confirm?email=${email}`
   } catch (error) {
       console.log(error);
-      setCognitoErrors(error.message)
+      setErrors(error.message)
   }
   return false
 }
 ```
 
-- Refresh to see if it works, try signing in in the front page
+- Refresh to see if it works, try signing up in the front page
 
-**Step 7 - Modifying the Confirmation Page **
+**Step 7 - Modifying the Confirmation Page**
 - Paste the following in the ```frontend-js/confimation.js/```:
 ```
 cd frontend-js/src/pages/ConfirmationPage.js
 import { Auth } from 'aws-amplify';
 ```
 
-- We will replace the existing on-submit code-block with:
+- We will replace the existing resend code-block with:
 ```
 const resend_code = async (event) => {
   setErrors('')
