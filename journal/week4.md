@@ -76,7 +76,9 @@ Correctly sanitize parameters passed to SQL to execute
 14. Do not enable **Log exports**
 15. Do not **Enable Deletion protection**, which for production should be turned on for backup purposes.
 
-### Step 2 - Use the AWS CLI in Gitpod to create a RDS instance and create a Cruddur database in the instance**
+
+### Provision RDS Instance
+**Step 2 - Use the AWS CLI in Gitpod to create a RDS instance and create a Cruddur database in the instance**
 - Use the following command to create an RDS instance via the CLI, notice that the commands follow the set up in Step 1.
 ```
 aws rds create-db-instance \
@@ -104,7 +106,8 @@ aws rds create-db-instance \
 - When the database instance has been fully created, the status will read created.
 - Click into the Database instance and in the Actions tab Stop temporarily, it is stopped for 7 days (be sure to check on it after 7 days).
  
-### Step 3 - Create a local Cruddur Database in PostgreSQL
+### Remotely connect to RDS instance
+**Step 3 - Create a local Cruddur Database in PostgreSQL**
 - Start up Docker compose, then open the Docker extension and make sure that Postgres has started up,( we added Postgres into the Docker-compose file in the earlier weeks).
 - Open the Postgres bash then, to be able to run psql commands inside the database instance we created above, run the following commands:
 ```
