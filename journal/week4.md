@@ -2,12 +2,12 @@
 
 ## Introduction
 
-Whry AWS RDS Postgres over AWS Aurora?
+**Why AWS RDS Postgres over AWS Aurora?**
+
 ## Prerequisites
 1. AWS Free Tier account
 2. AWS CLI on your local environment
 3. Knowledge of SQL and PostgreSQL.
-4. 
 
 ## Use Cases
 - Postgresql is a type of Relational Database System.
@@ -41,9 +41,6 @@ Correctly sanitize parameters passed to SQL to execute
 - Oracle
 - Microsoft SQL Server
 
-Security best practises?
-1. Create and store the data in the recommended region 
-
 **Security best practises - AWS**
 - Use VPCs: Use Amazon Virtula Private Cloud to create a private netwrok for your RDS instance. This helps prevent unauthorized access to your instance from the public internet.
 - Compliance standard is what the business requires.
@@ -51,6 +48,14 @@ Security best practises?
 - Amazon Oranisations SCP - to manage RDS deletion, RDS creation, region lock, RDS encryption enforced.
 - AWS CloudTrail is enabled and monitored to trigger alerts on malicious RDS behaviour by an identity in AWS.
 - Amazon Guard Duty is enabled in the account and region of RDS.
+
+**Security best practises - Application/Developer**
+- RDS instance to use appropriate authentication - Use IAM authentication, kerberos 
+- Database User Lifecycle Management - Create, Modify, Delete Users
+- Security Group to be restrictedonly to known IPs
+- Not have RDS be internet accessible
+- Encryption in Transit for comms between Apps and RDS
+- Secret Management - Master user password can be used with AWS Secrets Manager to automatically rotate the secrets for the Amazon RDS.
 
 ### Spin up an PostgreSQL RDS(Relational Database System) via the AWS Console
 **Step 1 - Provision an RDS instance**
