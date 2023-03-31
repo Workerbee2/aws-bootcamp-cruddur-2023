@@ -32,6 +32,26 @@ Implement a Lambda that runs in a VPC and commits code to RDS
 Work with PSQL json functions to directly return json from the database
 Correctly sanitize parameters passed to SQL to execute
 
+### Security for Amazon RDS and Postgres
+**What are the different types of Amazon RDS Databse Engines?**
+- Amazon Aurora
+- MySQL
+- MariaDB
+- PostreSQL
+- Oracle
+- Microsoft SQL Server
+
+Security best practises?
+1. Create and store the data in the recommended region 
+
+**Security best practises - AWS**
+- Use VPCs: Use Amazon Virtula Private Cloud to create a private netwrok for your RDS instance. This helps prevent unauthorized access to your instance from the public internet.
+- Compliance standard is what the business requires.
+- RDS Instances should only be in the AWS region that you are legally allowed to be holding user data in.
+- Amazon Oranisations SCP - to manage RDS deletion, RDS creation, region lock, RDS encryption enforced.
+- AWS CloudTrail is enabled and monitored to trigger alerts on malicious RDS behaviour by an identity in AWS.
+- Amazon Guard Duty is enabled in the account and region of RDS.
+
 ### Spin up an PostgreSQL RDS(Relational Database System) via the AWS Console
 **Step 1 - Provision an RDS instance**
 - We will first have to spin up an RDS instance on AWS then stop it.
