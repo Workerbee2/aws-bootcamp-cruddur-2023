@@ -18,19 +18,19 @@
 4. Durability
 
 ## Tasks
-Provision an RDS instance
-Temporarily stop an RDS instance
-Remotely connect to RDS instance
-Programmatically update a security group rule
-Write several bash scripts for database operations
-Operate common SQL commands
-Create a schema SQL file by hand
-Work with UUIDs and PSQL extensions
-Implement a postgres client for python using a connection pool
-Troubleshoot common SQL errors
-Implement a Lambda that runs in a VPC and commits code to RDS
-Work with PSQL json functions to directly return json from the database
-Correctly sanitize parameters passed to SQL to execute
+-Provision an RDS instance
+-Temporarily stop an RDS instance
+-Remotely connect to RDS instance
+-Programmatically update a security group rule
+-Write several bash scripts for database operations
+-Operate common SQL commands
+-Create a schema SQL file by hand
+-Work with UUIDs and PSQL extensions
+-Implement a postgres client for python using a connection pool
+-Troubleshoot common SQL errors
+-Implement a Lambda that runs in a VPC and commits code to RDS
+-Work with PSQL json functions to directly return json from the database
+-Correctly sanitize parameters passed to SQL to execute
 
 ### Security for Amazon RDS and Postgres
 **What are the different types of Amazon RDS Databse Engines?**
@@ -181,6 +181,12 @@ DELETE FROM table_name WHERE condition; -- Delete data from a table
 
 - Copy the path into all the three files above. Remember to create a shabang(#!) at the beginning of all the files that will indicate that they are bash files. The files will look like:
 ``` #! /usr/bin/bash ```
+
+- Create the db-create file by pasting in ;
+```
+#! /usr/bin/bash
+
+```
 
 - To enable us to run the files as scripts, we need to be able to change their permissions so that they are executable, we can do this by running the following command on all the 3 files:
 ```
