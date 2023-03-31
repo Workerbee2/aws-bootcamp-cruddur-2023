@@ -143,11 +143,16 @@ OR
 psql postgresql://postgres:password@127.0.0.1:5432/cruddur
 ```
 
-- In the terminal, paste the follwoing in the terminal(we should still be in backend-flask):
+***OR***
+
+- In the terminal, paste the following in the terminal(we should still be in backend-flask):
 ```
 export CONNECTION_URL="postgresql://postgres:password@127.0.0.1:5432/cruddur"
 psql $CONNECTION_URL
 ```
+
+- In the terminal, paste in the following (we should still be in backend-flask) to set as an environment variable:
+```gp env CONNECTION_URL="psql postgresql://postgres:password@127.0.0.1:5432/cruddur"```
 
 **Common PostgreSQL commands**
 ```
