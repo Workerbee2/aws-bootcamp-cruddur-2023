@@ -2,12 +2,12 @@
 
 ## Introduction
 
-Whry AWS RDS Postgres over AWS Aurora?
+**Why AWS RDS Postgres over AWS Aurora?**
+
 ## Prerequisites
 1. AWS Free Tier account
 2. AWS CLI on your local environment
 3. Knowledge of SQL and PostgreSQL.
-4. 
 
 ## Use Cases
 - Postgresql is a type of Relational Database System.
@@ -18,19 +18,45 @@ Whry AWS RDS Postgres over AWS Aurora?
 4. Durability
 
 ## Tasks
-Provision an RDS instance
-Temporarily stop an RDS instance
-Remotely connect to RDS instance
-Programmatically update a security group rule
-Write several bash scripts for database operations
-Operate common SQL commands
-Create a schema SQL file by hand
-Work with UUIDs and PSQL extensions
-Implement a postgres client for python using a connection pool
-Troubleshoot common SQL errors
-Implement a Lambda that runs in a VPC and commits code to RDS
-Work with PSQL json functions to directly return json from the database
-Correctly sanitize parameters passed to SQL to execute
+-Provision an RDS instance
+-Temporarily stop an RDS instance
+-Remotely connect to RDS instance
+-Programmatically update a security group rule
+-Write several bash scripts for database operations
+-Operate common SQL commands
+-Create a schema SQL file by hand
+-Work with UUIDs and PSQL extensions
+-Implement a postgres client for python using a connection pool
+-Troubleshoot common SQL errors
+-Implement a Lambda that runs in a VPC and commits code to RDS
+-Work with PSQL json functions to directly return json from the database
+-Correctly sanitize parameters passed to SQL to execute
+ 
+ 
+### Security for Amazon RDS and Postgres
+**What are the different types of Amazon RDS Databse Engines?**
+- Amazon Aurora
+- MySQL
+- MariaDB
+- PostreSQL
+- Oracle
+- Microsoft SQL Server
+
+**Security best practises - AWS**
+- Use VPCs: Use Amazon Virtula Private Cloud to create a private netwrok for your RDS instance. This helps prevent unauthorized access to your instance from the public internet.
+- Compliance standard is what the business requires.
+- RDS Instances should only be in the AWS region that you are legally allowed to be holding user data in.
+- Amazon Oranisations SCP - to manage RDS deletion, RDS creation, region lock, RDS encryption enforced.
+- AWS CloudTrail is enabled and monitored to trigger alerts on malicious RDS behaviour by an identity in AWS.
+- Amazon Guard Duty is enabled in the account and region of RDS.
+
+**Security best practises - Application/Developer**
+- RDS instance to use appropriate authentication - Use IAM authentication, kerberos 
+- Database User Lifecycle Management - Create, Modify, Delete Users
+- Security Group to be restrictedonly to known IPs
+- Not have RDS be internet accessible
+- Encryption in Transit for comms between Apps and RDS
+- Secret Management - Master user password can be used with AWS Secrets Manager to automatically rotate the secrets for the Amazon RDS.
 
 ### Spin up an PostgreSQL RDS(Relational Database System) via the AWS Console
 **Step 1 - Provision an RDS instance**
@@ -51,7 +77,9 @@ Correctly sanitize parameters passed to SQL to execute
 14. Do not enable **Log exports**
 15. Do not **Enable Deletion protection**, which for production should be turned on for backup purposes.
 
-### Step 2 - Use the AWS CLI in Gitpod to create a RDS instance and create a Cruddur database in the instance**
+
+### Provision RDS Instance
+**Step 2 - Use the AWS CLI in Gitpod to create a RDS instance and create a Cruddur database in the instance**
 - Use the following command to create an RDS instance via the CLI, notice that the commands follow the set up in Step 1.
 ```
 aws rds create-db-instance \
@@ -79,7 +107,8 @@ aws rds create-db-instance \
 - When the database instance has been fully created, the status will read created.
 - Click into the Database instance and in the Actions tab Stop temporarily, it is stopped for 7 days (be sure to check on it after 7 days).
  
-### Step 3 - Create a local Cruddur Database in PostgreSQL
+### Remotely connect to RDS instance
+**Step 3 - Create a local Cruddur Database in PostgreSQL**
 - Start up Docker compose, then open the Docker extension and make sure that Postgres has started up,( we added Postgres into the Docker-compose file in the earlier weeks).
 - Open the Postgres bash then, to be able to run psql commands inside the database instance we created above, run the following commands:
 ```
@@ -115,10 +144,35 @@ OR
 psql postgresql://postgres:password@127.0.0.1:5432/cruddur
 ```
 
-- In the terminal, paste the follwoing in the terminal(we should still be in backend-flask):
+***OR***
+
+- In the terminal, paste the following in the terminal(we should still be in backend-flask):
 ```
 export CONNECTION_URL="postgresql://postgres:password@127.0.0.1:5432/cruddur"
 psql $CONNECTION_URL
+```
+
+- In the terminal, paste in the following (we should still be in backend-flask) to set as an environment variable:
+```gp env CONNECTION_URL="psql postgresql://postgres:password@127.0.0.1:5432/cruddur"```
+
+**Common PostgreSQL commands**
+```
+\x on -- expanded display when looking at data
+\q -- Quit PSQL
+\l -- List all databases
+\c database_name -- Connect to a specific database
+\dt -- List all tables in the current database
+\d table_name -- Describe a specific table
+\du -- List all users and their roles
+\dn -- List all schemas in the current database
+CREATE DATABASE database_name; -- Create a new database
+DROP DATABASE database_name; -- Delete a database
+CREATE TABLE table_name (column1 datatype1, column2 datatype2, ...); -- Create a new table
+DROP TABLE table_name; -- Delete a table
+SELECT column1, column2, ... FROM table_name WHERE condition; -- Select data from a table
+INSERT INTO table_name (column1, column2, ...) VALUES (value1, value2, ...); -- Insert data into a table
+UPDATE table_name SET column1 = value1, column2 = value2, ... WHERE condition; -- Update data in a table
+DELETE FROM table_name WHERE condition; -- Delete data from a table
 ```
 
 ### Step 4 - Bash Scripting
@@ -128,6 +182,12 @@ psql $CONNECTION_URL
 
 - Copy the path into all the three files above. Remember to create a shabang(#!) at the beginning of all the files that will indicate that they are bash files. The files will look like:
 ``` #! /usr/bin/bash ```
+
+- Create the db-create file by pasting in ;
+```
+#! /usr/bin/bash
+
+```
 
 - To enable us to run the files as scripts, we need to be able to change their permissions so that they are executable, we can do this by running the following command on all the 3 files:
 ```
