@@ -1,7 +1,7 @@
 from psycopg_pool import ConnectionPool
 import os
 
-def query_wrap_object(template):
+def query_wrap_object(self, template):
   sql = f"""
   (SELECT COALESCE(row_to_json(object_row),'{{}}'::json) FROM (
   {template}
@@ -9,7 +9,7 @@ def query_wrap_object(template):
   """
   return sql
 
-def query_wrap_array(template):
+def query_wrap_array(self, template):
   sql =  f"""
   (SELECT COALESCE(array_to_json(array_agg(row_to_json(array_row))),'[]'::json) FROM (
   {template}

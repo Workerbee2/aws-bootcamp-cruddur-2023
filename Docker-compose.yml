@@ -21,7 +21,7 @@ services:
       #Rollabr error logging
       ROLLBAR_ACCESS_TOKEN: "${ROLLBAR_ACCESS_TOKEN}"
       AWS_COGNITO_USER_POOL_ID: "us-east-1_CQ4wDfnwc" #us-east-1_VOYl4xt6F
-      AWS_COGNITO_USER_POOL_CLIENT_ID: "5b6ro31g97urk767adrbrdj1g5"    
+      AWS_COGNITO_USER_POOL_CLIENT_ID: "25fj17oeuuqpe5bfhk2cr4894a"    
 
     build: ./backend-flask
     ports:
@@ -82,6 +82,7 @@ networks:
   internal-network:
     driver: bridge
     name: cruddur
+    
 volumes:
   db:
     driver: local
