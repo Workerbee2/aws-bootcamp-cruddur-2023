@@ -243,7 +243,7 @@ echo "db-schema-load"
 psql $CONNECTION_URL cruddur < db/schema.sql
 ```
 
-- Run ```./bin/db-schema-load``
+- Run ```./bin/db-schema-load```
 
 - Create a db-connect file and paste
 ```
