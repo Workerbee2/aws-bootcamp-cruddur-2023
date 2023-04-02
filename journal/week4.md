@@ -206,7 +206,7 @@ chmod u+x bin/db-schema-load
 echo $CONNECTION_URL   (output)======>postgresql://postgres:password@127.0.0.1:5432/cruddur
 ```
 
-- Therefore, if we want to get into psql with the command without going into our cruddur databse, we will paste the following into our db-drop script:
+- Therefore, if we want to get into psql with the command without going into our cruddur databse, we will paste the following into our ```db-drop``` script:
 ```
 #! /usr/bin/bash
 
@@ -221,7 +221,7 @@ psql $NO_DB_CONNECTION_URL -c "DROP DATABASE cruddur;"
 ./bin/db-drop
 ```
 
-- To use a script to create a cruddur database(again), paste the follwong in the db-create file:
+- To use a script to create a cruddur database(again), paste the follwong in the ```db-create``` file:
 ```
 #! /usr/bin/bash
 
