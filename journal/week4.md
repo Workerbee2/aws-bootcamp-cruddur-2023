@@ -252,7 +252,10 @@ psql $CONNECTION_URL cruddur < db/schema.sql
 psql $CONNECTION_URL 
 ```
 
-- Change permissions ```chmod u+x ./bin/db-connect``` then run ```./bin/db-connect```
+***For all the 3 bash scripts remember to change their permissions first otherwise running them will give permission denied i.e for the ```db-connect``` file***
+***```chmod u+x ./bin/db-connect 
+then run 
+./bin/db-connect```***
 
 ### STEP 5 - Making the output nicer
 
