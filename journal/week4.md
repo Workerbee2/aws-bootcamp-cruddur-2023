@@ -18,19 +18,19 @@
 4. Durability
 
 ## Tasks
--Provision an RDS instance
--Temporarily stop an RDS instance
--Remotely connect to RDS instance
--Programmatically update a security group rule
--Write several bash scripts for database operations
--Operate common SQL commands
--Create a schema SQL file by hand
--Work with UUIDs and PSQL extensions
--Implement a postgres client for python using a connection pool
--Troubleshoot common SQL errors
--Implement a Lambda that runs in a VPC and commits code to RDS
--Work with PSQL json functions to directly return json from the database
--Correctly sanitize parameters passed to SQL to execute
+- Provision an RDS instance
+- Temporarily stop an RDS instance
+- Remotely connect to RDS instance
+- Programmatically update a security group rule
+- Write several bash scripts for database operations
+- Operate common SQL commands
+- Create a schema SQL file by hand
+- Work with UUIDs and PSQL extensions
+- Implement a postgres client for python using a connection pool
+- Troubleshoot common SQL errors
+- Implement a Lambda that runs in a VPC and commits code to RDS
+- Work with PSQL json functions to directly return json from the database
+- Correctly sanitize parameters passed to SQL to execute
  
  
 ### Security for Amazon RDS and Postgres
@@ -153,7 +153,9 @@ psql $CONNECTION_URL
 ```
 
 - In the terminal, paste in the following (we should still be in backend-flask) to set as an environment variable:
-```gp env CONNECTION_URL="psql postgresql://postgres:password@127.0.0.1:5432/cruddur"```
+```
+gp env CONNECTION_URL="psql postgresql://postgres:password@127.0.0.1:5432/cruddur"
+```
 
 **Common PostgreSQL commands**
 ```
