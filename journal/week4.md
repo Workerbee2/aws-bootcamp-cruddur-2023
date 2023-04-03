@@ -18,19 +18,19 @@
 4. Durability
 
 ## Tasks
--Provision an RDS instance
--Temporarily stop an RDS instance
--Remotely connect to RDS instance
--Programmatically update a security group rule
--Write several bash scripts for database operations
--Operate common SQL commands
--Create a schema SQL file by hand
--Work with UUIDs and PSQL extensions
--Implement a postgres client for python using a connection pool
--Troubleshoot common SQL errors
--Implement a Lambda that runs in a VPC and commits code to RDS
--Work with PSQL json functions to directly return json from the database
--Correctly sanitize parameters passed to SQL to execute
+- Provision an RDS instance
+- Temporarily stop an RDS instance
+- Remotely connect to RDS instance
+- Programmatically update a security group rule
+- Write several bash scripts for database operations
+- Operate common SQL commands
+- Create a schema SQL file by hand
+- Work with UUIDs and PSQL extensions
+- Implement a postgres client for python using a connection pool
+- Troubleshoot common SQL errors
+- Implement a Lambda that runs in a VPC and commits code to RDS
+- Work with PSQL json functions to directly return json from the database
+- Correctly sanitize parameters passed to SQL to execute
  
  
 ### Security for Amazon RDS and Postgres
@@ -153,7 +153,9 @@ psql $CONNECTION_URL
 ```
 
 - In the terminal, paste in the following (we should still be in backend-flask) to set as an environment variable:
-```gp env CONNECTION_URL="psql postgresql://postgres:password@127.0.0.1:5432/cruddur"```
+```
+gp env CONNECTION_URL="psql postgresql://postgres:password@127.0.0.1:5432/cruddur"
+```
 
 **Common PostgreSQL commands**
 ```
@@ -176,7 +178,7 @@ DELETE FROM table_name WHERE condition; -- Delete data from a table
 ```
 
 ### Step 4 - Bash Scripting
-- We will create 3 new files in backend-flask folder so that we can run bash scripts that enable us to quickly manage our databases; db-create, db-seed, db-drop, db-schema-load
+- We will create 3 new files in backend-flask folder so that we can run bash scripts that enable us to quickly manage our databases; ```db-create, db-seed, db-drop, db-schema-load```
 - In the terminal run 
 ``` whereis bash```
 
@@ -204,7 +206,9 @@ chmod u+x bin/db-schema-load
 echo $CONNECTION_URL   (output)======>postgresql://postgres:password@127.0.0.1:5432/cruddur
 ```
 
-- Therefore, if we want to get into psql with the command without going into our cruddur databse, we will paste the following into our db-drop script:
+**DB-Drop - A script to drop an existing database**
+
+- Therefore, if we want to get into psql with the command without going into our cruddur database, we will paste the following into our ```db-drop``` script:
 ```
 #! /usr/bin/bash
 
@@ -219,7 +223,9 @@ psql $NO_DB_CONNECTION_URL -c "DROP DATABASE cruddur;"
 ./bin/db-drop
 ```
 
-- To use a script to create a cruddur database(again), paste the follwong in the db-create file:
+**DB-Create - A shell to create a database**
+
+- To use a script to create a cruddur database(again), paste the follwong in the ```db-create``` file:
 ```
 #! /usr/bin/bash
 
@@ -231,6 +237,7 @@ psql $NO_DB_CONNECTION_URL -c "CREATE DATABASE cruddur;"
 
 - Run ```./bin/db-create```
 
+**DB-Schema-load - A shell script to load the schema for the existing database**
 
 - To load the schema, paste the following in db-schema-load
 ```
@@ -241,7 +248,9 @@ echo "db-schema-load"
 psql $CONNECTION_URL cruddur < db/schema.sql
 ```
 
-- Run ```./bin/db-schema-load``
+- Run ```./bin/db-schema-load```
+
+**DB-Connect - A shell script to connect to the existing database**
 
 - Create a db-connect file and paste
 ```
@@ -250,11 +259,14 @@ psql $CONNECTION_URL cruddur < db/schema.sql
 psql $CONNECTION_URL 
 ```
 
-- Change permissions ```chmod u+x ./bin/db-connect``` then run ```./bin/db-connect```
+***For all the 3 bash scripts remember to change their permissions first otherwise running them will give permission denied i.e for the ```db-connect``` file***
+***```chmod u+x ./bin/db-connect 
+then run 
+./bin/db-connect```***
 
 ### STEP 5 - Making the output nicer
 
-- To make the bash script nicer, paste in db-schema-load
+- To make the bash script nicer, paste in ```db-schema-load```
 ```
 CYAN='\033[1;36m'
 NO_COLOR='\033[0m'
@@ -263,7 +275,7 @@ printf "${CYAN}== ${LABEL}${NO_COLOR}\n"
 ```
 
 ### STEP 6 - Making the output nicer
-- To create tables within our database, paste the code into the schema.sql file:
+- To create tables within our database, paste the code into the ```schema.sql``` file:
 ```
 DROP TABLE IF EXISTS public.users;
 DROP TABLE IF EXISTS public.activities;
