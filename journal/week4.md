@@ -178,7 +178,7 @@ DELETE FROM table_name WHERE condition; -- Delete data from a table
 ```
 
 ### Step 4 - Bash Scripting
-- We will create 3 new files in backend-flask folder so that we can run bash scripts that enable us to quickly manage our databases; db-create, db-seed, db-drop, db-schema-load
+- We will create 3 new files in backend-flask folder so that we can run bash scripts that enable us to quickly manage our databases; ```db-create, db-seed, db-drop, db-schema-load```
 - In the terminal run 
 ``` whereis bash```
 
@@ -259,7 +259,7 @@ then run
 
 ### STEP 5 - Making the output nicer
 
-- To make the bash script nicer, paste in db-schema-load
+- To make the bash script nicer, paste in ```db-schema-load```
 ```
 CYAN='\033[1;36m'
 NO_COLOR='\033[0m'
@@ -268,7 +268,7 @@ printf "${CYAN}== ${LABEL}${NO_COLOR}\n"
 ```
 
 ### STEP 6 - Making the output nicer
-- To create tables within our database, paste the code into the schema.sql file:
+- To create tables within our database, paste the code into the ```schema.sql``` file:
 ```
 DROP TABLE IF EXISTS public.users;
 DROP TABLE IF EXISTS public.activities;
