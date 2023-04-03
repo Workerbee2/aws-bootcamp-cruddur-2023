@@ -482,6 +482,21 @@ GITPOD_IP=$(curl ifconfig.me)
 export PROD_CONNECTION_URL="postgresql://root:passwordpassword@cruddur-db-instance.czz1cuvepklc.ca-central-1.rds.amazonaws.com:5433/cruddur"
 gp env PROD_CONNECTION_URL="postgresql://root:passwordpassword@cruddur-db-instance.czz1cuvepklc.ca-central-1.rds.amazonaws.com:5433/cruddur"***
 
+**Permanently setting the GITPOD.IO variables**
+- Change the values with the appropriate vaules of the ```security group id``` and ```security group rule id```, which you will get from the AWS Console for the Security group that was created above.
+- Paste the following into the terminal to set:
+```
+export DB_SG_ID="sg-56fghfghhhhghghhghg"
+gp env DB_SG_ID="sg-56fghfghhhhghghhghg"
+
+export DB_SG_RULE_ID="sgr-76cgcgvbvbnvnvnvnn"
+gp env DB_SG_RULE_ID="sgr-76cgcgvbvbnvnvnvnn"
+```
+
+-
+
+
+
 ### STEP 10 - Cognito Post Confirmation Lambda
 - Created a Lambda in AWS LAMBDA called ```cruddur-post-confirmation```
 - 
