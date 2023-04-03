@@ -237,7 +237,7 @@ psql $NO_DB_CONNECTION_URL -c "CREATE DATABASE cruddur;"
 
 - Run ```./bin/db-create```
 
-**DB-Schema-load o create a database**
+**DB-Schema-load - A shell script to load the schema for the existing database**
 
 - To load the schema, paste the following in db-schema-load
 ```
@@ -249,6 +249,8 @@ psql $CONNECTION_URL cruddur < db/schema.sql
 ```
 
 - Run ```./bin/db-schema-load```
+
+**DB-Connect - A shell script to connect to the existing database**
 
 - Create a db-connect file and paste
 ```
