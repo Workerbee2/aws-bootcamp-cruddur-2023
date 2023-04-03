@@ -443,7 +443,24 @@ pool = ConnectionPool(connection_url)
 
 
 
-### STEP 9 - Cognito Post Confirmation Lambda
+### STEP 9 - Connecting to the Cruddur Database
+- We will turn on our database via the AWS RDS console 
+- Then we will change our database password with within the console.
+- In the terminal, run ```echo $PROD_CONNECTION_URL``` and copy the output provided.
+
+**Testing remote access**
+- Then to test remote access , we will paste the following command ***(this is the output from echo $PROD_CONNECTION_URL)*** in the terminal then, change the passwordpassword item to the password that you reset  to above.
+``` 
+postgresql://cruddurroot:passwordpassword@cruddur-db-instance.czz1cuvepklc.ca-central-1.rds.amazonaws.com:5433/cruddur
+```
+
+- Then set it as an envrionment variable in the system by:
+```
+export PROD_CONNECTION_URL="postgresql://cruddurroot:passwordpassword@cruddur-db-instance.czz1cuvepklc.ca-central-1.rds.amazonaws.com:5433/cruddur"
+gp env PROD_CONNECTION_URL="postgresql://cruddurroot:passwordpassword@cruddur-db-instance.czz1cuvepklc.ca-central-1.rds.amazonaws.com:5433/cruddur"
+```
+
+### STEP 10 - Cognito Post Confirmation Lambda
 - Created a Lambda in AWS LAMBDA called ```cruddur-post-confirmation```
 - 
 
