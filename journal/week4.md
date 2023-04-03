@@ -243,7 +243,7 @@ psql $NO_DB_CONNECTION_URL -c "CREATE DATABASE cruddur;"
 ```
 #! /usr/bin/bash
 
-echo "db-schema-load"
+echo "db-schema-load" 
 
 psql $CONNECTION_URL cruddur < db/schema.sql
 ```
