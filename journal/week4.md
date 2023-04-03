@@ -441,8 +441,6 @@ pool = ConnectionPool(connection_url)
 - Then pass it in ```home-activities.py```:
 ```from lib.db import pool```
 
-
-
 ### STEP 9 - Connecting to the Cruddur Database
 - We will turn on our database via the AWS RDS console 
 - Then we will change our database password with within the console.
@@ -459,6 +457,30 @@ postgresql://cruddurroot:passwordpassword@cruddur-db-instance.czz1cuvepklc.ca-ce
 export PROD_CONNECTION_URL="postgresql://cruddurroot:passwordpassword@cruddur-db-instance.czz1cuvepklc.ca-central-1.rds.amazonaws.com:5433/cruddur"
 gp env PROD_CONNECTION_URL="postgresql://cruddurroot:passwordpassword@cruddur-db-instance.czz1cuvepklc.ca-central-1.rds.amazonaws.com:5433/cruddur"
 ```
+
+- Test that you can connect to the database by running in the terminal:
+```
+psql $CONNECTION_URL
+then
+psql $PROD_CONNECTION_URL
+```
+
+- The first line will work but the second will hang.
+
+**Edit the VPC inbound rules***
+- To enable it, we need to edit the inbound rules for the RDS VPC.
+- Go to the AWS Console and in the ```Connectivity``` section, choose it then click on ```inbound rules```
+- Determine our Gitpod IP address by running in the terminal (run line 1) then set it as an environment variable using line 2:
+```
+curl ifconfig.me
+GITPOD_IP=$(curl ifconfig.me)
+```
+
+- Copy the output and paste it as the ip address in the AWS inbound rules section.
+- Running ```psql $PROD_CONNECTION_URL``` in the terminal will now work.
+***Incase you are still unable to access the database using $PROD_CONNECTION_URL, try changing the following $PROD_CONNECTION_URL variable(instead of cruddurroot, we use root)
+export PROD_CONNECTION_URL="postgresql://root:passwordpassword@cruddur-db-instance.czz1cuvepklc.ca-central-1.rds.amazonaws.com:5433/cruddur"
+gp env PROD_CONNECTION_URL="postgresql://root:passwordpassword@cruddur-db-instance.czz1cuvepklc.ca-central-1.rds.amazonaws.com:5433/cruddur"***
 
 ### STEP 10 - Cognito Post Confirmation Lambda
 - Created a Lambda in AWS LAMBDA called ```cruddur-post-confirmation```
