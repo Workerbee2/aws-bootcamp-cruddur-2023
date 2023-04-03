@@ -441,7 +441,7 @@ pool = ConnectionPool(connection_url)
 - Then pass it in ```home-activities.py```:
 ```from lib.db import pool```
 
-- 
+
 
 ### STEP 9 - Cognito Post Confirmation Lambda
 - Created a Lambda in AWS LAMBDA called ```cruddur-post-confirmation```
