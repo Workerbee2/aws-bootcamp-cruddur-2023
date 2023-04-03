@@ -206,7 +206,7 @@ chmod u+x bin/db-schema-load
 echo $CONNECTION_URL   (output)======>postgresql://postgres:password@127.0.0.1:5432/cruddur
 ```
 
-**DB-Drop - A script to drop an existing database**
+**DB_DROP - A script to drop an existing database**
 
 - Therefore, if we want to get into psql with the command without going into our cruddur database, we will paste the following into our ```db-drop``` script:
 ```
@@ -223,7 +223,7 @@ psql $NO_DB_CONNECTION_URL -c "DROP DATABASE cruddur;"
 ./bin/db-drop
 ```
 
-**DB-Create - A shell to create a database**
+**DB_CREATE - A shell to create a database**
 
 - To use a script to create a cruddur database(again), paste the follwong in the ```db-create``` file:
 ```
@@ -237,7 +237,7 @@ psql $NO_DB_CONNECTION_URL -c "CREATE DATABASE cruddur;"
 
 - Run ```./bin/db-create```
 
-**DB-Schema-load - A shell script to load the schema for the existing database**
+**DB_SCHEMA-LOAD - A shell script to load the schema for the existing database**
 
 - To load the schema, paste the following in db-schema-load
 ```
@@ -250,7 +250,7 @@ psql $CONNECTION_URL cruddur < db/schema.sql
 
 - Run ```./bin/db-schema-load```
 
-**DB-Connect - A shell script to connect to the existing database**
+**DB_CONNECT - A shell script to connect to the existing database**
 
 - Create a db-connect file and paste
 ```
@@ -381,7 +381,7 @@ from pg_stat_activity;"
 - Use DOCKER_COMPOSE UP to forcefully kill all the sessions.(not recommended).
 
 
-**DB_SETUP - A shell script to see speedup our workflow**
+**DB_SETUP - A shell script to see speedup our workflow(Create DBs faster)**
 - To enable us to execute commands faster, we will create a new script ```db-setup``` and paste in 
 ```
 #! /usr/bin/bash
@@ -410,6 +410,38 @@ psycopg[pool]
 
 **Database Creation pool**
 - We will now create a **connection pool**(connection pooling is the process of having a pool of active connections on the backend servers. These can be used any time a user sends a request. Instead of opening, maintaining, and closing a connection when a user sends a request, the server will assign an active connection to the user.)
+- Create a file called in lib called, ```db.py``` (backend-flask/lib/db.py) and paste in:
+```
+from psycopg_pool import ConnectionPool
+import os
+
+def query_wrap_object(self, template):
+  sql = f"""
+  (SELECT COALESCE(row_to_json(object_row),'{{}}'::json) FROM (
+  {template}
+  ) object_row);
+  """
+  return sql
+
+def query_wrap_array(self, template):
+  sql =  f"""
+  (SELECT COALESCE(array_to_json(array_agg(row_to_json(array_row))),'[]'::json) FROM (
+  {template}
+  ) array_row);
+  """
+  return sql
+
+connection_url = os.getenv("CONNECTION_URL")
+pool = ConnectionPool(connection_url)
+```
+
+- Then pass it in our docker-compose file by passing in the connection string:
+``` CONNECTION_URL: "${PROD_CONNECTION_URL}" ```
+
+- Then pass it in ```home-activities.py```:
+```from lib.db import pool```
+
+- 
 
 ### STEP 9 - Cognito Post Confirmation Lambda
 - Created a Lambda in AWS LAMBDA called ```cruddur-post-confirmation```
