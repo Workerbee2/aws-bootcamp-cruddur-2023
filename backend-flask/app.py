@@ -4,6 +4,7 @@ from flask_cors import CORS, cross_origin
 import os
 import sys
 
+
 from services.home_activities import *
 from services.notifications_activities import *
 from services.user_activities import *
@@ -162,11 +163,12 @@ def data_create_message():
   return
 
 @app.route("/api/activities/home", methods=['GET'])
-@xray_recorder.capture('activities_home')
+#@xray_recorder.capture('activities_home')
 def data_home():
-  access_token = CognitoJWTToken.extract_access_token(request.headers)
+  print("hgdfhgdhjkdffhdhj")
+  access_token = extract_access_token(request.headers)
   try:
-    claims = cognito_jwt_token.token_service.verify(access_token)
+    claims = cognito_jwt_token.verify(access_token)
     #authenticated request
     app.logger.debug('authenicated')
     app.logger.debug(claims)

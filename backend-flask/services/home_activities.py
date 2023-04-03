@@ -43,10 +43,13 @@ class HomeActivities:
         cur.execute(sql)
         # this will return a tuple
         # the first field being the data
-        json = cur.fetchall()
+        json = cur.fetchone()
+
+##        json = cur.fetchall()
+
     print("-----")
     print(json[0])
     return json[0]
 
-    span.set_attributes("app.result_length", len(results))
+##    span.set_attributes("app.result_length", len(results))
     return results
