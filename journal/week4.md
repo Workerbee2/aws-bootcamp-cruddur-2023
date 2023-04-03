@@ -301,6 +301,7 @@ CREATE TABLE public.activities (
 );
 ```
 
+
 - The drop table lines will make sure that if there are any existing tables in the database, they are deleted first before the new tables are created.
 
 ### STEP 7 - Seeding/Adding data to the tables
