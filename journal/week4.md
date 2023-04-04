@@ -573,7 +573,8 @@ You can customize your users' experience by using Lambda functions to respond to
 
 - This will redirect you to AWS CloudWatch, choose the log groups
 - Then choose ```AWS/lambda/cruddur-post-confirmation``` tab and view the logs.
-
+- We will then set the VPC for the cruddur function in lambda otherwise when we try to sign up, it will always time out.
+- 
 
 
 
