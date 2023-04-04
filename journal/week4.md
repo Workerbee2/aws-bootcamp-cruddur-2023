@@ -562,8 +562,12 @@ env | grep PROD   ===> copy the ouptut and paste it into Lambda
 ```
 
 - Add a Layer in the Code tab.
-- In the AWS Cognito console, trigger the Lambda function by
+- In the AWS Cognito console, trigger the Lambda function by clickin in the ```User pool properties``` tab then choose ```Add Lambda trigger```.
+***(Add Lambda triggerInfo
+You can customize your users' experience by using Lambda functions to respond to authentication and authorization events. Use up to 10 different Lambda triggers to filter sign-ups and sign-ins, modify and import users, add custom authentication flows, and more. In addition, you can use Lambda function logging for deeper insight into trigger activity.)***
 
+- Choose the trigger type as ```Sign up```
+- Chse Post confirmation trigger
 
 
 
