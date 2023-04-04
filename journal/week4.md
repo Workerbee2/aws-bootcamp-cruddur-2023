@@ -566,8 +566,10 @@ env | grep PROD   ===> copy the ouptut and paste it into Lambda
 ***(Add Lambda triggerInfo
 You can customize your users' experience by using Lambda functions to respond to authentication and authorization events. Use up to 10 different Lambda triggers to filter sign-ups and sign-ins, modify and import users, add custom authentication flows, and more. In addition, you can use Lambda function logging for deeper insight into trigger activity.)***
 
-- Choose the trigger type as ```Sign up```
-- Chse Post confirmation trigger
+- Choose the trigger type as **Sign up**
+- Choose **Post confirmation trigger**
+- Choose ```cruddur-post-confirmation```, which is the Lambda function created above and create the trigger.
+- Go back to AWS Lambda console and refresh. Choose the **Monitor Tab** to make sure that the trigger works whenever a sign up is made, this will always be displayed via the logs. Choose the **logs** tab
 
 
 
