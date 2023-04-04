@@ -301,6 +301,7 @@ CREATE TABLE public.activities (
 );
 ```
 
+
 - The drop table lines will make sure that if there are any existing tables in the database, they are deleted first before the new tables are created.
 
 ### STEP 7 - Seeding/Adding data to the tables
@@ -441,15 +442,139 @@ pool = ConnectionPool(connection_url)
 - Then pass it in ```home-activities.py```:
 ```from lib.db import pool```
 
+### STEP 9 - Connecting to the Cruddur Database
+- We will turn on our database via the AWS RDS console 
+- Then we will change our database password with within the console.
+- In the terminal, run ```echo $PROD_CONNECTION_URL``` and copy the output provided.
+
+**Testing remote access**
+- Then to test remote access , we will paste the following command ***(this is the output from echo $PROD_CONNECTION_URL)*** in the terminal then, change the passwordpassword item to the password that you reset  to above.
+``` 
+postgresql://cruddurroot:passwordpassword@cruddur-db-instance.czz1cuvepklc.ca-central-1.rds.amazonaws.com:5433/cruddur
+```
+
+- Then set it as an envrionment variable in the system by:
+```
+export PROD_CONNECTION_URL="postgresql://cruddurroot:passwordpassword@cruddur-db-instance.czz1cuvepklc.ca-central-1.rds.amazonaws.com:5433/cruddur"
+gp env PROD_CONNECTION_URL="postgresql://cruddurroot:passwordpassword@cruddur-db-instance.czz1cuvepklc.ca-central-1.rds.amazonaws.com:5433/cruddur"
+```
+
+- Test that you can connect to the database by running in the terminal:
+```
+psql $CONNECTION_URL
+then
+psql $PROD_CONNECTION_URL
+```
+
+- The first line will work but the second will hang.
+
+**Edit the VPC inbound rules***
+- To enable it, we need to edit the inbound rules for the RDS VPC.
+- Go to the AWS Console and in the ```Connectivity``` section, choose it then click on ```inbound rules```
+- Determine our Gitpod IP address by running in the terminal (run line 1) then set it as an environment variable using line 2:
+```
+curl ifconfig.me
+GITPOD_IP=$(curl ifconfig.me)
+```
+
+- Copy the output and paste it as the ip address in the AWS inbound rules section.
+- Running ```psql $PROD_CONNECTION_URL``` in the terminal will now work.
+***Incase you are still unable to access the database using $PROD_CONNECTION_URL, try changing the following $PROD_CONNECTION_URL variable(instead of cruddurroot, we use root)
+export PROD_CONNECTION_URL="postgresql://root:passwordpassword@cruddur-db-instance.czz1cuvepklc.ca-central-1.rds.amazonaws.com:5433/cruddur"
+gp env PROD_CONNECTION_URL="postgresql://root:passwordpassword@cruddur-db-instance.czz1cuvepklc.ca-central-1.rds.amazonaws.com:5433/cruddur"***
+
+**Permanently setting the GITPOD.IO variables**
+- Change the values with the appropriate vaules of the ```security group id``` and ```security group rule id```, which you will get from the AWS Console for the Security group that was created above.
+- Paste the following into the terminal to set:
+```
+export DB_SG_ID="sg-56fghfghhhhghghhghg"
+gp env DB_SG_ID="sg-56fghfghhhhghghhghg"
+
+export DB_SG_RULE_ID="sgr-76cgcgvbvbnvnvnvnn"
+gp env DB_SG_RULE_ID="sgr-76cgcgvbvbnvnvnvnn"
+```
+
+- Create an inbound rule that allows internet from evrywhere, 0.0.0.0/0 and test it by running the code below:
+```
+aws ec2 modify-security-group-rules \
+    --group-id $DB_SG_ID \
+    --security-group-rules "SecurityGroupRuleId=$DB_SG_RULE_ID,SecurityGroupRule={IpProtocol=tcp,FromPort=5432,ToPort=5432,CidrIpv4=$GITPOD_IP/32}"
+```
 
 
-### STEP 9 - Cognito Post Confirmation Lambda
-- Created a Lambda in AWS LAMBDA called ```cruddur-post-confirmation```
+
+### Implementing a Custom authorizer for Cognito
+***STEP 10 - Cognito Post Confirmation Lambda***
+- Created a Lambda in the AWS LAMBDA console called ```cruddur-post-confirmation```
+- Create a new file in the aws folder named ```cruddur-post-confirmation``` and paste in:
+
+```
+import json
+import psycopg2
+
+def lambda_handler(event, context):
+    user = event['request']['userAttributes']
+    print('userAttributes')
+    print(user)
+
+    user_display_name   = user['name']
+    user_email          = user['email']
+    user_handle         = user['preferred_username']
+    user_cognito_id     = user ['sub']
+
+    try:
+        conn = psycopg2.connect(os.getenv('CONNECTION_URL'))
+        cur = conn.cursor()
+     
+        sql = f"""
+          "INSERT INTO users (
+            display_name, 
+            email,
+            handle, 
+            cognito_user_id
+            )
+           VALUES(
+             {user_display_name}, 
+             {user_email}, 
+             {user_handle},
+             {user_cognito_id}
+            )"
+        """
+        cur.execute(sql)
+        conn.commit() 
+
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+        
+    finally:
+        if conn is not None:
+            cur.close()
+            conn.close()
+            print('Database connection closed.')
+
+    return event
+```
+
+- In the Configuration tab in the Lambda function console, paste in the environment variable for the database:
+
+```
+env | grep PROD   ===> copy the ouptut and paste it into Lambda
+```
+
+- Add a Layer in the Code tab.
+- In the AWS Cognito console, trigger the Lambda function by clickin in the ```User pool properties``` tab then choose ```Add Lambda trigger```.
+***(Add Lambda triggerInfo
+You can customize your users' experience by using Lambda functions to respond to authentication and authorization events. Use up to 10 different Lambda triggers to filter sign-ups and sign-ins, modify and import users, add custom authentication flows, and more. In addition, you can use Lambda function logging for deeper insight into trigger activity.)***
+
+- Choose the trigger type as **Sign up**
+- Choose **Post confirmation trigger**
+- Choose ```cruddur-post-confirmation```, which is the Lambda function created above and create the trigger.
+- Go back to AWS Lambda console and refresh. Choose the **Monitor Tab** to make sure that the trigger works whenever a sign up is made, this will always be displayed via the logs. Choose the **logs** tab
+
+- This will redirect you to AWS CloudWatch, choose the log groups
+- Then choose ```AWS/lambda/cruddur-post-confirmation``` tab and view the logs.
+- We will then set the VPC for the cruddur function in lambda otherwise when we try to sign up, it will always time out.
 - 
-
-
-
-
 
 
 
