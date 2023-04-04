@@ -571,7 +571,8 @@ You can customize your users' experience by using Lambda functions to respond to
 - Choose ```cruddur-post-confirmation```, which is the Lambda function created above and create the trigger.
 - Go back to AWS Lambda console and refresh. Choose the **Monitor Tab** to make sure that the trigger works whenever a sign up is made, this will always be displayed via the logs. Choose the **logs** tab
 
-
+- This will redirect you to AWS CloudWatch, choose the log groups
+- Then choose ```AWS/lambda/cruddur-post-confirmation``` tab and view the logs.
 
 
 
