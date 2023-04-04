@@ -501,12 +501,68 @@ aws ec2 modify-security-group-rules \
     --security-group-rules "SecurityGroupRuleId=$DB_SG_RULE_ID,SecurityGroupRule={IpProtocol=tcp,FromPort=5432,ToPort=5432,CidrIpv4=$GITPOD_IP/32}"
 ```
 
-- 
 
 
-### STEP 10 - Cognito Post Confirmation Lambda
-- Created a Lambda in AWS LAMBDA called ```cruddur-post-confirmation```
-- 
+### Implementing a Custom authorizer for Cognito
+***STEP 10 - Cognito Post Confirmation Lambda***
+- Created a Lambda in the AWS LAMBDA console called ```cruddur-post-confirmation```
+- Create a new file in the aws folder named ```cruddur-post-confirmation``` and paste in:
+
+```
+import json
+import psycopg2
+
+def lambda_handler(event, context):
+    user = event['request']['userAttributes']
+    print('userAttributes')
+    print(user)
+
+    user_display_name   = user['name']
+    user_email          = user['email']
+    user_handle         = user['preferred_username']
+    user_cognito_id     = user ['sub']
+
+    try:
+        conn = psycopg2.connect(os.getenv('CONNECTION_URL'))
+        cur = conn.cursor()
+     
+        sql = f"""
+          "INSERT INTO users (
+            display_name, 
+            email,
+            handle, 
+            cognito_user_id
+            )
+           VALUES(
+             {user_display_name}, 
+             {user_email}, 
+             {user_handle},
+             {user_cognito_id}
+            )"
+        """
+        cur.execute(sql)
+        conn.commit() 
+
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+        
+    finally:
+        if conn is not None:
+            cur.close()
+            conn.close()
+            print('Database connection closed.')
+
+    return event
+```
+
+- In the Configuration tab in the Lambda function console, paste in the environment variable for the database:
+
+```
+env | grep PROD   ===> copy the ouptut and paste it into Lambda
+```
+
+- Add a Layer in the Code tab.
+- In the AWS Cognito console, trigger the Lambda function by
 
 
 
