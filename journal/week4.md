@@ -31,8 +31,7 @@
 - Implement a Lambda that runs in a VPC and commits code to RDS
 - Work with PSQL json functions to directly return json from the database
 - Correctly sanitize parameters passed to SQL to execute
- 
- 
+  
 ### Security for Amazon RDS and Postgres
 **What are the different types of Amazon RDS Databse Engines?**
 - Amazon Aurora
