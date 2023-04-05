@@ -6,7 +6,7 @@ from opentelemetry import trace
 import logging
 
 #Postgresql
-from lib.db import pool, query_wrap_array
+from lib.db import db
 
 #Honeycomb Creating a trace
 #tracer = trace.get_tracer("home.activities")
@@ -18,7 +18,7 @@ class HomeActivities:
     #logger.info("HomeActivities") #turned off to save on spend
     #Honeycomb Creating a trace
       
-    sql = query_wrap_array("""
+    results = db.query_array_json("""
       SELECT
         activities.uuid,
         users.display_name,
@@ -34,22 +34,5 @@ class HomeActivities:
       LEFT JOIN public.users ON users.uuid = activities.user_uuid
       ORDER BY activities.created_at DESC    
     """)
-    print("SQL-------")
-    print(sql)
-    print("SQL________")
-
-    with pool.connection() as conn:
-      with conn.cursor() as cur:
-        cur.execute(sql)
-        # this will return a tuple
-        # the first field being the data
-        json = cur.fetchone()
-
-##        json = cur.fetchall()
-
-    print("-----")
-    print(json[0])
-    return json[0]
-
 ##    span.set_attributes("app.result_length", len(results))
     return results
