@@ -43,36 +43,47 @@ This week will be learning about NoSQl Databases and the different types that ex
 1. Will be used with our application for message caching
 2. To create Amazon DynamoDB table for developers to use for their Web Application in AWS to allow for ***uninterrupted flow for a large amount of traffic in microseconds.***
 3. For ***milli-second response times***, we add a Amazon DynamoDB Accelerator (DAX) to improve the response time of the DynamoDB tables that has been linked to the Web Application in AWS.
-4. 
 
 ## Tasks
-Have a lecture about data modeling (Single Table Design) for NoSQL
-Launch DynamoDB local
-Seed our DynamoDB tables with data using Faker
-Write AWS SDK code for DynamoDB to query and scan put-item, for predefined endpoints
-Create a production DynamoDB table
-Update our backend app to use the production DynamoDB
-Add a caching layer using Momento Severless Cache
+- Have a lecture about data modeling (Single Table Design) for NoSQL
+- Launch DynamoDB local
+- Seed our DynamoDB tables with data using Faker
+- Write AWS SDK code for DynamoDB to query and scan put-item, for predefined endpoints
+- Create a production DynamoDB table
+- Update our backend app to use the production DynamoDB
+- Add a caching layer using Momento Severless Cache
 
 ## A lecture about data modeling (Single Table Design) for NoSQL
 **Step 1 - DynamoDB Data Modelling Youtube video**
-A flat table as we do not hva ejoins as is the case with Relational databases.
+A flat table as we do not have joins as is the case with Relational databases.
 NoSQL workbench
-DynamoDB Data Modelling
+
+**DynamoDB Data Modelling**
 
 It is better to put similar items in the same table/ reduces complexity in the application
-Globale tables?
+Global tables
 Sort keys?
-Access Patterns?
+
+***Access Patterns***
+1. **A single conversation within the DM** - Determines the habit that a user will most likely use i.e to view messages in the dms, sort messages in descending order and only for the messages with the 2 users.
+2. **List of Conversations(all dms)** - 
+3. **Create a message** - 
+4. **Create a message** - 
+
+What are primary keys?
+What are partition keys?
 What are base tables?
 What is a GSI?-Global Secondary Index
 What are LSI? Local Secondary Indexes
 GSI vs LSI?
 4kb in read 1kb in writes.
 
-Adavntagews of DynamoDB
-Fast
-Consistent
+**Advantages of DynamoDB**
+- Fast
+- Consistent
+- Easily Scalable 
+
+
 
 ### Launch DynamoDB local
 **Step 2 - Start up DynamoDB locally**
@@ -904,3 +915,5 @@ AWS recommends using Client side encryption when storing sensitive information. 
 **RESOURCES**
 1. [NoSQL DynamoDB Workbench](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.html)
 2. [AWS SDK Boto3 Python DynamoDB Documentation]([https://boto3.amazonaws.com/v1/documentation/api/latest/guide/dynamodb.html](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb/client/create_table.html))
+3. PartQL
+4. No-SQL Workbench
