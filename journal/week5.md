@@ -33,8 +33,6 @@ This week will be learning about NoSQl Databases and the different types that ex
 - graphs
 - Multi-model type
 
-
-
 ## Prerequisites
 
 
@@ -68,7 +66,8 @@ Sort keys?
 1. **A single conversation within the DM** - Determines the habit that a user will most likely use i.e to view messages in the dms, sort messages in descending order and only for the messages with the 2 users.
 2. **List of Conversations(all dms)** - 
 3. **Create a message** - 
-4. **Create a message** - 
+4. **Update message for the last message group** - 
+
 
 What are primary keys?
 What are partition keys?
@@ -80,9 +79,8 @@ GSI vs LSI?
 
 **Advantages of DynamoDB**
 - Fast
-- Consistent
+- Consistent perfomance
 - Easily Scalable 
-
 
 
 ### Launch DynamoDB local
