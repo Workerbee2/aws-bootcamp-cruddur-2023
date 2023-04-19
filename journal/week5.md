@@ -14,7 +14,6 @@ This week will be learning about NoSQl Databases and the different types that ex
 - Large scale data
 - They mainatin perfomance no matter the scale of  
 
-
 **What are the characteristics of NoSQL databases?**
 - Non-relational
 - Distributed system that can manage large scale data while maintaining high throughput and availability.
