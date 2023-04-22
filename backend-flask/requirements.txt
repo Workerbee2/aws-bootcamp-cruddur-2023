@@ -23,3 +23,6 @@ Flask-AWSCognito
 #Postgresql-python client binaries
 psycopg[binary]
 psycopg[pool]
+
+#Dunamodb
+boto3
