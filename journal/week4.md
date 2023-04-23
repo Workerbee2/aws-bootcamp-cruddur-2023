@@ -112,7 +112,8 @@ aws rds create-db-instance \
 - Open the Postgres bash then, to be able to run psql commands inside the database instance we created above, run the following commands:
 ```
 sudo apt update
-sudo apt install -y postgresql-client-12
+sudo apt install -y postgresql-client-12 OR
+sudo apt install -y postgresql-client-13/14
 psql -Upostgres --host localhost
 (When it prompts for password enter: ***password***
 ```
