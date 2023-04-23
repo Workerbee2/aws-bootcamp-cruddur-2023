@@ -21,12 +21,12 @@ class Db:
 
 #when we want to commit code ie inserts
 #check for returning in uppercase
-  def print_sql(self, title, sql):
+  def print_sql(self, title, sql, params={}):
     cyan = '\033[90m'
     no_color = '\033[0m'
     print("\n")
-    print(f'{cyan}SQL STATEMENT[{title}]---[array]----{no_colour}')   
-    print(sql + "\n")
+    print(f'{cyan}SQL STATEMENT[{title}]---[array]----{no_color}')   
+    print(sql,params)
 
   def query_commit(self, sql, params={}):
     self.print_sql('commit with returninhg', sql)
@@ -47,7 +47,7 @@ class Db:
 
 #when we want to return a JSON object
   def query_array_json(self, sql, params={}):
-    self.print_sql('array', sql)
+    self.print_sql('array', sql,params)
     
     wrapped_sql = self.query_wrap_array(sql)
     with self.pool.connection() as conn:
@@ -58,7 +58,8 @@ class Db:
 
 #when we want return an array of JSON objects
   def query_object_json(self, sql, params={}):
-    self.print_sql('json', sql)
+    self.print_sql('json', sql,params)
+    self.print_params(params)
     
     print("SQL---[array]----")
     print(sql)
@@ -76,6 +77,15 @@ class Db:
     ) object_row);
     """
     return sql
+
+  def query_value(self,sql,params={}):
+    self.print_sql('value',sql,params)
+
+    with self.pool.connection() as conn:
+      with conn.cursor() as cur:
+        cur.execute(sql,params)
+        json = cur.fetchone()
+        return json[0]
 
   def query_wrap_array(self, template):
     sql =  f"""
