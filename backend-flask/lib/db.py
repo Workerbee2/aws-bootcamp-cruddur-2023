@@ -9,8 +9,23 @@ class Db:
   def __init__(self):
     self.init_pool()
 
-  def template(self, name):
-    template_path = os.path.join(app.root_path, 'db', 'sql', name+'.sql')
+  #def template(self, name):
+  #  template_path = os.path.join(app.root_path, 'db', 'sql', name+'.sql')
+  #  with open(template_path, 'r') as f:
+  #    template_content = f.read()
+  #  return template_content
+
+  def template(self,*args):
+    pathing = list((app.root_path,'db','sql',) + args)
+    pathing[-1] = pathing[-1] + ".sql"
+
+    template_path = os.path.join(*pathing)
+
+    green = '\033[92m'
+    no_color = '\033[0m'
+    print("\n")
+    print(f'{green} Load SQL Template: {template_path} {no_color}')
+
     with open(template_path, 'r') as f:
       template_content = f.read()
     return template_content
@@ -29,7 +44,7 @@ class Db:
     print(sql,params)
 
   def query_commit(self, sql, params={}):
-    self.print_sql('commit with returninhg', sql)
+    self.print_sql('commit with returninhg', sql, params)
     pattern = r"\bRETURNING\b"
     is_returning_id = re.search(pattern, sql)
 
@@ -61,14 +76,17 @@ class Db:
     self.print_sql('json', sql,params)
     self.print_params(params)
     
-    print("SQL---[array]----")
-    print(sql)
+    #print("SQL---[array]----")
+    #print(sql)
     wrapped_sql = self.query_wrap_object(sql)
     with self.pool.connection() as conn:
       with conn.cursor() as cur:
         cur.execute(wrapped_sql, params)
         json = cur.fetchone()
-        return json[0]
+        if json == None:
+          "{}"
+        else:
+          return json[0]
 
   def query_wrap_object(self, template):
     sql = f"""
