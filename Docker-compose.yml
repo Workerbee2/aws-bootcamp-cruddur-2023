@@ -21,7 +21,7 @@ services:
       AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
       #Rollabr error logging
       ROLLBAR_ACCESS_TOKEN: "${ROLLBAR_ACCESS_TOKEN}"
-      AWS_COGNITO_USER_POOL_ID: "${AWS_COGNITO_USER_POOL_ID}"
+      AWS_COGNITO_USER_POOL_ID: "us-east-1_QQ98OQTQ8"
       AWS_COGNITO_USER_POOL_CLIENT_ID: "5hdrki2pc9ee534f352esae44e"    
 
     build: ./backend-flask

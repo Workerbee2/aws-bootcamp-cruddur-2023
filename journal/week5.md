@@ -1,4 +1,4 @@
-# Week 5 — DynamoDB and Serverless Caching
+cd ..cd # Week 5 — DynamoDB and Serverless Caching
 Hi guys! Welcome back to week 5!! It getting hotter in the kitchen but lets learn about a few definitions today.
 This week will be learning about NoSQl Databases and the different types that exist.
 - Then we will learn about NoSQL database in AWS which is DynamoDB. So lets start!!
