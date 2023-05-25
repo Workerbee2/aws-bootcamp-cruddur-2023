@@ -1,4 +1,4 @@
-cd ..cd # Week 5 — DynamoDB and Serverless Caching
+# Week 5 — DynamoDB and Serverless Caching
 Hi guys! Welcome back to week 5!! It getting hotter in the kitchen but lets learn about a few definitions today.
 This week will be learning about NoSQl Databases and the different types that exist.
 - Then we will learn about NoSQL database in AWS which is DynamoDB. So lets start!!
@@ -903,7 +903,14 @@ AWS recommends using Client side encryption when storing sensitive information. 
 - Site-to-Site VPN or Direct Connect for Onpremise and DynamoDB Access.
 - Client side encryption is recommended by Amazon for DynamoDB.
 
-
+## Errors I have encounterered so far and how i resolved them#
+1. While running ./bin/db/update-users
+```Traceback (most recent call last):
+  File "/workspace/aws-bootcamp-cruddur-2023/backend-flask/./bin/cognito/list-users", line 26, in <module>
+    dict_users[handle['Value']] = sub['Value']
+               ~~~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+```
 
 ## Next Steps - Additional Homework Challenges
 
