@@ -912,6 +912,30 @@ AWS recommends using Client side encryption when storing sensitive information. 
 TypeError: 'NoneType' object is not subscriptable
 ```
 
+3. While trying to connect to my postgres database, the records/users had been added twice from my cognito user pool id and when i tried dropping the Cruudur postgres datase database I woul encounter this error
+```
+== db-drop
+ERROR:  database "cruddur" is being accessed by other users
+DETAIL:  There are 4 other sessions using the database.
+```
+
+From the discord channel, a tip dropped there suggested using this command
+```
+REVOKE CONNECT ON DATABASE cr
+uddur FROM public;
+ALTER DATABASE cruddur allow_connections = off;
+SELECT pg_terminate_backend(pg_stat_activity.pid
+) FROM pg_stat_activity WHERE pg_stat_activity.d
+atname = 'cruddur';
+```
+I connected to the database by:
+```./bin/db/connect```
+then once in the cruddur database, run the command above.
+When i tried running ```./bin/db/drop``` once again it worked.
+Thus i ran, ```./bin/db/setup```
+
+
+
 ## Next Steps - Additional Homework Challenges
 
 
