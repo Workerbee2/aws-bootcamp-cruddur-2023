@@ -7,7 +7,6 @@ gp env HONEYCOMB_SERVICE_NAME="2vWS8WoeJxZMiqb2IIZwSH"
 
 
 
-
 createdb cruddur -h localhost -U postgres
 
 postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]
